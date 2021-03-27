@@ -1,8 +1,12 @@
 ##  Ubuntu Centos静态ip设置
 **1.实验环境**
+
 >1.VMware16.0.0
+>
 >2.Ubuntu16.04([安装教程](https://blog.csdn.net/qq_43938052/article/details/107326122))
+>
 >3.Centos8
+>
 >4.VMware网络模式：NAT
 
 **2.配置VMnet8**
