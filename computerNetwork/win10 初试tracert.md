@@ -1,0 +1,42 @@
+## win10 初试tracert
+**1.实验环境**
+>1.win10
+>2.tracert
+
+**2.tracert (Traceroute )原理**
+
+ICMP报文类型
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20201224185114894.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20201224185143608.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20201224185208153.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
+
+
+Traceroute 是 ICMP 的一个应用，用来跟踪一个分组从源主机到目标主机的路径。
+Traceroute 发送的 IP 数据报封装的是无法交付的 UDP 用户数据报，并由目的主机发送终点不可达差错报告报文。
+
+>
+>**1.** 源主机向目的主机发送一连串的 IP 数据报。
+>**2.** 第一个数据报 P1 的生存时间 TTL 设置为 1，当 P1 到达路径上的第一个路由器 R1 时，R1 收下它并把 TTL 减 1，此时 TTL 等于 0，R1 就把 P1 丢弃，并向源主机发送一个 ICMP 时间超过差错报告报文；
+>**3.** 源主机接着发送第二个数据报 P2，并把 TTL 设置为 2。P2 先到达 R1，R1 收下后把 TTL 减 1 再转发给 R2，R2 收下后也把 TTL 减 1，由于此时 TTL 等于 0，R2 就丢弃 P2，并向源主机发送一个 ICMP 时间超过差错报文。
+>**4.** 重复以上操作... ...
+>**5.** 直到最后一个数据报刚刚到达目的主机，主机不转发数据报，也不把 TTL 值减 1。由于数据报封装的是无法交付的 UDP，因此目的主机要向源主机发送 ICMP 终点不可达差错报告报文。
+>**6.** 综上所述，可以得到源主机到达目的主机所经过的路由器 IP 地址以及到达每个路由器的往返时间。
+
+
+**3.执行效果**
+打开终端>>执行命令
+**注意：想追踪哪个，请随意**
+```
+tracert baidu.com
+```
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20201224195137519.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
+**tracert用法**
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20201224195940215.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
+>作者info
+作者：DebugWuhen
+原创公众号：『DebugWuhen』，专注于记录有趣的编程技术和有益的程序人生，期待你的关注。
+转载说明：务必注明来源（注明：来源于公众号：DebugWuhen， 作者：DebugWuhen）
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200706013520101.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
