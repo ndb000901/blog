@@ -1,6 +1,8 @@
 ## python 连接sql server数据库，pymssql模块安装。
-python版本：python3.7
-数据库版本：sql server 2016
+
+>python版本：python3.7
+>
+>数据库版本：sql server 2016
 
 连接sql server数据库，本菜鸟用的是pymssql，现在我得着重说下pymssql的安装问题。
 
@@ -10,7 +12,9 @@ python版本：python3.7
 
 **资源下载** [pymssql下载](https://pypi.org/project/pymssql/#files)
 选择自己需要滴版本
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200402161638439.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
+
+![image](https://user-images.githubusercontent.com/48900845/112761694-0794ff80-902f-11eb-8561-d8e1a2d3d6a4.png)
+
 下载后直接在当前目录执行
 ```
  pip install 包名
@@ -60,9 +64,13 @@ list = ms.ExecQuery(sqlStr.encode('utf-8'))
 for i in list:
     print(i)
 ```
-OK，连接sql server的文章就结束喽。感谢阅读。
+
 >作者info
-作者：DebugWuhen
-原创公众号：『DebugWuhen』，新号，专注于记录有趣的编程技术和有益的程序人生，期待你的关注。
-转载说明：务必注明来源（注明：来源于公众号：DebugWuhen， 作者：DebugWuhen）
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200706013330882.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
+>
+>作者：DebugWuhen
+>
+>原创公众号：『DebugWuhen』，新号，专注于记录有趣的编程技术和有益的程序人生，期待你的关注。
+>
+>转载说明：务必注明来源（注明：来源于公众号：DebugWuhen， 作者：DebugWuhen）
+>
+>![image](https://user-images.githubusercontent.com/48900845/112752163-3b0e6480-9004-11eb-899d-66ddef749c2b.png)
