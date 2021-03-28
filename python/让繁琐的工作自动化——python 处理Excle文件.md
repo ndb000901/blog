@@ -1,8 +1,13 @@
 ## 让繁琐的工作自动化——python 处理Excle文件
+
 今天收到一个省市县区的Excle表格，想着整理一下数据，将信息整理为层级关系（省-->市-->(县/区)）存到字典里，以备不时之需。
 打开一看，MD，3千行数据，这TM要搞到神马时候。
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200804010225536.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200804011302170.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
+
+![image](https://user-images.githubusercontent.com/48900845/112762066-80e12200-9030-11eb-80a8-b888769e0f84.png)
+
+![image](https://user-images.githubusercontent.com/48900845/112762072-850d3f80-9030-11eb-924b-7d7a213bfe2e.png)
+
+
 *****
 叮铃铃~~~~ 叮铃铃 ~~~~，人生苦短，我用python。开搞！！！
 
@@ -13,9 +18,13 @@
 
 ****
 ## **openpyxl的基础使用**
+
 **环境**
+
 >1.pycharm2020.1
+>
 >2.python3.8
+>
 >3.openpyxl 2.1.4
 
 openpyxl已经更新到3点多了，我这里演示的是**openpyxl 2.1.4**。
@@ -24,6 +33,7 @@ openpyxl已经更新到3点多了，我这里演示的是**openpyxl 2.1.4**。
 ```
 import openpyxl
 ```
+
 **读取操作**
 
 打开要处理的文件，该函数需要传入一个文件路径。wb是一个Workbook对象。
@@ -41,7 +51,9 @@ sheetList = wb.get_sheet_names()
 sheet = wb.get_sheet_by_name("sheet名字")
 ```
 取得sheet表格中的值
+
 数值定位：row是行号，column是列号。
+
 字符定位：Excle用字母表示列，数字表示行。
 ```
 x = sheet.cell(row=1, column=1).value #第一种表示
@@ -97,6 +109,7 @@ sheet['A1'] = y #第二种表示
 *****
 
 ## **处理表格的源码**
+
 原表格公众号回复【省市】获得
 
 ```
@@ -122,8 +135,13 @@ print("文件写入完毕")
 ```
 
 
+
 >作者info
-作者：DebugWuhen
-原创公众号：『DebugWuhen』，专注于记录有趣的编程技术和有益的程序人生，期待你的关注。
-转载说明：务必注明来源（注明：来源于公众号：DebugWuhen， 作者：DebugWuhen）
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200706013520101.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
+>
+>作者：DebugWuhen
+>
+>原创公众号：『DebugWuhen』，新号，专注于记录有趣的编程技术和有益的程序人生，期待你的关注。
+>
+>转载说明：务必注明来源（注明：来源于公众号：DebugWuhen， 作者：DebugWuhen）
+>
+>![image](https://user-images.githubusercontent.com/48900845/112752163-3b0e6480-9004-11eb-899d-66ddef749c2b.png)
