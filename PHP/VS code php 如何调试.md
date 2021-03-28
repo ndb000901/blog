@@ -14,10 +14,13 @@
 >1.PHP Intelephense
 >
 >2.PHP Debug
+>
+
 ![image](https://user-images.githubusercontent.com/48900845/112752092-ea970700-9003-11eb-9332-c0633ef9bd72.png)
 
 
 **2.安装XDebug（phpstudy 貌似集成了这玩意）**
+
 >1.在php.ini加入下面三行代码(路径填自己的)
 >
 >2.保存，
@@ -28,10 +31,12 @@ xdebug.remote_enable = 1
 xdebug.remote_autostart = 1
 zend_extension="F:\PHPstudy\phpstudy_pro\Extensions\php\php7.3.4nts\ext\php_xdebug.dll"
 ```
+
 ![image](https://user-images.githubusercontent.com/48900845/112752117-0d292000-9004-11eb-9fa4-70f45f318932.png)
 
 
 **3.配置launch.json信息**
+
 端口用默认9000就好
 
 ![image](https://user-images.githubusercontent.com/48900845/112752127-174b1e80-9004-11eb-98cd-6ef621b3d033.png)
@@ -62,8 +67,11 @@ zend_extension="F:\PHPstudy\phpstudy_pro\Extensions\php\php7.3.4nts\ext\php_xdeb
 
 
 >作者info
-作者：DebugWuhen
-原创公众号：『DebugWuhen』，新号，专注于记录有趣的编程技术和有益的程序人生，期待你的关注。
-转载说明：务必注明来源（注明：来源于公众号：DebugWuhen， 作者：DebugWuhen）
+>
+>作者：DebugWuhen
+>
+>原创公众号：『DebugWuhen』，新号，专注于记录有趣的编程技术和有益的程序人生，期待你的关注。
+>
+>转载说明：务必注明来源（注明：来源于公众号：DebugWuhen， 作者：DebugWuhen）
 
 ![image](https://user-images.githubusercontent.com/48900845/112752163-3b0e6480-9004-11eb-899d-66ddef749c2b.png)
