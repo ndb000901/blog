@@ -1,11 +1,14 @@
 ##  ubuntu下初试静态库.a 与共享库.so
 
 **实验目的：** 欲将a1.c，a2.c生成静态库.a与共享库.so以供test.c使用。
+
 **阅读技术基础：** 需有gcc、makefile的一些基础，以及熟悉linux基础操作。
 ****
 **1.实验环境**
 >1.ubuntu16.04([安装教程](https://blog.csdn.net/qq_43938052/article/details/107326122))
+>
 >2.gcc-5.4.0（**安装：apt install gcc** ）
+>
 >3.make-4.1（**安装：apt install make** ）
 
 **2.测试源码**
@@ -107,29 +110,41 @@ clean:
 make
 ./all
 ```
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20201013103458911.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70#pic_center)
+
+![image](https://user-images.githubusercontent.com/48900845/112751801-6c863080-9002-11eb-86c4-1dbbe6056334.png)
+
 执行命令，生成静态库lib.a，使用test.c测试静态库是否可以正常使用。
 ```
 make static
 ```
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20201013103706896.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70#pic_center)
+
+![image](https://user-images.githubusercontent.com/48900845/112751808-7871f280-9002-11eb-9aff-752367723177.png)
+
 执行命令，生成共享库lib.so，并使用test.c进行测试。
 ```
 make createso
 ```
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2020101310402569.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70#pic_center)
+
+![image](https://user-images.githubusercontent.com/48900845/112751820-86277800-9002-11eb-9b7c-b11fc22d3840.png)
+
 **4.附录**
 gcc帮助信息
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20201013105012463.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70#pic_center)
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20201013105042594.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70#pic_center)
+
+![image](https://user-images.githubusercontent.com/48900845/112751833-90e20d00-9002-11eb-9ed8-5811651bf173.png)
+![image](https://user-images.githubusercontent.com/48900845/112751837-95a6c100-9002-11eb-8a1b-fbca1768a9d3.png)
+
 
 ****
 ar帮助信息
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20201013105250219.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70#pic_center)
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20201013105309568.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70#pic_center)
+
+![image](https://user-images.githubusercontent.com/48900845/112751844-9fc8bf80-9002-11eb-83f6-b3fcd7b29387.png)
+![image](https://user-images.githubusercontent.com/48900845/112751847-a3f4dd00-9002-11eb-82b5-b59e25ed537c.png)
+
 
 >作者info
 作者：DebugWuhen
 原创公众号：『DebugWuhen』，专注于记录有趣的编程技术和有益的程序人生，期待你的关注。
 转载说明：务必注明来源（注明：来源于公众号：DebugWuhen， 作者：DebugWuhen）
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200706013520101.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
+
+![image](https://user-images.githubusercontent.com/48900845/112751851-ac4d1800-9002-11eb-95c1-15b9d76f0dd0.png)
+
