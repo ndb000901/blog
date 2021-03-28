@@ -25,9 +25,14 @@ pip3
 命令 cd /usr/bin
 查看一下 ls -l
 ```
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2020032323410832.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200323234459547.png)
+
+![image](https://user-images.githubusercontent.com/48900845/112761926-1af49a80-9030-11eb-9ae6-9146358eff7b.png)
+
+![image](https://user-images.githubusercontent.com/48900845/112761932-1f20b800-9030-11eb-887e-3b0346ee50e8.png)
+
+
 冒绿光的是可以执行滴文件
+
 冒蓝光的是链接文件(您可以理解为类似Windows的快捷方式)
 
 要想更改pip3 install的安装位置，可以这么操作。
@@ -36,18 +41,22 @@ pip3
 编辑pip3(这玩意就是个Python脚本)
 vim pip3
 ```
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200323234817578.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
+
+![image](https://user-images.githubusercontent.com/48900845/112761941-28aa2000-9030-11eb-95f1-7efe414f8d3f.png)
+
+
 将第一行的python版本修改你想要的版本，然后保存，问题就解决喽。
-
-
 
 另一个问题就是你在shell命令使用Python时，Python版本问题。
 
 比如你的系统安装了Python2.7，Python3.6，Python3.7
 
 这时你在命令窗口
+
 输入python2 ----->使用Python2.7版本
+
 输入python3 ----->使用Python3.6版本
+
 如何使用Python3.7呢
 
 ```
@@ -62,8 +71,16 @@ ln -s /usr/bin/python3.7(找到python3.7的路径) /usr/bin/python3.7 (软链接
 $PATH
 ```
 这些目录应该都可以，你可以试试。
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200324000643781.png)
- >作者info
-作者：DebugWuhen
-原创公众号：『DebugWuhen』，新号，专注于记录有趣的编程技术和有益的程序人生，期待你的关注。
-转载说明：务必注明来源（注明：来源于公众号：DebugWuhen， 作者：DebugWuhen）![在这里插入图片描述](https://img-blog.csdnimg.cn/20200706013253951.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
+
+![image](https://user-images.githubusercontent.com/48900845/112761957-3790d280-9030-11eb-9b88-79752b523601.png)
+
+
+>作者info
+>
+>作者：DebugWuhen
+>
+>原创公众号：『DebugWuhen』，新号，专注于记录有趣的编程技术和有益的程序人生，期待你的关注。
+>
+>转载说明：务必注明来源（注明：来源于公众号：DebugWuhen， 作者：DebugWuhen）
+>
+>![image](https://user-images.githubusercontent.com/48900845/112752163-3b0e6480-9004-11eb-899d-66ddef749c2b.png)
