@@ -1,7 +1,11 @@
 ## python opencv 操作摄像头
+
 **1.实验环境**
+
 >1.win10
+>
 >2.python3.8
+>
 >3.opencv-4.4.0.46
 
 **2.源码**
@@ -25,4 +29,16 @@ cv2.destroyAllWindows()
 ```
 
 **3.效果**
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20201104145044659.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70#pic_center)
+
+![image](https://user-images.githubusercontent.com/48900845/112761669-db797e80-902e-11eb-81e4-9545c2243094.png)
+
+
+>作者info
+>
+>作者：DebugWuhen
+>
+>原创公众号：『DebugWuhen』，新号，专注于记录有趣的编程技术和有益的程序人生，期待你的关注。
+>
+>转载说明：务必注明来源（注明：来源于公众号：DebugWuhen， 作者：DebugWuhen）
+>
+>![image](https://user-images.githubusercontent.com/48900845/112752163-3b0e6480-9004-11eb-899d-66ddef749c2b.png)
