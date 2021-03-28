@@ -1,29 +1,44 @@
 ## 让繁琐的工作自动化——python处理email
+
 今天来谈一谈，如何用python处理Email。今天的示例选用QQ邮箱。
+
 以及写个利用邮件远程控制电脑下载图片。
+
 ****
 
 
 **1.环境**
+
 >1.python3.8
+>
 >2.pyzmail36 v1.04
+>
 >3.IMAPClient v2.1.0
+>
 >4.PyEmail v0.0.1
 
 **如果pyzmail安装报错，请安装pyzmail36。**
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200809173236850.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
+
+![image](https://user-images.githubusercontent.com/48900845/112761745-5b074d80-902f-11eb-9087-99fe74011332.png)
+
 
 **2.准备工作**
 
 需要准备个qq邮箱，这个很容易吧。
 
 网页登录qq邮箱，点击设置，点击账户。
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200809165908597.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
-开启IMAP/SMTP服务。会生成一个授权码，把它记下来，后面需要用，这玩意相当于密码。
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200809165945912.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
-QQ邮箱的一些信息，后面需要用
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2020080917034257.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
 
+![image](https://user-images.githubusercontent.com/48900845/112761792-7d00d000-902f-11eb-9476-a7852e23885d.png)
+
+
+开启IMAP/SMTP服务。会生成一个授权码，把它记下来，后面需要用，这玩意相当于密码。
+
+![image](https://user-images.githubusercontent.com/48900845/112761796-82f6b100-902f-11eb-8e3d-bfdd35a12978.png)
+
+
+QQ邮箱的一些信息，后面需要用
+
+![image](https://user-images.githubusercontent.com/48900845/112761800-89852880-902f-11eb-859d-d55b56cdc77b.png)
 
 
 **3.发送邮件**
@@ -39,6 +54,7 @@ smtpObj = smtplib.SMTP('smtp.qq.com', 587)
 ```
 
 给服务器打个招呼，问个好。
+
 **注意：得到SMTP对象后必须调用ehlo()方法，向SMTP服务器问好。**
 ```
 smtpObj.ehlo()
@@ -56,6 +72,7 @@ smtpObj.starttls()
 smtpObj.login('xxxxxx@qq.com', 'passwd')
 ```
 发送邮件。
+
 **注意：第一个参数填写登录的邮箱，第二个参数目的邮箱，第三个参数正文内容，必须以字符串'Subject: \n'开头，作为邮件的主题行，'\n'将正文与主题分割。**
 ```
 smtpObj.sendmail('你的邮箱','目的邮箱','Subject: haha\nhello,nie.')
@@ -66,7 +83,8 @@ smtpObj.sendmail('你的邮箱','目的邮箱','Subject: haha\nhello,nie.')
 smtpObj.quit()
 ```
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200809172951172.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
+![image](https://user-images.githubusercontent.com/48900845/112761828-a15cac80-902f-11eb-8694-27af6d354457.png)
+
 
 **4.获取邮件与删除邮件**
 
@@ -82,6 +100,7 @@ import imaplib
 imapObj = imapclient.IMAPClient('imap.qq.com', ssl=True)
 ```
 登录到IMAP服务器
+
 **注意：第一个参数你滴邮箱，第二个参数生成的授权码**
 ```
 imapObj.login('xxxxxxx@qq.com', 'passwd')
@@ -93,7 +112,8 @@ list1 = imapObj.list_folders()
 
 ```
 **注意：我为了输出好看，导入了pprint模块，调用pprint.pprint(list1)输出**
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200809174516807.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
+
+![image](https://user-images.githubusercontent.com/48900845/112761848-bdf8e480-902f-11eb-96a7-a61b1984039f.png)
 
 选择文件夹，一般都有‘INBOX’(收件箱)这个文件夹，readonly是只读，如果你的程序不需删除邮件，建议将该参数设置为True。
 ```
@@ -109,7 +129,10 @@ MIds = imapObj.search(['ALL'])
 import imaplib
 imaplib._MAXLINE = 100000000
 ```
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200809180543656.png)
+
+![image](https://user-images.githubusercontent.com/48900845/112761859-c9e4a680-902f-11eb-8462-ad0d53440cc3.png)
+
+
 获取电子邮件内容，以下代码获取了4个eamil的信息。
 ```
 msgList = imapObj.fetch(MIds, ['BODY[]'])
@@ -126,6 +149,7 @@ msg = pyzmail.PyzMessage.factory(msgList[10][b'BODY[]'])
 subject = msg.get_subject()
 ```
 获取地址
+
 **注意：'from' 可替换为'to','cc','bcc'。cc指抄送，bcc指密送。**
 
 ```
@@ -154,9 +178,13 @@ imapObj.logout()
 ****
 
 ## 实例——实现通过邮件远程控制电脑下载图片。
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200809202204376.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
+
+![image](https://user-images.githubusercontent.com/48900845/112761882-e680de80-902f-11eb-8ab8-f098427ffb0a.png)
+
 这不就下载好了吗
-![](https://img-blog.csdnimg.cn/20200809202327537.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
+
+![image](https://user-images.githubusercontent.com/48900845/112761886-ee408300-902f-11eb-85ae-85f5401dcf85.png)
+
 **注意：本例子写得太过于粗糙，有太多的问题需要修改。仅仅是为大家演示一种使用思路。**
 
 
@@ -236,11 +264,15 @@ print('---------执行完毕-----------')
 
 
 
->作者info
-作者：DebugWuhen
-原创公众号：『DebugWuhen』，专注于记录有趣的编程技术和有益的程序人生，期待你的关注。
-转载说明：务必注明来源（注明：来源于公众号：DebugWuhen， 作者：DebugWuhen）
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200706013520101.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
 
+>作者info
+>
+>作者：DebugWuhen
+>
+>原创公众号：『DebugWuhen』，新号，专注于记录有趣的编程技术和有益的程序人生，期待你的关注。
+>
+>转载说明：务必注明来源（注明：来源于公众号：DebugWuhen， 作者：DebugWuhen）
+>
+>![image](https://user-images.githubusercontent.com/48900845/112752163-3b0e6480-9004-11eb-899d-66ddef749c2b.png)
 
 
