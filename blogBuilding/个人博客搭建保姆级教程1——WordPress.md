@@ -33,8 +33,7 @@
 
 ![image](https://user-images.githubusercontent.com/48900845/112758356-89c9f780-9020-11eb-8e03-c98cd6f0c024.png)
 
-**注意：如果出现端口被占用，解决方案：
-1.netstat -ano （cmd执行，找到占用端口进程的PID，打开任务管理器，点击结束，之后启动apache) **
+**注意：如果出现端口被占用，解决方案：1.netstat -ano （cmd执行，找到占用端口进程的PID，打开任务管理器，点击结束，之后启动apache)**
 
 ![image](https://user-images.githubusercontent.com/48900845/112758374-a403d580-9020-11eb-8cf4-21bf011e40c0.png)
 
@@ -56,7 +55,7 @@
 
 ![image](https://user-images.githubusercontent.com/48900845/112758392-c5fd5800-9020-11eb-98b3-161cfb61b17d.png)
 
-在浏览器打开 **http://wordpress.myblog.com/wp-admin/setup-config.php **(把域名换成自己的)
+在浏览器打开 http://wordpress.myblog.com/wp-admin/setup-config.php (把域名换成自己的)
 
 点击let's go
 
@@ -136,7 +135,7 @@ cd /var/www/html
 ```
 git clone https://github.com/WordPress/WordPress.git
 ```
-访问**http://192.168.190.132/WordPress/wp-admin/install.php **，接下来的操作与windows相似，重点说下创建数据库。
+访问 http://192.168.190.132/WordPress/wp-admin/install.php ，接下来的操作与windows相似，重点说下创建数据库。
 
 ![image](https://user-images.githubusercontent.com/48900845/112758527-7ff4c400-9021-11eb-8ba5-95dbd8fbec94.png)
 
