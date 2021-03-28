@@ -1,5 +1,6 @@
 
 ## 让繁琐的工作自动化——python处理CSV文件
+
 CSV：CSV文件是一种简化的电子表格，不同于Excle(二进制文件)，CSV是纯文本文件。
 
 ****
@@ -9,6 +10,7 @@ CSV：CSV文件是一种简化的电子表格，不同于Excle(二进制文件)�
 **1.环境**
 
 >1.python3.8
+>
 >2.pycharm2020.1
 
 **2.读取**
@@ -22,8 +24,11 @@ lala,17,11.9
 papa,11,13.3
 
 ```
-![](https://img-blog.csdnimg.cn/20200806195125906.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200806195142958.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
+
+![image](https://user-images.githubusercontent.com/48900845/112762127-bb4abf00-9030-11eb-9720-275c57179ad9.png)
+
+![image](https://user-images.githubusercontent.com/48900845/112762129-bf76dc80-9030-11eb-9ac9-76ee5b99ab5b.png)
+
 ****
 
 
@@ -43,7 +48,9 @@ data = list(reader)
 print(data)
 ```
 以下为在交互式界面操作。
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200806200129796.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
+
+![image](https://user-images.githubusercontent.com/48900845/112762140-c867ae00-9030-11eb-9532-6a095423bf3c.png)
+
 
 使用Reader对象遍历数据，Reader.line_num标志当前遍历到第几行。
 ```
@@ -57,17 +64,21 @@ for row in reader:
 **3.写入**
 
 将数据写入到CSV文件，需要用到Writer对象。
+
 与读取一样，先导入csv模块，然后打开文件。
-**encoding是编码；
-newline等于空字符，若不设置，在Windows系统上，行距会变成下图所示。**
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200806202120140.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
+
+**encoding是编码；newline等于空字符，若不设置，在Windows系统上，行距会变成下图所示。**
+
+![image](https://user-images.githubusercontent.com/48900845/112762172-e503e600-9030-11eb-90f8-266b1ecbf2ba.png)
 
 ```
 import csv
 file = open('haha.csv', 'w', encoding='utf-8', newline='')
 ```
 创建Writer对象，csv.writer()有两个参数需要注意。
+
 delimiter： 单元格分隔符，默认为逗号，可以修改为其他。
+
 lineterminator：行终止符，默认为换行符，可以自行修改。
 ```
 writer = csv.writer(file)
@@ -94,8 +105,13 @@ file.close()
 ```
 ## 原创不易，点个赞再走吧。
 
+
 >作者info
-作者：DebugWuhen
-原创公众号：『DebugWuhen』，专注于记录有趣的编程技术和有益的程序人生，期待你的关注。
-转载说明：务必注明来源（注明：来源于公众号：DebugWuhen， 作者：DebugWuhen）
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200706013520101.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
+>
+>作者：DebugWuhen
+>
+>原创公众号：『DebugWuhen』，新号，专注于记录有趣的编程技术和有益的程序人生，期待你的关注。
+>
+>转载说明：务必注明来源（注明：来源于公众号：DebugWuhen， 作者：DebugWuhen）
+>
+>![image](https://user-images.githubusercontent.com/48900845/112752163-3b0e6480-9004-11eb-899d-66ddef749c2b.png)
