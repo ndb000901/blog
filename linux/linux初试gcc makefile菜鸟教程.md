@@ -2,8 +2,10 @@
 ----
 **1.实验环境**
 >1.ubuntu16([安装教程](https://blog.csdn.net/qq_43938052/article/details/107326122))
+>
 >2.gcc
 >(gcc安装：apt install gcc)
+>
 >3.make
 >(make安装 apt install make)
 
@@ -55,7 +57,8 @@ float sub(int a,int b)
 ```
 gcc -o out main.c sub.c
 ```
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200925224619757.png#pic_center)
+![image](https://user-images.githubusercontent.com/48900845/112751751-24ffa480-9002-11eb-80a8-ae4262aeceaf.png)
+
 **Nice，成功了**
 
 **3.makefile**
@@ -73,12 +76,20 @@ clean:
         rm main.o sub.o
 
 ```
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200925225213815.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70#pic_center)
+
+![image](https://user-images.githubusercontent.com/48900845/112751762-2f21a300-9002-11eb-8160-4aa943226a6e.png)
+
 OK，今天的文章就肝到这里。
+
 >作者info
-作者：DebugWuhen
-原创公众号：『DebugWuhen』，新号，专注于记录有趣的编程技术和有益的程序人生，期待你的关注。
-转载说明：务必注明来源（注明：来源于公众号：DebugWuhen， 作者：DebugWuhen）
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200706013520101.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
+>
+>作者：DebugWuhen
+>
+>原创公众号：『DebugWuhen』，专注于记录有趣的编程技术和有益的程序人生，期待你的关注。
+>
+>转载说明：务必注明来源（注明：来源于公众号：DebugWuhen， 作者：DebugWuhen）
+>
+>![image](https://user-images.githubusercontent.com/48900845/112752163-3b0e6480-9004-11eb-899d-66ddef749c2b.png)
+
 
 
