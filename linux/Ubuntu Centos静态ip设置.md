@@ -120,6 +120,7 @@ reboot
 成功。
 
 **4.CentOS配置**
+
 执行命令，查看网络
 ```
 ifconfig
@@ -128,6 +129,7 @@ ifconfig
 ![image](https://user-images.githubusercontent.com/48900845/112806992-f5a47280-90a9-11eb-94d8-62c9e99b9b34.png)
 
 需要配置ens33。
+
 执行命令，开始配置。
 ```
 vim /etc/sysconfig/network-scripts/ifcfg-ens33
