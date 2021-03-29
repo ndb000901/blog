@@ -1,23 +1,37 @@
 ## stm32 i2c初试 OLED
+
 **1.实验环境**
 
 >1.野火STM32指南者(STM32F103VET6)
+>
 >2.AHT20传感器
+>
 >3.OLED屏幕0.96寸（[地址](http://www.lcdwiki.com/zh/0.96inch_SPI_OLED_Module)）
+
 **并非广告只是说明使用哪家产品**
 
 **2.环境搭建**
+
 下载相应资料（[下载地址](http://www.lcdwiki.com/zh/0.96inch_SPI_OLED_Module)）
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20201228085429339.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
+
+![image](https://user-images.githubusercontent.com/48900845/112811450-aad92980-90ae-11eb-8bc9-b00581504f20.png)
+
 打开相应工程
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20201228085656127.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
+
+![image](https://user-images.githubusercontent.com/48900845/112811484-b4629180-90ae-11eb-8478-7e69c1cad47c.png)
+
 除了 main.c 、 oled.c 、 oled.h 、 bmp.h 、 oledfont.h ，其他都是和平台相关的代码。
+
 oledfont.h 、 bmp.h 都存放图片和汉字取模后的点阵数组。
+
 oled.h 存放的是和 OLED 屏相关的一些参数，包括引脚定义。
+
 oled.c 存放的是和 OLED 屏操作相关的一些函数，包括 IIC 的读写， OLED 屏数据写入等
+
 main.c 则是主程序操作了。
 
 一些函数介绍
+
 ```
 //显示汉字，x,y,为坐标，no为字体大小。
 void OLED_ShowCHinese(u8 x,u8 y,u8 no);
@@ -35,19 +49,28 @@ void OLED_ShowNum(u8 x,u8 y,u32 num,u8 len,u8 size2)
 **3.显示字符**
 
 获取想要显示的字模，设置如下;
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20201228091006242.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
+
+![image](https://user-images.githubusercontent.com/48900845/112811543-c47a7100-90ae-11eb-966c-46515489bec3.png)
+
 将生成的数据文件添加至oledfont.h相应的数组中
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20201228091317379.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
+
+![image](https://user-images.githubusercontent.com/48900845/112811578-cba17f00-90ae-11eb-8625-ef0afef5c735.png)
+
 烧录程序。
 
 **接线**
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20201228091631495.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
+
+![image](https://user-images.githubusercontent.com/48900845/112811639-da883180-90ae-11eb-9b73-11e15d7f5d04.png)
+
 效果图
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2020123009233121.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
+
+![image](https://user-images.githubusercontent.com/48900845/112811668-e07e1280-90ae-11eb-91b5-74c42f0f10df.png)
+
 
 **4.显示传感器温度**
 
 **5.滚屏**
+
 在main.c中添加
 ```
 	  OLED_WR_Byte(0x2e,OLED_CMD);;//关滚动
@@ -73,3 +96,13 @@ void roll(void)
         OLED_WR_Byte(0x2F,OLED_CMD); 
 }      
 ```
+
+>作者info
+>
+>作者：DebugWuhen
+>
+>原创公众号：『DebugWuhen』，专注于记录有趣的编程技术和有益的程序人生，期待你的关注。
+>
+>转载说明：务必注明来源（注明：来源于公众号：DebugWuhen， 作者：DebugWuhen）
+>
+>![image](https://user-images.githubusercontent.com/48900845/112752163-3b0e6480-9004-11eb-899d-66ddef749c2b.png)
