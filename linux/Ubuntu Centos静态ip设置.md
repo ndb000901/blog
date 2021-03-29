@@ -1,4 +1,5 @@
 ##  Ubuntu Centos静态ip设置
+
 **1.实验环境**
 
 >1.VMware16.0.0
@@ -15,44 +16,71 @@
 ```
 ipconfig
 ```
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20201006181925536.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70#pic_center)
+
+![image](https://user-images.githubusercontent.com/48900845/112806401-50899a00-90a9-11eb-8d6d-fe3fe95e6a56.png)
+
+
 VMnet8用于NAT模式。
+
 若无上图两块虚拟网卡，请打开VMware，虚拟网络编辑器，还原默认设置。（需要管理员权限）若有上图虚拟网卡，自行跳过这一步。
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20201006182245732.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70#pic_center)
+![image](https://user-images.githubusercontent.com/48900845/112806452-5c755c00-90a9-11eb-8162-eead8e9da02d.png)
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20201006182504749.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70#pic_center)
+![image](https://user-images.githubusercontent.com/48900845/112806472-61d2a680-90a9-11eb-9e6b-c5e56dc17b80.png)
+
 
 打开控制面板，右击VMnet8属性。
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20201006195711697.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70#pic_center)
+
+![image](https://user-images.githubusercontent.com/48900845/112806533-72831c80-90a9-11eb-9c04-9bc00b6f1df4.png)
+
 点击属性
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20201006195817134.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70#pic_center)
+
+![image](https://user-images.githubusercontent.com/48900845/112806555-7a42c100-90a9-11eb-9871-434094e59edc.png)
+
 配置
+
 IP地址你也可以自定义。
+
 比如IP地址你定义为192.168.146.1，那么你的网关的前3段要一样192.168.146
+
 **你可以翻阅一下有关子网掩码、网络地址和主机地址等知识**
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20201006195905189.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70#pic_center)
+
+![image](https://user-images.githubusercontent.com/48900845/112806602-8af33700-90a9-11eb-9a1a-d53cb9c36600.png)
+
 接下来开始配置VMware。因为需要配置静态ip，所以要将本地DHCP服务给取消了。配置子网IP，子网掩码。
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20201006201023791.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70#pic_center)
+
+![image](https://user-images.githubusercontent.com/48900845/112806621-93e40880-90a9-11eb-92bb-e1befd18276e.png)
+
 填写网关，要与前面的配置一致
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20201006201105144.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70#pic_center)
+
+![image](https://user-images.githubusercontent.com/48900845/112806666-9e9e9d80-90a9-11eb-8e4d-aa03a1153681.png)
+
 一路保存。开启ubuntu，centOS开始配置。
 
 **3.ubuntu配置**
+
 执行命令，查看网络信息。
 ```
 ifconfig
 ```
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20201006201631148.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70#pic_center)
+
+![image](https://user-images.githubusercontent.com/48900845/112806701-a9593280-90a9-11eb-8963-96a61554876d.png)
+
 我们需要给ens33配置一个静态ip，执行命令，开始配置。
 ```
 vim /etc/network/interfaces
 ```
+
 配置内容如下
-**iface ens33 inet static 静态ip（static，原来是dhcp）
-address ip地址
-netmask 子网掩码
-gateway 网关**
+
+**iface ens33 inet static 静态ip（static，原来是dhcp）**
+
+**address ip地址**
+
+**netmask 子网掩码**
+
+**gateway 网关**
+
 ```
 # This file describes the network interfaces available on your system
 # and how to activate them. For more information, see interfaces(5).
@@ -69,21 +97,25 @@ netmask 255.255.255.0
 gateway 192.168.146.2
 
 ```
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20201006201859768.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70#pic_center)
+
+![image](https://user-images.githubusercontent.com/48900845/112806845-cee63c00-90a9-11eb-834a-b7c7d09d546b.png)
 
 保存。
 执行命令，配置DNS服务器
 ```
 vim /etc/resolvconf/resolv.conf.d/base
 ```
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20201006202340235.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70#pic_center)
+
+![image](https://user-images.githubusercontent.com/48900845/112806903-ddccee80-90a9-11eb-9d87-be913a49d4d0.png)
 
 保存。
 重启一下机子就好
 ```
 reboot
 ```
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20201006202615378.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70#pic_center)
+
+![image](https://user-images.githubusercontent.com/48900845/112806945-e9b8b080-90a9-11eb-9fd5-399cb283cee2.png)
+
 
 成功。
 
@@ -92,19 +124,28 @@ reboot
 ```
 ifconfig
 ```
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20201006203129922.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70#pic_center)
+
+![image](https://user-images.githubusercontent.com/48900845/112806992-f5a47280-90a9-11eb-94d8-62c9e99b9b34.png)
+
 需要配置ens33。
 执行命令，开始配置。
 ```
 vim /etc/sysconfig/network-scripts/ifcfg-ens33
 ```
 填写以下内容
+
 BOOTPROTO填static
+
 IPADDR填你要设定的IP
+
 GATEWAY填写网关
+
 NETMASK填写子网掩码
+
 DNS1填写DNS服务器地址，填网关就好
+
 ONBOOT填yes
+
 ```
 TYPE=Ethernet
 PROXY_METHOD=none
@@ -127,12 +168,16 @@ DEVICE=ens33
 ONBOOT=yes
 
 ```
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20201006203347983.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70#pic_center)
+
+![image](https://user-images.githubusercontent.com/48900845/112807052-094fd900-90aa-11eb-9118-e6f536826313.png)
+
 执行命令，配置resolv.conf，填写你的网关就好。
 ```
 vim /etc/resolv.conf
 ```
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20201006212256769.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70#pic_center)
+
+![image](https://user-images.githubusercontent.com/48900845/112807085-140a6e00-90aa-11eb-96a7-a41e56d042d2.png)
+
 重启机子
 ```
 reboot
@@ -140,8 +185,13 @@ reboot
 
 今天的文章就肝到这里了。
 
+
 >作者info
-作者：DebugWuhen
-原创公众号：『DebugWuhen』，专注于记录有趣的编程技术和有益的程序人生，期待你的关注。
-转载说明：务必注明来源（注明：来源于公众号：DebugWuhen， 作者：DebugWuhen）
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200706013520101.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
+>
+>作者：DebugWuhen
+>
+>原创公众号：『DebugWuhen』，专注于记录有趣的编程技术和有益的程序人生，期待你的关注。
+>
+>转载说明：务必注明来源（注明：来源于公众号：DebugWuhen， 作者：DebugWuhen）
+>
+>![image](https://user-images.githubusercontent.com/48900845/112752163-3b0e6480-9004-11eb-899d-66ddef749c2b.png)
