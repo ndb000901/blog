@@ -50,11 +50,12 @@ tracert baidu.com
 ![image](https://user-images.githubusercontent.com/48900845/112760281-dfa29d80-9028-11eb-88b6-6d5ed2fe5cc7.png)
 
 
+
 >作者info
 >
 >作者：DebugWuhen
 >
->原创公众号：『DebugWuhen』，新号，专注于记录有趣的编程技术和有益的程序人生，期待你的关注。
+>原创公众号：『DebugWuhen』，专注于记录有趣的编程技术和有益的程序人生，期待你的关注。
 >
 >转载说明：务必注明来源（注明：来源于公众号：DebugWuhen， 作者：DebugWuhen）
 >
