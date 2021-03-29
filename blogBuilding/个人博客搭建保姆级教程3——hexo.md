@@ -286,11 +286,12 @@ next
 打开cmd，或者power shell执行命令，操作与Linux 部署相似。请参考Linux部署。
 
 
+
 >作者info
 >
 >作者：DebugWuhen
 >
->原创公众号：『DebugWuhen』，新号，专注于记录有趣的编程技术和有益的程序人生，期待你的关注。
+>原创公众号：『DebugWuhen』，专注于记录有趣的编程技术和有益的程序人生，期待你的关注。
 >
 >转载说明：务必注明来源（注明：来源于公众号：DebugWuhen， 作者：DebugWuhen）
 >
