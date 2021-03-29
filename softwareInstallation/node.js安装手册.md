@@ -67,11 +67,12 @@ cnpm -v
 ![image](https://user-images.githubusercontent.com/48900845/112761470-10d19c80-902e-11eb-8fa8-2b7870780b97.png)
 
 
+
 >作者info
 >
 >作者：DebugWuhen
 >
->原创公众号：『DebugWuhen』，新号，专注于记录有趣的编程技术和有益的程序人生，期待你的关注。
+>原创公众号：『DebugWuhen』，专注于记录有趣的编程技术和有益的程序人生，期待你的关注。
 >
 >转载说明：务必注明来源（注明：来源于公众号：DebugWuhen， 作者：DebugWuhen）
 >
