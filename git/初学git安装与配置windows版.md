@@ -6,7 +6,10 @@
 
 >注意：安装是图形化安装，跟个指示就可。
 >
->有这个Git bash就可。![在这里插入图片描述](https://img-blog.csdnimg.cn/20200602014348196.png)
+>有这个Git bash就可。
+>
+>![image](https://user-images.githubusercontent.com/48900845/112805019-a6f5d900-90a7-11eb-910d-baed0ef87c48.png)
+
 
 **2.开始配置**
 
@@ -104,7 +107,7 @@
 >
 >作者：DebugWuhen
 >
->原创公众号：『DebugWuhen』，新号，专注于记录有趣的编程技术和有益的程序人生，期待你的关注。
+>原创公众号：『DebugWuhen』，专注于记录有趣的编程技术和有益的程序人生，期待你的关注。
 >
 >转载说明：务必注明来源（注明：来源于公众号：DebugWuhen， 作者：DebugWuhen）
 >
