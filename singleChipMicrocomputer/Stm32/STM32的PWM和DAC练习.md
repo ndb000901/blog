@@ -1,27 +1,45 @@
 ## STM32的PWM和DAC练习
+
 **1.实验环境**
+
 >1.野火STM32指南者(STM32F103VET6)
+>
 >2.keil5
+>
 >3.Adobe Audition 2020
 
 **2.环境搭建**
+
 在野火官方资料库中，找到“TIM—通用定时器-4路PWM输出”文件夹，打开keil工程文件
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210103175140729.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
+![image](https://user-images.githubusercontent.com/48900845/112813501-d5c47d00-90b0-11eb-8e82-4790f5448e91.png)
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210103175200617.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
+![image](https://user-images.githubusercontent.com/48900845/112813514-d9f09a80-90b0-11eb-87c4-891a68bd4579.png)
+
 
 接PA6引脚，示波器观察如下
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210103175221878.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
+
+![image](https://user-images.githubusercontent.com/48900845/112813546-e248d580-90b0-11eb-9580-eab3c8b06df5.png)
+
+
 没有示波器也可进行仿真，
 打开魔法棒，选中“Use Simulator”
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210103175314718.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210103175328947.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210103175344330.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210103175359389.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
+
+![image](https://user-images.githubusercontent.com/48900845/112813583-effe5b00-90b0-11eb-8b41-a2ab9cd15277.png)
+
+![image](https://user-images.githubusercontent.com/48900845/112813596-f42a7880-90b0-11eb-9fb5-1ce7af4eaab5.png)
+
+![image](https://user-images.githubusercontent.com/48900845/112813616-f8ef2c80-90b0-11eb-85dd-04a92215296b.png)
+
+![image](https://user-images.githubusercontent.com/48900845/112813634-fee50d80-90b0-11eb-9cf2-6f9e4610249e.png)
+
 **3.用STM32F103的DAC功能波形输出**
+
 在野火官方资料库中找到“DAC—输出正弦波”文件夹，打开keil工程文件，把bsp_dac.c中的代码修改如下，编译烧录到STM32中即可得到2Khz的正弦波。
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210103175507623.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
+
+![image](https://user-images.githubusercontent.com/48900845/112813661-0c01fc80-90b1-11eb-9382-31432b58804d.png)
+
+
 **源码**
 ```
 /**
@@ -656,10 +674,18 @@ void DAC_Mode_Init(void)
 
 **4.将一段数字音频歌曲数据转换为模拟音频波形输出**
 打开AU,添加一首歌曲
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210103175639481.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
+
+![image](https://user-images.githubusercontent.com/48900845/112813756-28059e00-90b1-11eb-98c7-ab6429b4cda3.png)
+
 截取，生成wav文件，设置如下
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2021010317573070.png)
+
+![image](https://user-images.githubusercontent.com/48900845/112813783-2e941580-90b1-11eb-93b6-e333cfab84fd.png)
+
 用音频输出软件将所得到的wav转换
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210103175807155.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210103175822241.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210103175836153.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
+
+![image](https://user-images.githubusercontent.com/48900845/112813814-35bb2380-90b1-11eb-96fc-5be17877ec15.png)
+
+![image](https://user-images.githubusercontent.com/48900845/112813832-3bb10480-90b1-11eb-89f0-afee6184167d.png)
+
+![image](https://user-images.githubusercontent.com/48900845/112813853-3fdd2200-90b1-11eb-92a9-13e6b0b6c0db.png)
+
