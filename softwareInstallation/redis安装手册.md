@@ -144,11 +144,12 @@ cd /usr/local/redis/redis-6.0.8/src/
 今天的文章到此结束。
 
 
+
 >作者info
 >
 >作者：DebugWuhen
 >
->原创公众号：『DebugWuhen』，新号，专注于记录有趣的编程技术和有益的程序人生，期待你的关注。
+>原创公众号：『DebugWuhen』，专注于记录有趣的编程技术和有益的程序人生，期待你的关注。
 >
 >转载说明：务必注明来源（注明：来源于公众号：DebugWuhen， 作者：DebugWuhen）
 >
