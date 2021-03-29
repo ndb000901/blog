@@ -1,8 +1,11 @@
 ## STM32实验全局变量、局部变量、堆、栈
 
 **1.实验环境**
+
 >1.野火STM32指南者(STM32F103VET6)
+>
 >2.keil5
+>
 >3.野火多功能调试助手.exe
 
 **全局变量、静态局部变量保存在全局数据区，初始化的和未初始化的分别保存在一起。普通局部变量保存在堆栈中。
@@ -10,10 +13,14 @@
 
 
 >1.内存栈区stack： 存放局部变量名；
-2.内存堆区heap： 存放new或者malloc出来的对象；
-3.Text & Data & Bss：代码段与静态分配
-4.BSS区（未初始化数据段）：并不给该段的数据分配空间，仅仅是记录了数据所需空间的大小。
-5.DATA（初始化的数据段）：为数据分配空间，数据保存在目标文件中。
+>
+>2.内存堆区heap： 存放new或者malloc出来的对象；
+>
+>3.Text & Data & Bss：代码段与静态分配
+>
+>4.BSS区（未初始化数据段）：并不给该段的数据分配空间，仅仅是记录了数据所需空间的大小。
+>
+>5.DATA（初始化的数据段）：为数据分配空间，数据保存在目标文件中。
 
 
 **2.源码**
@@ -54,4 +61,5 @@ int main(void)
 
 **3.效果**
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20201206203014907.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzOTM4MDUy,size_16,color_FFFFFF,t_70)
+![image](https://user-images.githubusercontent.com/48900845/112813107-723a4f80-90b0-11eb-8758-5e768179892e.png)
+
