@@ -24,6 +24,8 @@
 
 如果从U盘启动时无法进入安装界面或黑屏，在bios中将Graphic Device 设置为Dynamic Graphics，或者在u盘启动时第一个启动项出按e，然后将driver=free改成driver=intel,按F10保存继续。
 
+****
+
 # 系统配置
 
 ## 配置软件源
@@ -43,6 +45,25 @@ sudo pacman -Syy
 ```
 sudo pacman -Syyu
 ```
+## 安装RTX2060驱动
+
+执行命令
+
+```
+mhwd-tui
+```
+
+![image](https://user-images.githubusercontent.com/48900845/113739426-5c70fe00-9732-11eb-8c6e-c97389430e0f.png)
+
+选择4安装
+
+安装成功后，可重启进入bios,将Graphic Device 设置为Discrete Graphics，然后执行以下命令验证
+
+```
+nvidia-smi
+```
+
+![image](https://user-images.githubusercontent.com/48900845/113739657-93dfaa80-9732-11eb-8fbb-c69cf707ae7f.png)
 
 
 ## 中文输入法
