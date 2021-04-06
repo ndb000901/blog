@@ -114,6 +114,7 @@ forward-socks5  /  127.0.0.1:1080  .  # socks5 端口
 ```
 
 启动/停止/重启
+
 ```
 systemctl start privoxy
 systemctl stop privoxy
@@ -123,7 +124,77 @@ systemctl restart privoxy
 ## proxychains配置
 
 安装
+
 ```
 sudo pacman -S proxychains
 ```
 
+配置/etc/proxychains.conf
+
+```
+Examples:
+
+socks5	192.168.67.78	1080	lamer	secret
+http	192.168.89.3	8080	justu	hidden
+socks4	192.168.1.49	1080
+http	192.168.39.93	8080
+```
+
+## oh-my-zsh
+
+安装
+
+```
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
+
+语法高亮 zsh-syntax-highlighting 
+
+命令补全插件 zsh-autosuggestions
+
+```
+cd ~/.oh-my-zsh/custom/plugins/
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
+git clone https://github.com/zsh-users/zsh-autosuggestions
+```
+
+修改配置文件
+
+```
+vim ~/.zshrc
+plugins=(
+	git
+	zsh-autosuggestions
+	zsh-syntax-highlighting
+)
+```
+
+## powerlevel10k
+
+安装
+
+```
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
+echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
+```
+
+Oh My Zsh
+
+```
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+```
+
+修改配置
+
+```
+vim ~/.zshrc
+
+ZSH_THEME="powerlevel10k/powerlevel10k“
+```
+
+刷新
+
+```
+source ~/.zshrc
+```
+根据提示开始配置
