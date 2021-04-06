@@ -26,6 +26,13 @@
 
 ****
 
+## 从u盘系统操作本机manjaro系统
+
+执行以下命令
+```
+manjaro-chroot -a
+```
+
 # 系统配置
 
 ## 配置软件源
@@ -83,3 +90,40 @@ export XMODIFIERS="@im=fcitx"
 ```
 
 **重启或注销**
+
+## 美化
+
+主题 壁纸 图标 --> [官网](https://www.gnome-look.org/browse/cat/)
+
+各种拓展 --> [官网](https://extensions.gnome.org/)
+
+
+## privoxy (http https 转 socks5)
+
+安装
+
+```
+sudo pacman -S privoxy
+```
+
+配置/etc/privoxy/config
+
+```
+listen-address  0.0.0.0:1081          # 监听http https端口
+forward-socks5  /  127.0.0.1:1080  .  # socks5 端口
+```
+
+启动/停止/重启
+```
+systemctl start privoxy
+systemctl stop privoxy
+systemctl restart privoxy
+```
+
+## proxychains配置
+
+安装
+```
+sudo pacman -S proxychains
+```
+
