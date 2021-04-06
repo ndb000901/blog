@@ -198,3 +198,25 @@ ZSH_THEME="powerlevel10k/powerlevel10k“
 source ~/.zshrc
 ```
 根据提示开始配置
+
+
+## electerm
+
+```
+$ wget https://github.com/electerm/electerm/releases/download/v1.3.54/electerm-1.3.54-linux-x64.tar.gz
+$ sudo tar -zxvf electerm-1.3.54-linux-x64.tar.gz -C /opt
+# 保存上面的图标到 /opt/electerm-1.3.54-linux-x64/ 目录为 icon.png
+# 编写启动脚本
+$ sudo vim /usr/share/applications/electerm.desktop
+[Desktop Entry]
+Name=electerm
+Exec=electerm
+Terminal=false
+Type=Application
+Icon=/opt/electerm-1.3.54-linux-x64/icon.png
+Exec=/opt/electerm-1.3.54-linux-x64/electerm
+StartupWMClass=plasmashell
+Comment=Terminal/ssh/sftp client(linux, mac, win) based on electron/ssh2/node-pty/xterm/antd/subx and other libs
+Categories=Development;System;TerminalEmulator;
+
+```
