@@ -200,7 +200,7 @@ source ~/.zshrc
 根据提示开始配置
 
 
-## electerm
+## ssh 工具 electerm
 
 ```
 $ wget https://github.com/electerm/electerm/releases/download/v1.3.54/electerm-1.3.54-linux-x64.tar.gz
