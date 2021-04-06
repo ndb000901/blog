@@ -24,7 +24,6 @@
 
 如果从U盘启动时无法进入安装界面或黑屏，在bios中将Graphic Device 设置为Dynamic Graphics，或者在u盘启动时第一个启动项出按e，然后将driver=free改成driver=intel,按F10保存继续。
 
-****
 
 ## 从u盘系统操作本机manjaro系统
 
@@ -32,6 +31,7 @@
 ```
 manjaro-chroot -a
 ```
+****
 
 # 系统配置
 
