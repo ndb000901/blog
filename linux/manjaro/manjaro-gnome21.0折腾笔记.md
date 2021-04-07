@@ -220,3 +220,32 @@ Comment=Terminal/ssh/sftp client(linux, mac, win) based on electron/ssh2/node-pt
 Categories=Development;System;TerminalEmulator;
 
 ```
+
+## IDEA插件
+
+```
+# 阿里代码规范
+Alibaba Java Coding Guidelines
+# 右侧预览，方便快速定位，Ctrl+Shift+G 快速打开关闭
+CodeGlance
+# mybatis 代码到 xml 跳转
+Free Mybatis plugin
+# 分析依赖冲突插件
+Maven Helper
+# 括号开始结尾，高亮显示
+HighlightBracketPair
+# 多彩括号，区域代码高亮
+Rainbow Brackets
+# 翻译
+Translation
+# 字符串各种显示格式转换
+String Manipulation
+CamelCase
+# git 显示插件，可以在每行显示修改人和修改时间
+GitToolBox
+# 热加载修改的代码而无需重启项目，使用参考下方链接
+JRebel and XRebel for IntelliJ
+
+```
+
+## WPS
