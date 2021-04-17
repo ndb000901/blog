@@ -64,4 +64,27 @@ public class Application {
 {"name":"Tom","age":15,"email":"haha@jiji.com"}
 ```
 
-**3.**
+**3.将json字符串解析为java对象**
+
+**Application.java**
+```
+public class Application {
+    public static void main(String[] args) {
+        MyJson myJson = new MyJson();
+        Gson gson = new Gson();
+        String text = "{\"name\":\"Tom\",\"age\":19,\"email\":\"hello@jiba.com\"}";
+        myJson = gson.fromJson(text,myJson.getClass());
+        System.out.println(myJson.getName());
+        System.out.println(myJson.getAge());
+        System.out.println(myJson.getEmail());
+    }
+}
+```
+
+**输出结果**
+
+```
+Tom
+19
+hello@jiba.com
+```
