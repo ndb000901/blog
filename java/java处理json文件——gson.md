@@ -48,6 +48,7 @@ public class MyJson {
 
 ```
 import com.google.gson.Gson;
+
 public class Application {
     public static void main(String[] args) {
         MyJson myJson = new MyJson("Tom",15,"haha@jiji.com");
@@ -68,6 +69,8 @@ public class Application {
 
 **Application.java**
 ```
+import com.google.gson.Gson;
+
 public class Application {
     public static void main(String[] args) {
         MyJson myJson = new MyJson();
@@ -87,4 +90,63 @@ public class Application {
 Tom
 19
 hello@jiba.com
+```
+
+**4.将ArrayList转为json数组**
+
+**Application.java**
+```
+import com.google.gson.Gson;
+
+public class Application {
+    public static void main(String[] args) {
+        Gson gson = new Gson();
+        ArrayList<MyJson> list = new ArrayList<>();
+        list.add(new MyJson("name1",10,"ki@jiba.com"));
+        list.add(new MyJson("name2",19,"hi@jiba.com"));
+        String json = gson.toJson(list);
+        System.out.println(json);
+    }
+}
+```
+
+**输出结果**
+
+```
+[{"name":"name1","age":10,"email":"ki@jiba.com"},{"name":"name2","age":19,"email":"hi@jiba.com"}]
+```
+
+**5.将json数组转为ArrayList**
+
+**Application.java**
+```
+import com.google.gson.Gson;
+
+public class Application {
+    public static void main(String[] args) {
+        Gson gson = new Gson();    
+        ArrayList<MyJson> list = new ArrayList<>();
+        Type listType = new TypeToken<List<MyJson>>(){}.getType();
+        String text = "[{\"name\":\"name1\",\"age\":10,\"email\":\"ki@jiba.com\"},{\"name\":\"name2\",\"age\":19,\"email\":\"hi@jiba.com\"}]";
+        list = gson.fromJson(text,listType);
+
+        for (MyJson obj : list) {
+            System.out.println(obj.getName());
+            System.out.println(obj.getAge());
+            System.out.println(obj.getEmail());
+        }
+    }
+}
+
+```
+
+**输出结果**
+
+```
+name1
+10
+ki@jiba.com
+name2
+19
+hi@jiba.com
 ```
