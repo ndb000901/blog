@@ -9,6 +9,28 @@
 >3.gson-2.8.6 [项目地址](https://github.com/google/gson)
 >
 
+**在Gradle/Android中使用**
+
+```
+dependencies {
+    implementation 'com.google.code.gson:gson:2.8.6'
+}
+```
+
+**在Maven中使用**
+
+```
+<dependencies>
+    <!--  Gson: Java to Json conversion -->
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.8.6</version>
+      <scope>compile</scope>
+    </dependency>
+</dependencies>
+```
+
 **2.将一个对象转为json字符串**
 
 **MyJson.java**
