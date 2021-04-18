@@ -114,3 +114,34 @@
 # 工具
 
 [初学git安装与配置windows版](https://github.com/ndb000901/blog/blob/main/git/%E5%88%9D%E5%AD%A6git%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEwindows%E7%89%88.md)
+
+# 嵌入式
+
+****
+
+## STC51
+
+[keil + protues 51单片机点亮led灯](https://github.com/ndb000901/blog/blob/main/singleChipMicrocomputer/Stc51/keil4%20%2B%20proteus%2051%E5%8D%95%E7%89%87%E6%9C%BA%E7%82%B9%E4%BA%AEled%E7%81%AF.md)
+
+****
+
+## STM32
+
+[Arduino 下初试 stm32开发板](https://github.com/ndb000901/blog/blob/main/singleChipMicrocomputer/Stm32/Arduino%20%E4%B8%8B%E5%88%9D%E8%AF%95%20stm32%E5%BC%80%E5%8F%91%E6%9D%BF.md)
+
+[STM32F103VET6 串口 初试](https://github.com/ndb000901/blog/blob/main/singleChipMicrocomputer/Stm32/STM32F103%E4%B8%B2%E5%8F%A3%20%E5%88%9D%E8%AF%95.md)
+
+[STM32中FreeRTOS移植——多程序](https://github.com/ndb000901/blog/blob/main/singleChipMicrocomputer/Stm32/STM32%E4%B8%ADFreeRTOS%E7%A7%BB%E6%A4%8D%E2%80%94%E2%80%94%E5%A4%9A%E7%A8%8B%E5%BA%8F.md)
+
+[STM32实验全局变量、局部变量、堆、栈](https://github.com/ndb000901/blog/blob/main/singleChipMicrocomputer/Stm32/STM32%E5%AE%9E%E9%AA%8C%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F%E3%80%81%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E3%80%81%E5%A0%86%E3%80%81%E6%A0%88.md)
+
+[STM32汇编程序设计](https://github.com/ndb000901/blog/blob/main/singleChipMicrocomputer/Stm32/STM32%E6%B1%87%E7%BC%96%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1.md)
+
+[STM32的PWM和DAC练习](https://github.com/ndb000901/blog/blob/main/singleChipMicrocomputer/Stm32/STM32%E7%9A%84PWM%E5%92%8CDAC%E7%BB%83%E4%B9%A0.md)
+
+[stm32 AHT20温度采集](https://github.com/ndb000901/blog/blob/main/singleChipMicrocomputer/Stm32/stm32%20AHT20%E6%B8%A9%E5%BA%A6%E9%87%87%E9%9B%86.md)
+
+[stm32 i2c初试 OLED](https://github.com/ndb000901/blog/blob/main/singleChipMicrocomputer/Stm32/stm32%20i2c%E5%88%9D%E8%AF%95%20OLED.md)
+
+[stm32启动模式](https://github.com/ndb000901/blog/blob/main/singleChipMicrocomputer/Stm32/stm32%E5%90%AF%E5%8A%A8%E6%A8%A1%E5%BC%8F.md)
+
