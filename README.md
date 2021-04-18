@@ -78,6 +78,27 @@
 
 # linux折腾笔记
 
+**** 
+
+## manjaro折腾笔记
+
+[manjaro21.0-gnome折腾笔记](https://github.com/ndb000901/blog/blob/main/linux/manjaro/manjaro-gnome21.0%E6%8A%98%E8%85%BE%E7%AC%94%E8%AE%B0.md)
+
+[manjaro顶部显示网速](https://github.com/ndb000901/blog/blob/main/linux/manjaro/manjaro%E9%A1%B6%E9%83%A8%E6%98%BE%E7%A4%BA%E7%BD%91%E9%80%9F.md)
+
+[vmware问题解决](https://github.com/ndb000901/blog/blob/main/linux/manjaro/vmware.md)
+
+****
+
+[Ubuntu Centos静态ip设置](https://github.com/ndb000901/blog/blob/main/linux/Ubuntu%20Centos%E9%9D%99%E6%80%81ip%E8%AE%BE%E7%BD%AE.md)
+
+[linux如何使用U盘等外接储存设备](https://github.com/ndb000901/blog/blob/main/linux/linux%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8U%E7%9B%98%E7%AD%89%E5%A4%96%E6%8E%A5%E5%82%A8%E5%AD%98%E8%AE%BE%E5%A4%87.md)
+
+[ubuntu20配置ip](https://github.com/ndb000901/blog/blob/main/linux/ubuntu20%E9%85%8D%E7%BD%AEip.md)
+
+[ubuntu忘记用户名与密码解决方案](https://github.com/ndb000901/blog/blob/main/linux/ubuntu%E5%BF%98%E8%AE%B0%E7%94%A8%E6%88%B7%E5%90%8D%E4%B8%8E%E5%AF%86%E7%A0%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.md)
+
+
 # 个人博客搭建
 
 [ubuntu16.04 保姆级安装教程](https://github.com/ndb000901/blog/blob/main/blogBuilding/ubuntu16.04%20%E4%BF%9D%E5%A7%86%E7%BA%A7%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B.md)
