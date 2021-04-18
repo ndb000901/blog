@@ -172,3 +172,85 @@ name2
 19
 hi@jiba.com
 ```
+
+**6.从文件流读取json数据转换为java对象**
+
+**myJson.json**
+```
+[
+  {
+    "name": "name1",
+    "age": 10,
+    "email": "ki@jiba.com"
+  },
+  {
+    "name": "name2",
+    "age": 19,
+    "email": "hi@jiba.com"
+  }
+]
+
+
+```
+
+**Application.java**
+```
+public class Application {
+    public static void main(String[] args) throws IOException {
+        ArrayList<MyJson> list = new ArrayList<>();
+        Type listType = new TypeToken<List<MyJson>>(){}.getType();
+        Gson gson = new Gson();
+        File file = new File("/home/hello/myCode/java/json/gson/src/main/java/xyz/wuhen/gson/myJson.json");
+        FileReader reader = new FileReader(file);
+        list = gson.fromJson(reader,listType);
+        for (MyJson obj : list) {
+            System.out.println(obj.getName());
+            System.out.println(obj.getAge());
+            System.out.println(obj.getEmail());
+        }
+   }
+}
+```
+
+**输出结果**
+
+```
+name1
+10
+ki@jiba.com
+name2
+19
+hi@jiba.com
+```
+
+**7.从URL读取json数据字节流转为java对象**
+
+**Application.java**
+```
+public class Application {
+    public static void main(String[] args) throws IOException {
+        ArrayList<MyJson> list = new ArrayList<>();
+        Type listType = new TypeToken<List<MyJson>>(){}.getType();
+        Gson gson = new Gson();
+        URL url = new URL("http://127.0.0.1/myJson.json");
+        JsonReader reader = new JsonReader(new InputStreamReader(url.openStream()));
+        list = gson.fromJson(reader,listType);
+        for (MyJson obj : list) {
+            System.out.println(obj.getName());
+            System.out.println(obj.getAge());
+            System.out.println(obj.getEmail());
+        }
+    }
+}
+```
+
+**输出结果**
+
+```
+name1
+10
+ki@jiba.com
+name2
+19
+hi@jiba.com
+```
