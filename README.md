@@ -76,6 +76,8 @@
 
 [redis安装手册](https://github.com/ndb000901/blog/blob/main/softwareInstallation/redis%E5%AE%89%E8%A3%85%E6%89%8B%E5%86%8C.md)
 
+[nginx安装手册](https://github.com/ndb000901/blog/blob/main/softwareInstallation/nginx%E5%AE%89%E8%A3%85%E6%89%8B%E5%86%8C.md)
+
 # linux折腾笔记
 
 **** 
