@@ -162,6 +162,18 @@ src为图片地址,alt为替换文本,当图片无法正常显示,将显示文�
 <img src="haha.jpg" alt="haha">
 ```
 
+****
+
+## 属性
+
+**class**
+
+**id**
+
+**style**
+
+**title**
+
 ## CSS引用
 
 **外部引用**
@@ -208,6 +220,8 @@ p    {color: red;}
 <h1 style="color:blue;">A Blue Heading</h1>
 <p style="color:red;">A red paragraph.</p>
 ```
+
+****
 
 ## javaScript引用
 
