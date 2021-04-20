@@ -8,29 +8,129 @@
 
 **\<html\>元素**
 
-```
-```
-
-**\<head\>元素**
+\<html\>定义了整个文档
 
 ```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+</body>
+</html>
 ```
 
-**\<body\>元素**
+## \<head\>元素
+
+可以插入到\<head\>的元素：\<title\>, \<style\>, \<meta\>, \<link\>, \<script\>, \<noscript\> 和 \<base\>
 
 ```
 ```
 
 **\<title\>元素**
 
+定义了该网页的标题
+
 ```
+<title>MyTitle</title>
+```
+
+**\<style\>元素**
+
+引用CSS
+
+```
+<style type="text/css">
+body {background-color:yellow}
+p {color:blue}
+</style>
+```
+
+**\<meta\>元素**
+
+用来定义一些元数据
+
+**description：** 为网页定义描述语言
+**keywords：** 为搜索引擎定义搜素关键字
+**author：** 定义作者
+**charset：** 字符集
+
+```
+<head>
+<meta name="description" content="fuck">
+<meta name="keywords" content="hello,world">
+<meta name="author" content="hello">
+<meta charset="UTF-8">
+</head>
+```
+
+**\<link\>元素**
+
+通常用于链接外部CSS
+
+```
+<head>
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+</head>
+```
+
+**\<script\>元素**
+
+用于加载脚本
+
+```
+<script>
+alert("hello,world");
+</script>
+```
+
+**\<base\>元素**
+
+描述了基本的链接地址/链接目标，该标签作为HTML文档中所有的链接标签的默认链接。
+
+```
+<head>
+<base href="https://www.github.com" target="_blank">
+</head>
+<body>
+<img src="images/stickman.gif" >
+<a href="tags/tag_base.asp">HTML base Tag</a>
+</body>
+```
+
+****
+
+**\<body\>元素**
+
+\<body\>元素定义了 HTML 文档的主体
+
+```
+<body>
+</body>
 ```
 
 **\<h\>元素**
 
-作用：标题,范围\<h1\>~\<h6\>,\<h1最大\>,\<h6\>
+作用：标题,范围\<h1\>~\<h6\>,\<h1最大\>,\<h6\>最小。
+
 ```
+<body>
+    <h1>一级标题</h1>
+    <h2>二级标题</h2>
+    <h3>三级标题</h3>
+    <h4>四级标题</h4>
+    <h5>五级标题</h5>
+    <h6>六级标题</h6>
+</body>
 ```
+
+![image](https://user-images.githubusercontent.com/48900845/115442031-2197bb80-a244-11eb-9d61-b1879842c528.png)
+
 
 **\<p\>元素**
 
@@ -40,12 +140,26 @@
 <p>这是一个段落</p>
 ```
 
-**\<br\>**
+**\<br\>元素**
 
 作用：换行，无关闭标签。
 
 ```
 <br>
+```
+
+**\<a\>元素**
+
+```
+<a href="url">link text</a>
+```
+
+**\<img\>元素**
+
+src为图片地址,alt为替换文本,当图片无法正常显示,将显示文本。
+
+```
+<img src="haha.jpg" alt="haha">
 ```
 
 ## CSS引用
