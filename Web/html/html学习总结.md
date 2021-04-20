@@ -164,15 +164,87 @@ src为图片地址,alt为替换文本,当图片无法正常显示,将显示文�
 
 ****
 
+## \<td\>表格
+
+**\<table\>元素**
+
+表示表格
+
+**\<tr\>元素**
+
+表示行
+
+**\<th\>元素**
+
+表示表头
+
+**\<td\>元素**
+
+表示数据
+
+```
+<table border="1">
+    <tr>
+        <th>Header 1</th>
+        <th>Header 2</th>
+    </tr>
+    <tr>
+        <td>row 1, cell 1</td>
+        <td>row 1, cell 2</td>
+    </tr>
+    <tr>
+        <td>row 2, cell 1</td>
+        <td>row 2, cell 2</td>
+    </tr>
+</table>
+```
+![image](https://user-images.githubusercontent.com/48900845/115448953-dd5ce900-a24c-11eb-8570-0128793b0db9.png)
+
+
+****
+
+****
+
+****
+
 ## 属性
 
 **class**
 
+可以有多个
+
+```
+<p class="haha jiji"></p>
+```
+
 **id**
+
+只能有一个
+
+```
+<p id="myId"><</p>
+```
 
 **style**
 
+定义样式
+
+```
+<p style="color: red;">haha</p>
+```
+
+![image](https://user-images.githubusercontent.com/48900845/115447952-a9cd8f00-a24b-11eb-8b54-a4f0493af584.png)
+
 **title**
+
+提供一些额外信息
+
+```
+<p title="jiji">haha</p>
+```
+
+****
+****
 
 ## CSS引用
 
