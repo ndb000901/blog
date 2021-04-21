@@ -270,11 +270,9 @@ type默认为text
 
 ![image](https://user-images.githubusercontent.com/48900845/115527865-0bc9db00-a2c4-11eb-917b-a8947025967c.png)
 
-![Uploading image.png…]()
+![image](https://user-images.githubusercontent.com/48900845/115528404-97436c00-a2c4-11eb-8e59-6a44784cfe13.png)
 
-![Uploading image.png…]()
-
-
+![image](https://user-images.githubusercontent.com/48900845/115528351-8abf1380-a2c4-11eb-9c84-28323d4ea882.png)
 
 ****
 
