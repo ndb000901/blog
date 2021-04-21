@@ -207,6 +207,75 @@ src为图片地址,alt为替换文本,当图片无法正常显示,将显示文�
 
 ****
 
+## \<input\>元素
+
+**type**
+
+type默认为text
+
+**type的类型**
+
+```
+    <form>
+        <p>文本框</p>
+        <input type="text"> <br>
+        <p>密码框</p>
+        <input type="password"><br>
+        <p>按钮</p>
+        <br><input type="button" value="按钮">
+        <p>复选框</p><br>
+        选项1<input type="checkbox">选项2<input type="checkbox">选项3<input type="checkbox">
+        <p>颜色选择</p>
+        <br><input type="color">
+        <p>只显示年月日</p>
+        <br><input type="date">
+        <p>年月日时间</p>
+        <br><input type="datetime-local">
+        <p>邮箱</p>
+        <br><input type="email">
+        <p>文件选择</p>
+        <br><input type="file">
+        <p>隐藏用户不可见,具有form传值功能</p>
+        <br><input type="hidden">
+        <p>图片提交按钮</p>
+        <br><input type="image">
+        <p>月份</p>
+        <br><input type="month">
+        <p>数字</p>
+        <br><input type="number">
+        <p>密码</p>
+        <br><input type="password">
+        <p>name属性相同的为同一组,只可选中一个</p>
+        <br>选项1<input type="radio" name="haha">选项2<input type="radio" name="haha">选项3<input type="radio" name="haha">
+        <p>数值介于指定数值之间,可拖动</p>
+        <br><input type="range">
+        <p>重置按钮</p>
+        <br><input type="reset">
+        <p>搜索框</p>
+        <br><input type="search">
+        <p>提交按钮</p>
+        <br><input type="submit">
+        <p>电话</p>
+        <br><input type="tel">
+        <p>文本框</p>
+        <br><input type="text">
+        <p>只显示时分</p>
+        <br><input type="time">
+        <p></p>
+        <br><input type="url">
+        <p>显示周</p>
+        <br><input type="week">
+    </form>
+```
+
+![image](https://user-images.githubusercontent.com/48900845/115527865-0bc9db00-a2c4-11eb-917b-a8947025967c.png)
+
+![Uploading image.png…]()
+
+![Uploading image.png…]()
+
+
+
 ****
 
 ****
