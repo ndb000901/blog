@@ -81,3 +81,79 @@ dis ip routing-table
 ![image](https://user-images.githubusercontent.com/48900845/115918657-5dcc5580-a4aa-11eb-828a-3098a28d9d7d.png)
 
 
+**试验2**
+
+**目的**
+
+>配置vlan
+>
+
+>4台PC
+>
+>2台S3700
+>
+
+**网络拓扑**
+
+![image](https://user-images.githubusercontent.com/48900845/115921710-73437e80-a4ae-11eb-871e-a26731f687ee.png)
+
+**PC1配置**
+
+![image](https://user-images.githubusercontent.com/48900845/115921798-98d08800-a4ae-11eb-97ae-02806ddc7e8e.png)
+
+**PC2配置**
+
+![image](https://user-images.githubusercontent.com/48900845/115921840-a554e080-a4ae-11eb-8295-4062cefe8cad.png)
+
+**PC3配置**
+
+![image](https://user-images.githubusercontent.com/48900845/115921881-b30a6600-a4ae-11eb-93cf-24f2284579df.png)
+
+**PC4配置**
+
+![image](https://user-images.githubusercontent.com/48900845/115921906-be5d9180-a4ae-11eb-90e5-4da6a132d711.png)
+
+**LSW1配置**
+
+```
+# 创建vlan 1 2
+vlan batch 1 2
+
+# 配置e0/0/1
+int e0/0/1
+port link-type trunk
+port trunk allow-pass vlan 1 2
+
+# 配置e0/0/2
+int e0/0/2
+port link-type access
+port default vlan 1
+
+# 配置e0/0/3
+int e0/0/3
+port link-type access
+port default vlan 2
+
+```
+
+**LSW2配置**
+
+```
+# 创建vlan 1 2
+vlan batch 1 2
+
+# 配置e0/0/1
+int e0/0/1
+port link-type trunk
+port trunk allow-pass vlan 1 2
+
+# 配置e0/0/2
+int e0/0/2
+port link-type access
+port default vlan 1
+
+# 配置e0/0/3
+int e0/0/3
+port link-type access
+port default vlan 2
+```
