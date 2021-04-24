@@ -248,3 +248,171 @@ area 0
 network 192.168.1.254 0.0.0.0
 network 2.2.2.2 0.0.0.0
 ```
+
+**实验4**
+
+**目的：**
+
+>配置三层交换
+>
+
+>5台PC
+>
+>2台S3700(LSW1 LSW2)
+>
+>1台S5700(LSW3)
+>
+>2台AR2220
+>
+
+**网络拓扑**
+![image](https://user-images.githubusercontent.com/48900845/115961516-4db78300-a549-11eb-9f46-cd6a5cd3b4e6.png)
+
+**PC1配置**
+
+![image](https://user-images.githubusercontent.com/48900845/115961694-1f867300-a54a-11eb-93f2-05466f5b4d55.png)
+
+**PC2配置**
+
+![image](https://user-images.githubusercontent.com/48900845/115961711-2e6d2580-a54a-11eb-8976-ab6c1c31d31a.png)
+
+**PC3配置**
+
+![image](https://user-images.githubusercontent.com/48900845/115961732-3fb63200-a54a-11eb-84c4-502ab2d6ffea.png)
+
+**PC4配置**
+
+![image](https://user-images.githubusercontent.com/48900845/115961740-4a70c700-a54a-11eb-9628-09dde24da7e7.png)
+
+**PC5配置**
+
+![image](https://user-images.githubusercontent.com/48900845/115961777-74c28480-a54a-11eb-961b-bbe0102a1661.png)
+
+**LSW1配置**
+
+```
+# 创建vlan
+sys
+vlan batch 2 3
+
+# 配置e0/0/1
+int e0/0/1
+port link-type trunk
+port trunk allow-pass vlan all
+
+# 配置e0/0/2
+int e0/0/2
+port link-type trunk
+port trunk allow-pass vlan all
+
+# 配置e0/0/3
+int e0/0/3
+port link-type access
+port default vlan 1
+
+# 配置e0/0/4
+int e0/0/4
+port link-type access
+port default vlan 2
+
+```
+
+**LSW2配置**
+
+```
+# 创建vlan
+sys
+vlan batch 2 3
+
+# 配置e0/0/1
+int e0/0/1
+port link-type trunk
+port trunk allow-pass vlan all
+
+# 配置e0/0/2
+int e0/0/2
+port link-type trunk
+port trunk allow-pass vlan all
+
+# 配置e0/0/3
+int e0/0/3
+port link-type access
+port default vlan 1
+
+# 配置e0/0/4
+int e0/0/4
+port link-type access
+port default vlan 2
+```
+
+**LSW3配置**
+
+```
+# 创建vlan
+sys
+vlan batch 2 3
+
+# 配置g0/0/1
+int g0/0/1
+port link-type trunk
+port trunk allow-pass vlan all
+
+# 配置g0/0/2
+int g0/0/2
+port link-type trunk
+port trunk allow-pass vlan all
+
+# 配置vlan ip
+int vlanif 1
+ip add 192.168.2.254 24
+int vlanif 2
+ip add 192.168.0.254 24
+int vlanif 3
+ip add 192.168.1.254 24
+
+# 配置ospf
+ospf 1 router-id 3.3.3.3
+area 0
+net 192.168.0.254 0.0.0.0
+net 192.168.1.254 0.0.0.0
+net 192.168.2.254 0.0.0.0
+
+```
+
+**AR1配置**
+
+```
+# 配置g0/0/0
+sys
+int g0/0/0
+ip add 192.168.2.3 24
+
+# 配置g0/0/1
+int g0/0/1
+ip add 1.1.1.1 24
+
+# 配置ospf
+ospf 1 router-id 1.1.1.1
+area 0
+net 192.168.2.3 0.0.0.0
+net 1.1.1.1 0.0.0.0
+```
+
+**AR2配置**
+
+```
+# 配置g0/0/0
+sys
+int g0/0/0
+ip add 1.1.1.2 24
+
+# 配置g0/0/1
+int g0/0/1
+ip add 2.2.2.1 24
+
+# 配置ospf
+ospf 1 router-id 2.2.2.2
+area 0
+net 1.1.1.2 0.0.0.0
+net 2.2.2.1 0.0.0.0
+```
