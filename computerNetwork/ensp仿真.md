@@ -230,4 +230,21 @@ network 2.2.2.1 0.0.0.0
 **AR3配置**
 
 ```
+# 配置g0/0/0/1 ip
+sys
+int g0/0/1
+ip add 192.168.1.254 24
+
+# 配置g0/0/0/0 ip
+int g0/0/0
+ip add 2.2.2.2 24
+
+# 配置ospf
+# 1为ospf进程ip,可以与其它路由器相同，3.3.3.3为router-id，是路由器唯一标识，不可相同。
+# network 为区域下宣告
+
+ospf 1 router-id 3.3.3.3
+area 0
+network 192.168.1.254 0.0.0.0
+network 2.2.2.2 0.0.0.0
 ```
