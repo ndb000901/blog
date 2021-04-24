@@ -157,3 +157,77 @@ int e0/0/3
 port link-type access
 port default vlan 2
 ```
+
+**实验3**
+
+**目的**
+
+>配置ospf打通处于不同网络主机的网络链路
+>
+
+>2台PC
+>
+>3台AR2220
+>
+
+**网络拓扑**
+
+![image](https://user-images.githubusercontent.com/48900845/115952778-960b7c80-a51a-11eb-822f-86b481964000.png)
+
+**PC1配置**
+
+![image](https://user-images.githubusercontent.com/48900845/115952848-05816c00-a51b-11eb-9eef-5b708135d2a5.png)
+
+**PC2配置**
+
+![image](https://user-images.githubusercontent.com/48900845/115952862-20ec7700-a51b-11eb-82f4-1677393cd04a.png)
+
+**AR1配置**
+
+```
+# 配置g0/0/0/1 ip
+sys
+int g0/0/1
+ip add 192.168.0.254 24
+
+# 配置g0/0/0/0 ip
+int g0/0/0
+ip add 1.1.1.1 24
+
+# 配置ospf
+# 1为ospf进程ip,可以与其它路由器相同，1.1.1.1为router-id，是路由器唯一标识，不可相同。
+# network 为区域下宣告
+
+ospf 1 router-id 1.1.1.1
+area 0
+network 1.1.1.1 0.0.0.0
+network 192.168.0.254 0.0.0.0
+
+```
+
+**AR2配置**
+
+```
+# 配置g0/0/0/1 ip
+sys
+int g0/0/1
+ip add 2.2.2.1 24
+
+# 配置g0/0/0/0 ip
+int g0/0/0
+ip add 1.1.1.2 24
+
+# 配置ospf
+# 1为ospf进程ip,可以与其它路由器相同，2.2.2.2为router-id，是路由器唯一标识，不可相同。
+# network 为区域下宣告
+
+ospf 1 router-id 2.2.2.2
+area 0
+network 1.1.1.2 0.0.0.0
+network 2.2.2.1 0.0.0.0
+```
+
+**AR3配置**
+
+```
+```
