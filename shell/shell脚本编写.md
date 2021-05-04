@@ -37,8 +37,9 @@ readonly haha="jiji"
 
 **定义**
 
+数组内可有不同类型数据
 ```
-myArray=(1 2 3 4)
+myArray=(1 2 ‘kkk’ 4)
 
 # 或者(下标可以不连续，无限制)
 
@@ -46,6 +47,58 @@ myArray[0]=10
 myArray[0]=11
 myArray[0]=12
 
+```
+
+**读取数组内容**
+
+**通过索引**
+```
+myArray=(1 2 'jiji' 4)
+echo ${myArray[0]}
+echo ${myArray[1]}
+echo ${myArray[2]}
+echo ${myArray[3]}
+```
+
+**输出结果**
+
+```
+1
+2
+jiji
+4
+```
+
+**获取所有元素**
+
+使用@、*获取。
+
+```
+myArray=(1 2 'jiji' 4)
+echo ${myArray[@]}
+echo ${myArray[*]}
+```
+
+**输出结果**
+
+```
+1 2 jiji 4
+1 2 jiji 4
+```
+
+**获取数组长度**
+
+```
+myArray=(1 2 'jiji' 4)
+echo ${#myArray[@]}
+echo ${#myArray[*]}
+```
+
+**输出结果**
+
+```
+4
+4
 ```
 
 **2.流程控制**
