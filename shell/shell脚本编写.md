@@ -411,3 +411,8 @@ f2 1 2 3 4
 |-p file|有名管道，返回true|
 |-u file|设置SUID，返回true|
 
+**注意：**
+
+SUID-->Set User ID
+SGID-->Set Group ID
+
