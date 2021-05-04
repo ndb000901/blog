@@ -417,3 +417,13 @@ SUID-->Set User ID
 
 SGID-->Set Group ID
 
+
+**6.文件包含**
+
+```
+# 方法1 '.'与文件名间空格不可以忘哦
+. filename
+
+# 方法2 
+source filename
+```
