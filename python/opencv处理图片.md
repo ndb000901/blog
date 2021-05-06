@@ -67,7 +67,58 @@ cv2.imshow('img2', img2)
 cv2.waitKey()
 ```
 
-**4.图像轮廓检测**
+**4.图片旋转**
+
+**main.py**
+
+```
+import numpy as np
+import argparse
+import imutils
+import cv2
+
+ap = argparse.ArgumentParser()
+ap.add_argument("-i", "--image", required=True,
+                help="Path to the image")
+args = vars(ap.parse_args())
+
+image = cv2.imread(args["image"])
+cv2.imshow("Original", image)
+
+(h, w) = image.shape[:2]
+center = (w // 2, h // 2)
+
+M = cv2.getRotationMatrix2D(center, 45, 1.0)
+rotated = cv2.warpAffine(image, M, (w, h))
+cv2.imshow("Rotated by 45 Degrees", rotated)
+
+M = cv2.getRotationMatrix2D(center, -90, 1.0)
+rotated = cv2.warpAffine(image, M, (w, h))
+cv2.imshow("Rotated by -90 Degrees", rotated)
+
+rotated = imutils.rotate(image, 180)
+cv2.imshow("Rotated by 180 Degrees", rotated)
+cv2.waitKey(0)
+```
+
+**imutils.py**
+
+rotate()第一个参数为需要处理的图片,第二个为角度，第三个为旋转中心，默认为图片中心，第四个为规模，默认1.0。
+
+```
+import cv2
+def rotate(image, angle, center=None, scale=1.0):
+    (h, w) = image.shape[:2]
+    if center is None: 
+        center = (w // 2, h // 2)
+
+    M = cv2.getRotationMatrix2D(center, angle, scale)
+
+    rotated = cv2.warpAffine(image, M, (w, h))
+    return rotated
+```
+
+**5.图像轮廓检测**
 
 ```
 # 图片轮廓检测
