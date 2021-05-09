@@ -8,6 +8,13 @@
 
 **2.配置**
 
+**安装**
+
+```
+npm install typescript --save-dev
+npm install ts-node --save-dev
+```
+
 **launch.json**
 
 ```
