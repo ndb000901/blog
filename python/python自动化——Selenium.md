@@ -1,6 +1,6 @@
-## python自动化——Selenium
+# python自动化——Selenium
 
-**1.实验环境**
+## 1.实验环境
 
 >1.manjaro21-gnome
 >
@@ -16,7 +16,7 @@
 **注意：** chromedriver下载与自己浏览器相符的版本，selenium也可用于其他浏览器，下载与浏览器相应的*driver就好。
 
 
-**定位元素**
+## 2.定位元素
 
 selenium 提供8种find_element_by定位元素的方法，有16个函数，分为两类find_element_by 返回匹配的第1个元素，find_elements_by返回所有匹配的元素。
 
