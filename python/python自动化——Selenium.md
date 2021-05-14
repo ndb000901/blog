@@ -23,6 +23,7 @@ selenium 提供8种find_element_by定位元素的方法，有16个函数，分�
 **表1**
 
 |方法|说明|
+|----|----|
 |find_element_by_id(id)|通过元素id属性值定位|
 |find_element_by_name(name)|通过元素name属性值定位元素|
 |find_element_by_class_name(name)|通过元素的class名定位元素|
@@ -35,6 +36,7 @@ selenium 提供8种find_element_by定位元素的方法，有16个函数，分�
 **表2**
 
 |方法|说明|
+|----|----|
 |find_elements_by_id(id)|通过元素id属性值定位|
 |find_elements_by_name(name)|通过元素name属性值定位元素|
 |find_elements_by_class_name(name)|通过元素的class名定位元素|
