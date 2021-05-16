@@ -104,4 +104,27 @@ selenium 提供8种find_element_by定位元素的方法，有16个函数，分�
 |is_selected()|是否被选中，用于复选框、单选按钮|
 |value_of_css_property(property_name)|获取css属性的值|
 
+## 5.Select
+
+**Select类用于处理下拉菜单和列表**
+
+**一些属性**
+
+|属性|说明|
+|----|----|
+|all_selected_options|获取下拉菜单与列表中被选中的所有内容|
+|first_selected_option|获取下拉菜单和列表的第一个选项或当前选择项|
+|options|获取下拉菜单和列表的所有选项|
+
+**一些方法**
+
+|方法|说明|
+|----|----|
+|deselect_all()|清除所有选择项|
+|deselect_by_index(index)|根据索引清除选择项|
+|deselect_by_value(value)|清除所有与给定值匹配的选项|
+|deselect_by_visible_text(text)|清除所有与给定text匹配的选择项|
+|select_by_index(index)|根据索引选择|
+|select_by_value(value)|选择所有与给定值匹配的选项|
+|select_by_visible_text(text)|选择所有与给定text匹配的选择项|
 
