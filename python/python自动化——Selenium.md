@@ -128,3 +128,20 @@ selenium 提供8种find_element_by定位元素的方法，有16个函数，分�
 |select_by_value(value)|选择所有与给定值匹配的选项|
 |select_by_visible_text(text)|选择所有与给定text匹配的选择项|
 
+
+## 6.Alert
+
+**一些属性**
+
+|属性|说明|
+|----|----|
+|text|获取警告窗口文本|
+
+**一些方法**
+
+|方法|说明|
+|----|----|
+|accept()|接受警告，单击OK|
+|dismiss()|驳回警告，单击取消|
+|send_keys(value)|模拟输入|
+
