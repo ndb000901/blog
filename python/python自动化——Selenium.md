@@ -145,3 +145,20 @@ selenium 提供8种find_element_by定位元素的方法，有16个函数，分�
 |dismiss()|驳回警告，单击取消|
 |send_keys(value)|模拟输入|
 
+
+## 7.等待机制
+
+**隐式等待**
+
+WebDriver将会在指定的时间内查找元素，超时后抛出NoSuchElementException异常。
+
+```
+implicitly_wait(time)
+```
+
+**显示等待**
+
+WebDriver 提供 WebDriverWait、expected_conditions实现显示等待。
+
+[expected_conditions 文档](https://www.selenium.dev/selenium/docs/api/py/webdriver_support/selenium.webdriver.support.expected_conditions.html#module-selenium.webdriver.support.expected_conditions)
+
