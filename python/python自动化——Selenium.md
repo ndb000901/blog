@@ -162,3 +162,65 @@ WebDriver 提供 WebDriverWait、expected_conditions实现显示等待。
 
 [expected_conditions 文档](https://www.selenium.dev/selenium/docs/api/py/webdriver_support/selenium.webdriver.support.expected_conditions.html#module-selenium.webdriver.support.expected_conditions)
 
+
+## 8.键盘、鼠标事件
+
+**ActionChains类实现**
+
+**一些方法**
+
+|方法|说明|
+|----|----|
+|click(on_element=None)|单击元素，若参数为None则点击当前鼠标位置|
+|double_click(on_element=None)|双击元素，若参数为None则点击当前鼠标位置|
+|click_and_hold(on_element)|按住鼠标左键，若参数为None则点击当前鼠标位置|
+|drag_and_drop(source,target)|拖动鼠标，source鼠标拖动的源元素，target鼠标释放的目标元素|
+|key_down(value,element=None)|按下某修饰键，在Keys定义，element=None,按键在当前焦点|
+|key_up(value,element=None)|松开某修饰键，在Keys定义，element=None,按键在当前焦点|
+|send_keys(value)|模拟键盘输入|
+|move_to_element(element)|将鼠标移至目标元素|
+|release(on_element=None)|释放鼠标,on_element为被鼠标释放的元素|
+|perform()|提交已保存的动作|
+|send_keys_to_element(element,keys_to_send)|对指定元素的键盘操作，element指定的元素，keys_to_send键盘输入值|
+
+## 9.执行JavaScript
+
+**一些方法**
+
+|方法|说明|
+|----|----|
+|execute_async_script(script,*args)|异步执行|
+|execute_script(script,*args)|同步执行|
+
+
+## 10.屏幕截图
+
+**一些方法**
+
+|方法|说明|
+|----|----|
+|save_screenshot(filename)|截屏保存|
+|save_screenshot_as_base64()|返回当前截屏base64编码字符串|
+|get_screenshot_as_file(filename)|获取当前的屏幕截图，使用完整路径|
+|get_screenshot_as_png|获取当前屏幕截图的二进制文件数据|
+
+## 11.录屏
+
+安装第三方包
+
+```
+pip install Castro
+```
+
+## 12.操作cookies
+
+**一些方法**
+
+|方法|说明|
+|----|----|
+|add_cookie(cookie_dict)|添加cookie,cookie_dict字典|
+|delete_all_cookies()|删除当前会话所有cookie|
+|delete_cookie(name)|删除单个名叫name的cookie|
+|get_cookies()|返回所有cookie信息|
+|get_cookie(name)|返回单个名为name的cookie|
+
