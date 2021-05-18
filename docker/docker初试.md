@@ -61,8 +61,40 @@ docker inspect 标签/id
 
 **3.搜索镜像**
 
-```
+[官方仓库](https://hub.docker.com/)
 
+**docker search 表头**
+ 
+|表头|说明|
+|----|----|
+|NAME|名字|
+|DESCRIPTION|描述|
+|STARS|星级|
+|OFFICIAL|是否官方创建|
+|AUTOMATED|是否自动创建|
+
+```
+docker search mysql
+```
+**4.创建镜像**
+**5.删除镜像**
+**6.存出镜像**
+**7.载入镜像**
+
+载入ubuntu_18.04.tar
+
+```
+docker load --input ubuntu_18.04.tar
+或
+docker load < ubuntu_18.04.tar
+```
+**8.上传镜像**
+
+上传本地ubuntu:18.04
+
+```
+docker tag ubuntu:18.04 user/ubuntu:18.04 test
+docker push user/ubuntu:18.04
 ```
 ## 3.容器
 
