@@ -89,7 +89,7 @@ docker search mysql
 |-p,--pause=true|提交时暂停容器运行|
 
 ```
-docker commit -m "创建镜像" -a "作者" id/名称 test
+docker commit -m "创建镜像" -a "作者" id/名称 镜像名
 ```
 
 **基于本地模板创建**
@@ -193,7 +193,16 @@ docker stop id/名称
 
 **5.删除容器**
 
+**docker rm一些参数**
+
+|参数|说明|
+|----|----|
+|-f,--force=false|强行终止并删除一个运行中的容器|
+|-l,--link=false|删除容器连接，但保留容器|
+|-v,--volumes=false|删除容器挂载的数据卷|
+
 ```
+docker rm id/名称
 ```
 
 **6.进入容器**
@@ -215,6 +224,15 @@ nsenter --target PID --mount --uts --ipc --net --pid
 ```
 
 **7.导出容器**
+
+```
+docker export id/名称 > filename
+```
+
 **8.导入容器**
+
+```
+cat filename | docker import 名称
+```
 
 ## 4.仓库
