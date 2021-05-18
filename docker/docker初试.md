@@ -247,7 +247,13 @@ docker run -d -p 5000:5000 registry
 
 **1.数据卷**
 
+容器与主机共享数据
+
 **在容器内创建一个数据卷**
+
+--name 容器命名
+
+-v 创建一个数据卷
 
 ```
 # 创建容器
@@ -262,9 +268,47 @@ ls /
 
 **挂载主机目录作为数据卷**
 
+```
+# 创建容器
+docker run --name hello -dti -v /home/ubuntu:/hello ubuntu:18.04
+
+# 连接hello
+docker exec -ti hello /bin/bash
+
+#  查看
+ls /hello
+```
+
 **挂载本地主机文件作为数据卷**
 
+```
+# 创建容器
+docker run --name hello -dti -v ~/.bash_history:~/.bash_history ubuntu:18.04
+
+# 连接hello
+docker exec -ti hello /bin/bash
+
+#  查看
+cat ~/.bash_history
+```
+
 **2.数据卷容器**
+
+容器与容器之间共享数据
+
+--volumes-from 挂载的数据卷并不需要保持运行状态
+
+```
+docker run -it -v /dbdata --name dbdata ubuntu:18.04
+docker run -it --volumes-from dbdata --name db1 ubuntu:18.04
+docker run -it --volumes-from dbdata --name db2 ubuntu:18.04
+```
+
+
+**只删除挂载的容器数据卷并不会被删除，需加-v**
+
+**删除：docker rm -v id/名称**
+
 
 ## 6.网络基础配置
 
