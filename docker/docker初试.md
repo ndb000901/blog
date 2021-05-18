@@ -250,7 +250,14 @@ docker run -d -p 5000:5000 registry
 **在容器内创建一个数据卷**
 
 ```
+# 创建容器
+docker run --name hello -dti -v /hello ubuntu:18.04
 
+# 连接hello
+docker exec -ti hello /bin/bash
+
+#  查看
+ls /
 ```
 
 **挂载主机目录作为数据卷**
