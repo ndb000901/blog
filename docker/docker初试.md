@@ -142,4 +142,17 @@ docker push user/ubuntu:18.04
 
 ## 3.容器
 
+**1.容器的状态**
+
+|状态|说明|
+|----|----|
+|created|已创建|
+|restarting|重启中|
+|running|Up（运行中）|
+|removing|迁移中|
+|paused|暂停|
+|exited|停止|
+|dead|死亡|
+
+**2.**
 ## 4.仓库
