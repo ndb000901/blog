@@ -154,5 +154,67 @@ docker push user/ubuntu:18.04
 |exited|停止|
 |dead|死亡|
 
-**2.**
+**2.创建容器**
+
+docker create 创建的容器处于停止状态，需要start启动。
+
+docker run 等价上述步骤。
+
+```
+# 方法1
+docker create -it ubuntu:18.04
+docker start id/名称
+
+# 方法2
+docker run ubuntu:18.04 /bin/echo "hello world"
+```
+
+**守护态运行**
+
+-d 后台以守护态运行
+
+```
+docker run -d ubuntu:18.04 /bin/bash "while true;do echo hello,world;sleep 1;done"
+```
+
+**3.查看容器**
+
+-a 所有容器
+
+```
+docker ps -a
+```
+
+**4.终止容器**
+
+```
+docker stop id/名称
+```
+
+**5.删除容器**
+
+```
+```
+
+**6.进入容器**
+
+推荐使用方法2
+
+```
+docker run -tid ubuntu:18.04
+
+# 方法1
+docker attach id/名称
+
+# 方法2
+docker exec -ti id/名称
+
+#方法3
+nsenter --target PID --mount --uts --ipc --net --pid
+
+```
+
+**7.导出容器**
+**8.导入容器**
+
 ## 4.仓库
