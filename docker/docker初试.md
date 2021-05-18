@@ -43,6 +43,27 @@ Server: Docker Engine - Community
 
 ## 2.镜像
 
+**1.获取镜像**
+
+```
+docker pull ubuntu
+```
+
+**2.查看镜像信息**
+
+```
+# 列出本地镜像
+docker images
+
+# 镜像详细信息
+docker inspect 标签/id
+```
+
+**3.搜索镜像**
+
+```
+
+```
 ## 3.容器
 
 ## 4.仓库
