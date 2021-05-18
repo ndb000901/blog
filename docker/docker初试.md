@@ -77,8 +77,50 @@ docker inspect 标签/id
 docker search mysql
 ```
 **4.创建镜像**
+
+**基于已有镜像的容器创建**
+
+**docker commit一些选项**
+
+|选项|说明|
+|----|----|
+|-a,--author=""|作者信息|
+|-m,--message=""|提交消息|
+|-p,--pause=true|提交时暂停容器运行|
+
+```
+docker commit -m "创建镜像" -a "作者" id/名称 test
+```
+
+**基于本地模板创建**
+
+```
+cat ubuntu_18.04.tar | docker import ubuntu:18.04
+```
+
+**基于Dockerfile创建**
+
+```
+```
+
 **5.删除镜像**
+
+删除镜像需删除依赖于该镜像的所有容器。
+
+-f 强制删除镜像，不推荐。
+
+```
+docker rmi 标签/id
+```
+
 **6.存出镜像**
+
+将ubuntu:18.04存出
+
+```
+docker save -o ubuntu_18.04.tar ubuntu:18.04
+```
+
 **7.载入镜像**
 
 载入ubuntu_18.04.tar
@@ -88,6 +130,7 @@ docker load --input ubuntu_18.04.tar
 或
 docker load < ubuntu_18.04.tar
 ```
+
 **8.上传镜像**
 
 上传本地ubuntu:18.04
@@ -96,6 +139,7 @@ docker load < ubuntu_18.04.tar
 docker tag ubuntu:18.04 user/ubuntu:18.04 test
 docker push user/ubuntu:18.04
 ```
+
 ## 3.容器
 
 ## 4.仓库
