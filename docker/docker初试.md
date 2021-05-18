@@ -95,7 +95,7 @@ docker commit -m "创建镜像" -a "作者" id/名称 镜像名
 **基于本地模板创建**
 
 ```
-cat ubuntu_18.04.tar | docker import ubuntu:18.04
+cat ubuntu_18.04.tar | docker import - ubuntu:18.04
 ```
 
 **基于Dockerfile创建**
@@ -232,7 +232,35 @@ docker export id/名称 > filename
 **8.导入容器**
 
 ```
-cat filename | docker import 名称
+cat filename | docker import - 镜像名
 ```
 
 ## 4.仓库
+
+本地仓库
+
+```
+docker run -d -p 5000:5000 registry
+```
+
+## 5.数据管理
+
+**1.数据卷**
+
+**在容器内创建一个数据卷**
+
+```
+
+```
+
+**挂载主机目录作为数据卷**
+
+**挂载本地主机文件作为数据卷**
+
+**2.数据卷容器**
+
+## 6.网络基础配置
+
+## 7.Dockerfile
+
+
