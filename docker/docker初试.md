@@ -312,6 +312,27 @@ docker run -it --volumes-from dbdata --name db2 ubuntu:18.04
 
 ## 6.网络基础配置
 
+**-P 参数**
+
+随机映射一个49000～49900端口
+
+**-p 参数**
+
+|格式|说明|
+|----|----|
+|ip:hostPort:containerPort|映射指定地址指定端口|
+|ip::containerPort|映射指定地址任意端口|
+|hostPort:containerPort|绑定本地所有接口地址|
+
+**查看映射端口配置**
+
+```
+docker port id
+或
+docker ps
+```
+
+
 ## 7.Dockerfile
 
 
