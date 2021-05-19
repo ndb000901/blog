@@ -353,7 +353,7 @@ docker run -d -P --name web --link db:db training/webapp python app.py
 
 |指令|格式|说明|
 |----|----|----|
-|FROM|FROM <image>:<tag>|第一条必须为该命令，若需创建多个镜像可使用多条FROM|
+|FROM|FROM <image>:<tag> |第一条必须为该命令，若需创建多个镜像可使用多条FROM|
 |MAINTAINER|MAINTAINER <name>|维护者信息|
 |RUN|RUN <command> 或 RUN ["executable","param1","param2"]|第一种在/bin/sh 执行命令，指定其他终端使用第二种。命令太长可用\\换行|
 |CMD|CMD ["executable","param1","param2"] (exec执行，推荐) 或 CMD command param1 param2(在/bin/sh执行) 或 RUN ["param1","param2"]| 只可以有一条CMD命令,第3种提供给ENTRYPOINT的默认参数|
@@ -367,3 +367,8 @@ docker run -d -P --name web --link db:db training/webapp python app.py
 |WORKDIR|WORKDIR path|可使用多个，后续命令的参数若为相对路径，则以上一条命令所在路径为参照|
 |ONBUILD|ONBUILD [INSTRUCTION]|配置当所创建的镜像作为其他新创建镜像的基础镜像时，所执行的操作命令|
 
+**docker build 创建镜像**
+
+```
+docker build -t 镜像名 Dockerfile所在路径
+```
