@@ -351,18 +351,19 @@ docker run -d -P --name web --link db:db training/webapp python app.py
 
 ## 7.Dockerfile
 
-|||
-|||
-|||
-|||
-|||
-|||
-|||
-|||
-|||
-|||
-|||
-|||
-|||
-|||
+|指令|格式|说明|
+|----|----|----|
+|FROM|||
+|MAINTAINER|||
+|RUN|||
+|CMD|||
+|EXPOSE|||
+|ENV|ENV <key> <value>|指定一个环境变量，会被RUN指令使用，在容器运行时保持|
+|ADD|ADD <src> <dest>|将本地src复制到容器dest，src可是url、文件、目录、tar文件自动解压为目录(可以是相对路径)|
+|COPY|COPY <src> <dest>|将本地src复制到容器dest，src可是文件、目录(可以是相对路径),dest不存在会自动创建|
+|ENTRYPOINT|ENTRYPOINT ["executable","param1","param2"] 或 ENTRYPOINT command param1 param2(在shell执行)|只能有一个ENTRYPOINT|
+|VOLUME|||
+|USER|||
+|WORKDIR|||
+|ONBUILD|||
 
