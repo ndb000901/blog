@@ -353,14 +353,14 @@ docker run -d -P --name web --link db:db training/webapp python app.py
 
 |指令|格式|说明|
 |----|----|----|
-|FROM|FROM <image>:<tag> |第一条必须为该命令，若需创建多个镜像可使用多条FROM|
-|MAINTAINER|MAINTAINER <name>|维护者信息|
-|RUN|RUN <command> 或 RUN ["executable","param1","param2"]|第一种在/bin/sh 执行命令，指定其他终端使用第二种。命令太长可用\\换行|
+|FROM|FROM \<image\>:\<tag\> |第一条必须为该命令，若需创建多个镜像可使用多条FROM|
+|MAINTAINER|MAINTAINER \<name\>|维护者信息|
+|RUN|RUN \<command\> 或 RUN ["executable","param1","param2"]|第一种在/bin/sh 执行命令，指定其他终端使用第二种。命令太长可用\\换行|
 |CMD|CMD ["executable","param1","param2"] (exec执行，推荐) 或 CMD command param1 param2(在/bin/sh执行) 或 RUN ["param1","param2"]| 只可以有一条CMD命令,第3种提供给ENTRYPOINT的默认参数|
-|EXPOSE|EXPOSE <port> [<port>...]|容器暴露端口|
-|ENV|ENV <key> <value>|指定一个环境变量，会被RUN指令使用，在容器运行时保持|
-|ADD|ADD <src> <dest>|将本地src复制到容器dest，src可是url、文件、目录、tar文件自动解压为目录(可以是相对路径)|
-|COPY|COPY <src> <dest>|将本地src复制到容器dest，src可是文件、目录(可以是相对路径),dest不存在会自动创建|
+|EXPOSE|EXPOSE \<port\> [\<port\>...]|容器暴露端口|
+|ENV|ENV \<key\> \<value\>|指定一个环境变量，会被RUN指令使用，在容器运行时保持|
+|ADD|ADD \<src\> \<dest\>|将本地src复制到容器dest，src可是url、文件、目录、tar文件自动解压为目录(可以是相对路径)|
+|COPY|COPY \<src\> \<dest\>|将本地src复制到容器dest，src可是文件、目录(可以是相对路径),dest不存在会自动创建|
 |ENTRYPOINT|ENTRYPOINT ["executable","param1","param2"] 或 ENTRYPOINT command param1 param2(在shell执行)|只能有一个ENTRYPOINT，如有多个，最后一个有效。配置容器后启动的命令|
 |VOLUME|VOLUME ["/data"]|创建一个可从本地或其他容器挂载的挂载点|
 |USER|USER daemon|指定运行容器时的用户名或UID，后续的RUN也使用指定用户|
