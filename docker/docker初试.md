@@ -338,6 +338,31 @@ docker ps
 
 **2.容器间通信**
 
+--link name:alias参数可使容器互联,name是要链接的容器，alias为这个链接的别名。
+
+```
+# 创建一个新的数据库容器
+docker run -d --name db training/postgres
+
+# 创建一个新的web容器，并将它连接到db容器
+docker run -d -P --name web --link db:db training/webapp python app.py
+```
+
+
 ## 7.Dockerfile
 
+|||
+|||
+|||
+|||
+|||
+|||
+|||
+|||
+|||
+|||
+|||
+|||
+|||
+|||
 
