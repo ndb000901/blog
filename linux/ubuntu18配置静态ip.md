@@ -21,3 +21,9 @@ network:
   version: 2
 
 ```
+
+**执行命令**
+
+```
+sudo netplan apply
+```
