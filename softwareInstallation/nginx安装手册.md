@@ -81,6 +81,55 @@ server {
 127.0.0.1 mysite.haha
 ```
 
+## 配置ubuntu18 + nginx-1.14.0
+
+**安装**
+
+```
+sudo apt update
+sudo apt install nginx
+```
+
+**新建站点根目录**
+
+```
+sudo mkdir /var/www/html/test.com
+```
+
+**在/etc/nginx/sites-available目录新建站点配置文件**
+
+**sudo vim test.com**
+
+```
+server {
+        listen 80;
+        listen [::]:80;
+
+        root /var/www/html/test.com;
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name test.com www.test.com;
+
+        location / {
+                try_files $uri $uri/ =404;
+        }
+}
+
+```
+
+**建立软链接**
+
+```
+sudo ln -s /etc/nginx/sites-available/test.com /etc/nginx/sites-enabled/
+```
+
+**重启服务**
+
+```
+sudo service nginx restart
+```
+
+
 >作者info
 >
 >作者：DebugWuhen
