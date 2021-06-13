@@ -253,3 +253,17 @@ JRebel and XRebel for IntelliJ
 ## Etcher 
 
 启动盘制作工具
+
+## Cisco Packet Tracer
+
+```
+# 下载地址
+https://www.computernetworkingnotes.com/ccna-study-guide/download-packet-tracer-for-windows-and-linux.html
+# clone 
+git clone https://aur.archlinux.org/packettracer.git
+# 进入clone项目的目录，若已经安装java-runtime，可修改PKGBUILD文件depends删除java-runtime
+
+# 执行命令
+makepkg -sic 
+
+```
