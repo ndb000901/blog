@@ -9,3 +9,15 @@
 
 ## 安装步骤
 
+```java
+# 下载
+wget https://downloads.apache.org/tomcat/tomcat-9/v9.0.48/bin/apache-tomcat-9.0.48.tar.gz
+
+# 解压
+tar -zxvf apache-tomcat-9.0.48.tar.gz
+
+cd apache-tomcat-9.0.48/bin
+
+./startup.sh
+
+```
