@@ -19,5 +19,7 @@
 
 ![image](https://user-images.githubusercontent.com/48900845/123553299-f03fec80-d7ac-11eb-818b-a3831b780828.png)
 
+**Build >> Build Artifacts**
+
 ## 导出war包
 
