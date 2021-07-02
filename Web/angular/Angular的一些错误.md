@@ -51,3 +51,12 @@ Require stack:
 ```
 sudo npm i @schematics/angular@11.0.1
 ```
+
+
+## 错误2 NullInjectorError: No provider for NzMessageService!
+
+**解决**
+
+```
+import { NzMessageModule } from 'ng-zorro-antd/message';
+```
