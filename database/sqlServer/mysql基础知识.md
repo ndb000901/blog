@@ -85,8 +85,8 @@ select <字段1,字段2> from <表名> where <字段1> like '%ji%';
 
 ## 连接
 
-||说明|
+|类别|说明|
 |----|----|
-|||
-|||
-|||
+|inner join|内连接|
+|left join|左连接|
+|right join|右连接|
