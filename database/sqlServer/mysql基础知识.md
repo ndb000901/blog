@@ -121,6 +121,18 @@ select <字段1,字段2> from <表名> where <字段1> like '%ji%';
 
 **右连接：获取右表所有记录，即使左表没有对应匹配的记录**
 
+## union
+
+**用于连接两个以上的select 语句的结果组合到一个结果集合中，多个select 语句默认删除重复的数据**
+
+```
+select <字段> from <表名> [where...] union [all | distinct] select <字段> from <表名> [where...]
+```
+
+|参数|说明|
+|----|----|
+|distinct|删除结果集中重复的数据，union默认删除了重复的数据|
+|all|返回所以结果，包括重复数据|
 
 ## 事务
 
