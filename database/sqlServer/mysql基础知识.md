@@ -158,6 +158,8 @@ select <字段> from <表名> group by <字段>
 
 **改变mysql的自动提交模式**
 
+**mysql 命令行默认设置，事务为自动提交**
+
 ```
 set autocommit=0  #禁止自动提交
 set autocommit=1  #开启自动提交
@@ -176,3 +178,4 @@ set autocommit=1  #开启自动提交
 **rollback to identifier 把事务回滚到标记点**
 
 **set transaction 用来设置事务隔离级别**
+
