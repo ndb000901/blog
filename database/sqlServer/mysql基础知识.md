@@ -179,3 +179,62 @@ set autocommit=1  #开启自动提交
 
 **set transaction 用来设置事务隔离级别**
 
+
+## 普通索引
+
+**优点：大大提高查询速度**
+
+**缺点：降低更新表的速度，例如insert、update、delete。占用较多储存空间**
+
+**创建索引**
+
+```
+create index <索引名> on <表名> (字段名)
+```
+
+**添加索引(修改表结构)**
+
+```
+alter table <表名> add index <索引名>(字段名)
+```
+
+**删除索引**
+
+```
+drop index [索引名] on <表名>
+```
+
+## 唯一索引
+
+**索引列的值必须唯一，但允许有空值。如果是组合索引，则列值的组合必须唯一**
+
+**创建索引**
+
+```
+create unique index <索引名> on <表名> (字段名)
+```
+
+**修改表字段，添加索引**
+
+```
+alter table <表名> add unique [索引名] (字段名) 
+```
+
+**常见alter命令添加和删除索引**
+
+```
+# 添加主键，索引值必须唯一，且不为NULL
+alter table <表名> add primary key <字段名>
+
+# 索引值唯一，可有多个NULL
+alter table <表名> add unique <索引名>(字段名)
+
+# 索引值可出现多次
+alter table <表名> add index <索引名>(字段名)
+
+# 全文索引
+alter table <表名> add fulltext <索引名>(字段名)
+
+# 删除索引
+alter table <表名> drop index <字段>
+```
