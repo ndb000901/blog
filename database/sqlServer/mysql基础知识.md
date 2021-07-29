@@ -145,6 +145,8 @@ select <字段> from <表名> group by <字段>
 
 ## 事务
 
+**在mysql中并不是所有的数据库引擎都支持事务，Innodb数据库引擎支持事务**
+
 **事务的四个特性(ACID)**
 
 |特性|说明|
@@ -154,4 +156,23 @@ select <字段> from <表名> group by <字段>
 |隔离性(Isolation)|数据库允许多个并发事务同时对其数据进行读写和修改的能力。事务隔离级别:读未提交、读提交、可重复读、串行化|
 |持久性(Durability)|执行事务后，对数据的修改是永久的|
 
+**改变mysql的自动提交模式**
 
+```
+set autocommit=0  #禁止自动提交
+set autocommit=1  #开启自动提交
+```
+
+**begin 或 start transaction 显示开启一个事务**
+
+**commit 或 commit work 提交事务**
+
+**rollback 或 rollback work 回滚，并撤销正在进行的所以未提交的修改**
+
+**savepoint identifier savepoint 允许在事务中创建一个保存点，可有多个**
+
+**release savepoint identifier 删除一个事务的保存点，当没有指定保存点，抛出一个异常**
+
+**rollback to identifier 把事务回滚到标记点**
+
+**set transaction 用来设置事务隔离级别**
