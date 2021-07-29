@@ -238,3 +238,15 @@ alter table <表名> add fulltext <索引名>(字段名)
 # 删除索引
 alter table <表名> drop index <字段>
 ```
+
+## 临时表
+
+**只在当前连接存在，关闭连接后销毁**
+
+**创建**
+
+```
+create temporary table <表明>();
+```
+
+****
