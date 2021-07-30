@@ -274,3 +274,71 @@ show status
 # 服务器配置变量
 show variables
 ```
+
+## 导出数据
+
+**导出sql格式的数据**
+
+```
+mysqldump -u root -p --no-create-info --tab=<路径> <数据库> <表名>
+
+mysqldump -u root -p <数据库> <表名> > dump.txt
+
+select * from <表名> into outfile '<文件路径>'
+```
+
+## 导入数据
+
+**使用mysql导入**
+
+```
+mysql -u <用户名> -p <密码> < <数据sql脚本>
+```
+
+**使用source导入**
+
+```
+create database <数据库名>;
+use <数据库名>
+set names utf8;
+source <脚本路径>
+```
+
+**使用 load data导入**
+
+**若指定local关键词，则文件从本地查找**
+
+```
+load data local infile '<文件路径>' into table <表名>
+
+# 设置列顺序
+load data local infile '<文件路径>' into table <表名> (列1,列2...);
+
+```
+
+**使用mysqlimport 导入数据**
+
+```
+mysqlimport -u <用户名> -p --local <表名> <数据文件>
+
+# 设置列顺序
+mysqlimport -u <用户名> -p --local --columns=列1,列2... <表名> <数据文件>
+
+# 设置格式
+mysqlimport -u <用户名> -p --local --fields-terminated-by":" --line-terminated-by="\r\n" <表名> <数据文件>
+```
+
+## 运算符
+
+**逻辑运算符**
+
+**位运算符**
+
+|符号|说明|
+|----|----|
+|&|按位与|
+|\||按位或|
+|^|按位异或|
+|!|取反|
+|<<|左移|
+|>>|右移|
