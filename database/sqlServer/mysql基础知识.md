@@ -332,7 +332,8 @@ mysqlimport -u <用户名> -p --local --fields-terminated-by":" --line-terminate
 
 **逻辑运算符**
 
-|||
+|符号|说明|
+|----|----|
 |not或!|逻辑非|
 |and|逻辑与|
 |or|逻辑或|
@@ -349,3 +350,35 @@ mysqlimport -u <用户名> -p --local --fields-terminated-by":" --line-terminate
 |!|取反|
 |<<|左移|
 |>>|右移|
+
+**算数运算符**
+
+|符号|说明|
+|----|----|
+|+|加|
+|-|减|
+|*|乘|
+|/或div|除|
+|%或mod|取余|
+
+**比较运算符**
+
+|符号|说明|
+|----|----|
+|=|等于|
+|<>,!=|不等于|
+|>|大于|
+|<|小于|
+|>=|大于等于|
+|<=|小于等于|
+|between|在两值之间|
+|not between|不在两值之间|
+|in|在集合中|
+|not in|不在集合中|
+|<=>|严格比较两个null值是否相等|
+|like|模糊匹配|
+|regexp 或 rlike|正则匹配|
+|is null|为空|
+|is not null|不为空|
+
+
