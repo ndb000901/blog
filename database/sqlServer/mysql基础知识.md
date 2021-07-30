@@ -249,4 +249,28 @@ alter table <表名> drop index <字段>
 create temporary table <表明>();
 ```
 
-****
+## 复制表
+
+```
+# 显示创建表的sql语句
+show create table <表名>;
+```
+
+## 元数据
+
+```
+# 显示版本
+select version()
+
+# 显示当前数据库名
+select database()
+
+# 显示当前用户名
+select user()
+
+# 服务器状态
+show status
+
+# 服务器配置变量
+show variables
+```
