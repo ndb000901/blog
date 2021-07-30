@@ -332,6 +332,13 @@ mysqlimport -u <用户名> -p --local --fields-terminated-by":" --line-terminate
 
 **逻辑运算符**
 
+|||
+|not或!|逻辑非|
+|and|逻辑与|
+|or|逻辑或|
+|xor|逻辑异或|
+
+
 **位运算符**
 
 |符号|说明|
