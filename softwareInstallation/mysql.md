@@ -28,4 +28,6 @@ useradd -M -s /sbin/nologin mysql
 
 ```
 安装 ncurses5-compat-libs
+
+安装 libnuma
 ```
