@@ -34,3 +34,11 @@ mhwd-nvidia-460.80-1
 ```
 sudo ./NVIDIA-Linux-x86_64-460.84.run
 ```
+
+
+
+## dash版本
+
+![image](https://user-images.githubusercontent.com/48900845/131479994-c4572551-64b9-4307-96ea-2138be4b1384.png)
+
+![image](https://user-images.githubusercontent.com/48900845/131480255-95cef22e-ebdc-4396-bb63-883b00836dcb.png)
