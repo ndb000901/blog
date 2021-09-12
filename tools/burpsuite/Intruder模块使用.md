@@ -33,6 +33,8 @@ burpsuite-v2021.8.2 Community Edition
 
 ## Resource Pool
 
+**用于控制请求**
+
 ## Options
 
 |模块|说明|
