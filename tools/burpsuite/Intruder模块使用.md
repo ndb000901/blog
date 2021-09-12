@@ -1,5 +1,10 @@
 # Intruder模块
 
+## 环境
+
+```
+burpsuite-v2021.8.2 Community Edition
+```
 ## Target
 
 **功能：配置攻击目标服务器**
@@ -29,6 +34,16 @@
 ## Resource Pool
 
 ## Options
+
+|模块|说明|
+|----|----|
+|Request Headers|http请求头设置|
+|Error Handling||
+|Attack Results|设置攻击结果的显示|
+|Grep-Match|在响应中找出指定的内容|
+|Grep-Extract|通过正则提取返回信息中的内容|
+|Grep-Payloads|在结果中添加一个复选框指示当前负载的值在每个响应发现新的结果列|
+|Redirections|设置在进行攻击时如何处理重定向|
 
 
 
