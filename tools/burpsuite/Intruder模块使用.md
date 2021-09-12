@@ -38,7 +38,7 @@ burpsuite-v2021.8.2 Community Edition
 |模块|说明|
 |----|----|
 |Request Headers|http请求头设置|
-|Error Handling||
+|Error Handling|设置攻击时如何处理错误|
 |Attack Results|设置攻击结果的显示|
 |Grep-Match|在响应中找出指定的内容|
 |Grep-Extract|通过正则提取返回信息中的内容|
