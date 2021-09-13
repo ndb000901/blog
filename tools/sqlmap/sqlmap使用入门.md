@@ -74,168 +74,167 @@
 |--safe-post=SAFE..|发送到安全url的post数据|
 |--safe-req=SAFER..|从一个文件加载安全的http请求|
 |--safe-freq=SAFE..|在访问的安全的url之间定期请求|
-|--skip-urlencode  |跳过有效payload|
-|--csrf-token=CSR..||
-|--csrf-url=CSRFURL||
-|--csrf-method=CS..||
-|--csrf-retries=C..||
-|--force-ssl       ||
-|--chunked         ||
-|--hpp             ||
-|--eval=EVALCODE   ||
+|--skip-urlencode  |跳过有效payload的url编码|
+|--csrf-token=CSR..|保存反CSRF令牌的参数|
+|--csrf-url=CSRFURL|为提取反CSRF令牌而访问的url地址|
+|--csrf-method=CS..|在反CSRF令牌页面访问时使用的HTTP方法|
+|--csrf-retries=C..|反CSRF令牌检索的重试次数默认0|
+|--force-ssl       |强制使用SSL/HTTPS|
+|--chunked         |使用HTTP分块传输编码（POST）请求|
+|--hpp             |使用HTTP参数污染方法|
+|--eval=EVALCODE   |在请求前评估所提供的Python代码|
+
+**优化**
+
+|参数|说明|
+|----|----|
+|-o               |开启所有的优化开关|
+|--predict-output |预测常见的查询输出|
+|--keep-alive     |使用持久的HTTP(s)连接|
+|--null-connection|检索没有实际HTTP响应体的页面长度|
+|--threads=THREADS|最大的HTTP(s)并发请求数（默认为1）|
+
+**注入**
+
+|参数|说明|
+|----|----|
+|-p TESTPARAMETER  |指定测试参数|
+|--skip=SKIP       |跳过对指定参数的测试|
+|--skip-static     |跳过测试那些看起来不是动态的参数|
+|--param-exclude=..|从测试中排除参数的Regexp|
+|--param-filter=P..|按位置选择可测试的参数(例如 "POST")|
+|--dbms=DBMS       |强制后端DBMS为提供的值|
+|--dbms-cred=DBMS..|DBMS认证凭证(用户：密码)|
+|--os=OS           |将后端DBMS的操作系统强制为所提供的值|
+|--invalid-bignum  |使用大的数字作为无效值|
+|--invalid-logical |使用逻辑运算来计算无效值|
+|--invalid-string  |无效值使用随机字符串|
+|--no-cast         |关闭有效载荷铸造机制|
+|--no-escape       |关闭字符串转义机制|
+|--prefix=PREFIX   |注入有效载荷前缀字符串|
+|--suffix=SUFFIX   |注入有效载荷的后缀字符串|
+|--tamper=TAMPER   |使用指定的脚本来篡改注入数据|
+
+**检测**
+
+|参数|说明|
+|----|----|
+|--level=LEVEL     |检测级别(1-5，默认为1)|
+|--risk=RISK       |测试的风险(1-3，默认为1)|
+|--string=STRING   |当查询被评估为True时要匹配的字符串|
+|--not-string=NOT..|当查询结果为False时，要匹配的字符串|
+|--regexp=REGEXP   |当查询结果为 "真 "时，匹配的是Regexp|
+|--code=CODE       |当查询结果为True时，匹配的HTTP代码|
+|--smart           |仅当启发式方法为正时，才进行彻底测试|
+|--text-only       |仅根据文本内容比较网页|
+|--titles          |仅根据页面的标题进行比较|
+
+**技术**
+
+|参数|说明|
+|----|----|
+|--technique=TECH..|要使用的SQL注入技术(默认为 "BEUSTQ")|
+|--time-sec=TIMESEC|延迟DBMS响应的秒数(默认为5)|
+|--union-cols=UCOLS|测试UNION查询SQL注入的列的范围|
+|--union-char=UCHAR|用来破解列数的字符|
+|--union-from=UFROM|在UNION查询的FROM部分要使用的表|
+|--dns-domain=DNS..|用于DNS渗出攻击的域名|
+|--second-url=SEC..|搜索到的二阶响应的结果页面URL|
+|--second-req=SEC..|从文件中加载二阶HTTP请求|
 
 **ss**
 
 |参数|说明|
 |----|----|
-|-o               ||
-|--predict-output ||
-|--keep-alive     ||
-|--null-connection||
-|--threads=THREADS||
-
-**jj**
-
-|参数|说明|
-|----|----|
-|-p TESTPARAMETER  ||
-|--skip=SKIP       ||
-|--skip-static     ||
-|--param-exclude=..||
-|--param-filter=P..||
-|--dbms=DBMS       ||
-|--dbms-cred=DBMS..||
-|--os=OS           ||
-|--invalid-bignum  ||
-|--invalid-logical ||
-|--invalid-string  ||
-|--no-cast         ||
-|--no-escape       ||
-|--prefix=PREFIX   ||
-|--suffix=SUFFIX   ||
-|--tamper=TAMPER   ||
-
-**kk**
-
-|参数|说明|
-|----|----|
-|--level=LEVEL     ||
-|--risk=RISK       ||
-|--string=STRING   ||
-|--not-string=NOT..||
-|--regexp=REGEXP   ||
-|--code=CODE       ||
-|--smart           ||
-|--text-only       ||
-|--titles          ||
-
-**aa**
-
-|参数|说明|
-|----|----|
-|--technique=TECH..||
-|--time-sec=TIMESEC||
-|--union-cols=UCOLS||
-|--union-char=UCHAR||
-|--union-from=UFROM||
-|--dns-domain=DNS..||
-|--second-url=SEC..||
-|--second-req=SEC..||
-
-**ss**
-
-|参数|说明|
-|----|----|
-|-f, --fingerprint||
+|-f, --fingerprint|进行广泛的DBMS版本指纹识别|
 
 ****
 
 |参数|说明|
 |----|----|
-|-a, --all         ||
-|-b, --banner      ||
-|--current-user    ||
-|--current-db      ||
-|--hostname        ||
-|--is-dba          ||
-|--users           ||
-|--passwords       ||
-|--privileges      ||
-|--roles           ||
-|--dbs             ||
-|--tables          ||
-|--columns         ||
-|--schema          ||
-|--count           ||
-|--dump            ||
-|--dump-all        ||
-|--search          ||
-|--comments        ||
-|--statements      ||
-|-D DB             ||
-|-T TBL            ||
-|-C COL            ||
-|-X EXCLUDE        ||
-|-U USER           ||
-|--exclude-sysdbs  ||
-|--pivot-column=P..||
-|--where=DUMPWHERE ||
-|--start=LIMITSTART||
-|--stop=LIMITSTOP  ||
-|--first=FIRSTCHAR ||
-|--last=LASTCHAR   ||
-|--sql-query=SQLQ..||
-|--sql-shell       ||
-|--sql-file=SQLFILE||
+|-a, --all         |检索所有信息|
+|-b, --banner      |检索DBMS的旗帜|
+|--current-user    |检索DBMS的当前用户|
+|--current-db      |检索DBMS当前数据库|
+|--hostname        |检索DBMS服务器主机名|
+|--is-dba          |检测DBMS当前用户是否为DBA|
+|--users           |枚举DBMS用户|
+|--passwords       |枚举DBMS用户的密码哈希值|
+|--privileges      |枚举DBMS用户的权限|
+|--roles           |枚举DBMS用户的角色|
+|--dbs             |枚举DBMS的数据库|
+|--tables          |枚举DBMS数据库的表|
+|--columns         |枚举DBMS数据库表列|
+|--schema          |枚举DBMS模式|
+|--count           |检索表的条目数|
+|--dump            |备份DBMS数据库表的条目|
+|--dump-all        |备份所有DBMS数据库表的条目|
+|--search          |搜索列、表和/或数据库名称|
+|--comments        |在列举过程中检查DBMS的注释|
+|--statements      |检索正在DBMS上运行的SQL语句|
+|-D DB             |DBMS的数据库要进行列举|
+|-T TBL            |要枚举的DBMS数据库表|
+|-C COL            |要列举的DBMS数据库表列|
+|-X EXCLUDE        |DBMS数据库标识符，不进行列举|
+|-U USER           |要枚举的DBMS用户|
+|--exclude-sysdbs  |枚举表时排除DBMS系统数据库|
+|--pivot-column=P..|枢轴列名称|
+|--where=DUMPWHERE |在转储表时使用WHERE条件|
+|--start=LIMITSTART|要检索的第一个转储表项|
+|--stop=LIMITSTOP  |检索的最后一个转储表项|
+|--first=FIRSTCHAR |检索的第一个查询输出字段|
+|--last=LASTCHAR   |最后一个查询输出的字词要被检索出来|
+|--sql-query=SQLQ..|要执行的SQL语句|
+|--sql-shell       |提示一个交互式SQL shell|
+|--sql-file=SQLFILE|从给定文件中执行SQL语句|
 
-****
-
-|参数|说明|
-|----|----|
-|--common-tables ||
-|--common-columns||
-|--common-files  ||
-
-****
+**暴力**
 
 |参数|说明|
 |----|----|
-|--udf-inject      ||
-|--shared-lib=SHLIB||
+|--common-tables |检查共通表的存在|
+|--common-columns|检查共通列是否存在|
+|--common-files  |检查共通文件是否存在|
 
-****
-
-
-|参数|说明|
-|----|----|
-|--file-read=FILE..||
-|--file-write=FIL..||
-|--file-dest=FILE..||
-
-****
+**用户定义的函数注入**
 
 |参数|说明|
 |----|----|
-|--os-cmd=OSCMD    ||
-|--os-shell        ||
-|--os-pwn          ||
-|--os-smbrelay     ||
-|--os-bof          ||
-|--priv-esc        ||
-|--msf-path=MSFPATH||
-|--tmp-path=TMPPATH||
+|--udf-inject      |注入自定义用户定义的函数|
+|--shared-lib=SHLIB|共享库的本地路径|
 
-****
+**文件系统访问**
 
 |参数|说明|
 |----|----|
-|--reg-read        ||
-|--reg-add         ||
-|--reg-del         ||
-|--reg-key=REGKEY  ||
-|--reg-value=REGVAL||
-|--reg-data=REGDATA||
-|--reg-type=REGTYPE||
+|--file-read=FILE..|从后端数据库管理系统的文件系统中读取一个文件|
+|--file-write=FIL..|在后端DBMS文件系统上写一个本地文件|
+|--file-dest=FILE..|写入到后端DBMS的绝对文件路径|
+
+**操作系统访问**
+
+|参数|说明|
+|----|----|
+|--os-cmd=OSCMD    |执行一个操作系统的命令|
+|--os-shell        |提示一个交互式的操作系统shell|
+|--os-pwn          |提示OOB shell、Meterpreter或VNC|
+|--os-smbrelay     |一键提示OOB shell、Meterpreter或VNC|
+|--os-bof          |存储程序缓冲区溢出的利用|
+|--priv-esc        |数据库进程用户的权限升级|
+|--msf-path=MSFPATH|安装Metasploit框架的本地路径|
+|--tmp-path=TMPPATH|临时文件目录的远程绝对路径|
+
+**Windows注册表访问**
+
+|参数|说明|
+|----|----|
+|--reg-read        |读取一个Windows注册表的键值|
+|--reg-add         |写一个Windows注册表的键值数据|
+|--reg-del         |删除一个Windows注册表键值|
+|--reg-key=REGKEY  |Windows注册表键|
+|--reg-value=REGVAL|Windows注册表值|
+|--reg-data=REGDATA|Windows注册表键值数据|
+|--reg-type=REGTYPE|Windows注册表键值类型|
 
 ****
 
