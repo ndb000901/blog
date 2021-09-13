@@ -37,28 +37,28 @@
 |参数|说明|
 |----|----|
 |-A AGENT, --user..|http请求用户代理标头|
-|-H HEADER, --hea..||
-|--method=METHOD   ||
-|--data=DATA       ||
-|--param-del=PARA..||
-|--cookie=COOKIE   ||
-|--cookie-del=COO..||
-|--live-cookies=L..||
-|--load-cookies=L..||
-|--drop-set-cookie ||
-|--mobile          ||
-|--random-agent    ||
-|--host=HOST       ||
-|--referer=REFERER ||
-|--headers=HEADERS ||
-|--auth-type=AUTH..||
-|--auth-cred=AUTH..||
-|--auth-file=AUTH..||
-|--ignore-code=IG..||
-|--ignore-proxy    ||
-|--ignore-redirects||
-|--ignore-timeouts ||
-|--proxy=PROXY     ||
+|-H HEADER, --hea..|额外的头信息|
+|--method=METHOD   |http请求方式|
+|--data=DATA       |通过post发送的数据|
+|--param-del=PARA..|用于分割参数的字符|
+|--cookie=COOKIE   |http cookie值|
+|--cookie-del=COO..|用于分割cookie的字符|
+|--live-cookies=L..|用于加载最新值的实时cookie文件|
+|--load-cookies=L..|包含Netscape/wget格式的cookie的文件|
+|--drop-set-cookie |忽略响应中的Set-Cookie头信息|
+|--mobile          |通过http User-agent模仿智能手机|
+|--random-agent    |随机User-Agent|
+|--host=HOST       |http host头值|
+|--referer=REFERER |http Referer头值|
+|--headers=HEADERS |额外的头文件|
+|--auth-type=AUTH..|http认证类型|
+|--auth-cred=AUTH..|http认证凭证|
+|--auth-file=AUTH..|http认证的PEM证书/私钥文件|
+|--ignore-code=IG..|忽略http的错误代码|
+|--ignore-proxy    |忽略系统默认的代理设置|
+|--ignore-redirects|忽略重定向的尝试|
+|--ignore-timeouts |忽略连接超时|
+|--proxy=PROXY     |使用代理连接到目标url|
 |--proxy-cred=PRO..||
 |--proxy-file=PRO..||
 |--proxy-freq=PRO..||
