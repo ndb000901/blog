@@ -59,22 +59,22 @@
 |--ignore-redirects|忽略重定向的尝试|
 |--ignore-timeouts |忽略连接超时|
 |--proxy=PROXY     |使用代理连接到目标url|
-|--proxy-cred=PRO..||
-|--proxy-file=PRO..||
-|--proxy-freq=PRO..||
-|--tor             ||
-|--tor-port=TORPORT||
-|--tor-type=TORTYPE||
-|--check-tor       ||
-|--delay=DELAY     ||
-|--timeout=TIMEOUT ||
-|--retries=RETRIES ||
-|--randomize=RPARAM||
-|--safe-url=SAFEURL||
-|--safe-post=SAFE..||
-|--safe-req=SAFER..||
-|--safe-freq=SAFE..||
-|--skip-urlencode  ||
+|--proxy-cred=PRO..|代理认证凭证|
+|--proxy-file=PRO..|从文件加载代理|
+|--proxy-freq=PRO..|从一个给定的列表更换代理|
+|--tor             |使用tor匿名网络|
+|--tor-port=TORPORT|设置非默认的Tor代理端口|
+|--tor-type=TORTYPE|设置tor代理类型|
+|--check-tor       |检查tor是否被正确使用|
+|--delay=DELAY     |每次http请求延时时间单位秒|
+|--timeout=TIMEOUT |默认等待时间默认30s|
+|--retries=RETRIES |超时时重试默认3|
+|--randomize=RPARAM|随机改变给定参数值|
+|--safe-url=SAFEURL|测试期间经常访问的url地址|
+|--safe-post=SAFE..|发送到安全url的post数据|
+|--safe-req=SAFER..|从一个文件加载安全的http请求|
+|--safe-freq=SAFE..|在访问的安全的url之间定期请求|
+|--skip-urlencode  |跳过有效payload|
 |--csrf-token=CSR..||
 |--csrf-url=CSRFURL||
 |--csrf-method=CS..||
