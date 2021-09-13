@@ -17,6 +17,9 @@
 |-v VERBOSE||
 
 **目标**
+
+|参数|说明|
+|----|----|
 |-u URL, --url=URL||
 |-d DIRECT        ||
 |-l LOGFILE       ||
@@ -29,6 +32,8 @@
 
 **qq**
 
+|参数|说明|
+|----|----|
 |-A AGENT, --user..||
 |-H HEADER, --hea..||
 |--method=METHOD   ||
@@ -79,6 +84,8 @@
 
 **ss**
 
+|参数|说明|
+|----|----|
 |-o               ||
 |--predict-output ||
 |--keep-alive     ||
@@ -87,6 +94,8 @@
 
 **jj**
 
+|参数|说明|
+|----|----|
 |-p TESTPARAMETER  ||
 |--skip=SKIP       ||
 |--skip-static     ||
@@ -106,6 +115,8 @@
 
 **kk**
 
+|参数|说明|
+|----|----|
 |--level=LEVEL     ||
 |--risk=RISK       ||
 |--string=STRING   ||
@@ -117,6 +128,9 @@
 |--titles          ||
 
 **aa**
+
+|参数|说明|
+|----|----|
 |--technique=TECH..||
 |--time-sec=TIMESEC||
 |--union-cols=UCOLS||
@@ -127,10 +141,15 @@
 |--second-req=SEC..||
 
 **ss**
+
+|参数|说明|
+|----|----|
 |-f, --fingerprint||
 
 ****
 
+|参数|说明|
+|----|----|
 |-a, --all         ||
 |-b, --banner      ||
 |--current-user    ||
@@ -169,21 +188,32 @@
 
 ****
 
+|参数|说明|
+|----|----|
 |--common-tables ||
 |--common-columns||
 |--common-files  ||
 
 ****
+
+|参数|说明|
+|----|----|
 |--udf-inject      ||
 |--shared-lib=SHLIB||
 
 ****
 
+
+|参数|说明|
+|----|----|
 |--file-read=FILE..||
 |--file-write=FIL..||
 |--file-dest=FILE..||
 
 ****
+
+|参数|说明|
+|----|----|
 |--os-cmd=OSCMD    ||
 |--os-shell        ||
 |--os-pwn          ||
@@ -194,6 +224,9 @@
 |--tmp-path=TMPPATH||
 
 ****
+
+|参数|说明|
+|----|----|
 |--reg-read        ||
 |--reg-add         ||
 |--reg-del         ||
@@ -204,6 +237,8 @@
 
 ****
 
+|参数|说明|
+|----|----|
 |-s SESSIONFILE    ||
 |-t TRAFFICFILE    ||
 |--answers=ANSWERS ||
@@ -244,7 +279,8 @@
 
 ****
 
-
+|参数|说明|
+|----|----|
 |-z MNEMONICS      ||
 |--alert=ALERT     ||
 |--beep            ||
