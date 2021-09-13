@@ -142,7 +142,7 @@
 |--second-url=SEC..|搜索到的二阶响应的结果页面URL|
 |--second-req=SEC..|从文件中加载二阶HTTP请求|
 
-**ss**
+**指纹**
 
 |参数|说明|
 |----|----|
@@ -236,66 +236,66 @@
 |--reg-data=REGDATA|Windows注册表键值数据|
 |--reg-type=REGTYPE|Windows注册表键值类型|
 
-****
+**常规**
 
 |参数|说明|
 |----|----|
-|-s SESSIONFILE    ||
-|-t TRAFFICFILE    ||
-|--answers=ANSWERS ||
-|--base64=BASE64P..||
-|--base64-safe     ||
-|--batch           ||
-|--binary-fields=..||
-|--check-internet  ||
-|--cleanup         ||
-|--crawl=CRAWLDEPTH||
-|--crawl-exclude=..||
-|--csv-del=CSVDEL  ||
-|--charset=CHARSET ||
-|--dump-format=DU..||
-|--encoding=ENCOD..||
-|--eta             ||
-|--flush-session   ||
-|--forms           ||
-|--fresh-queries   ||
-|--gpage=GOOGLEPAGE||
-|--har=HARFILE     ||
-|--hex             ||
-|--output-dir=OUT..||
-|--parse-errors    ||
-|--preprocess=PRE..||
-|--postprocess=PO..||
-|--repair          ||
-|--save=SAVECONFIG ||
-|--scope=SCOPE     ||
-|--skip-heuristics ||
-|--skip-waf        ||
-|--table-prefix=T..||
-|--test-filter=TE..||
-|--test-skip=TEST..||
-|--web-root=WEBROOT||
+|-s SESSIONFILE    |从存储的（.sqlite）文件加载会话|
+|-t TRAFFICFILE    |将所有HTTP流量记录到一个文本文件中|
+|--answers=ANSWERS |设置预定义的答案（例如，"quit=N,follow=N"）|
+|--base64=BASE64P..|包含Base64编码数据的参数(s)|
+|--base64-safe     |使用URL和文件名安全的Base64字母(RFC 4648)|
+|--batch           |从不要求用户输入，使用默认行为|
+|--binary-fields=..|具有二进制值的结果字段（例如 "摘要"）|
+|--check-internet  |在评估目标之前检查互联网连接情况|
+|--cleanup         |从sqlmap特定的UDF和表清理DBMS|
+|--crawl=CRAWLDEPTH|从目标URL开始抓取网站|
+|--crawl-exclude=..|从抓取中排除网页的Regexp（例如："logout"）|
+|--csv-del=CSVDEL  |在CSV输出中使用的定界字符（默认为","）|
+|--charset=CHARSET |SQL盲注字符集|
+|--dump-format=DU..|转储数据的格式（CSV（默认），HTML或SQLITE）|
+|--encoding=ENCOD..|用于数据检索的字符编码（如GBK）|
+|--eta             |为每个输出显示估计的到达时间|
+|--flush-session   |为当前目标刷新会话文件|
+|--forms           |解析并测试目标URL上的表单|
+|--fresh-queries   |忽略会话文件中存储的查询结果|
+|--gpage=GOOGLEPAGE|用指定页数的Google dork结果|
+|--har=HARFILE     |将所有的HTTP流量记录到一个HAR文件中|
+|--hex             |在数据检索时使用十六进制转换|
+|--output-dir=OUT..|自定义输出目录路径|
+|--parse-errors    |解析并显示响应中的DBMS错误信息|
+|--preprocess=PRE..|使用给定的脚本进行预处理(请求)|
+|--postprocess=PO..|使用给定的脚本进行后处理(响应)|
+|--repair          |重置有未知字符标记的条目|
+|--save=SAVECONFIG |将选项保存到配置INI文件中|
+|--scope=SCOPE     |用于过滤目标的Regexp|
+|--skip-heuristics |跳过对漏洞的启发式检测|
+|--skip-waf        |跳过对WAF/IPS保护的启发式检测|
+|--table-prefix=T..|用于临时表的前缀（默认是 "sqlmap"）|
+|--test-filter=TE..|通过有效载荷和/或标题（例如ROW）选择测试|
+|--test-skip=TEST..|通过有效载荷和/或标题跳过测试（例如，BENCHMARK）|
+|--web-root=WEBROOT|网络服务器文件根目录（例如"/var/www"）|
 
 
 
-****
+**其他**
 
 |参数|说明|
 |----|----|
-|-z MNEMONICS      ||
-|--alert=ALERT     ||
-|--beep            ||
-|--dependencies    ||
-|--disable-coloring||
-|--list-tampers    ||
-|--offline         ||
-|--purge           ||
-|--results-file=R..||
-|--shell           ||
-|--tmp-dir=TMPDIR  ||
-|--unstable        ||
-|--update          ||
-|--wizard          ||
+|-z MNEMONICS      |使用简短的助记符（例如："flu,bat,ban,tec=EU"）|
+|--alert=ALERT     |当发现有SQL注入时，运行主机操作系统命令|
+|--beep            |遇到问题或发现漏洞时发出提示音|
+|--dependencies    |检查缺失的（可选）sqlmap依赖项|
+|--disable-coloring|禁用控制台输出的颜色|
+|--list-tampers    |显示可用的篡改脚本的列表|
+|--offline         |在离线模式下工作（只使用会话数据）|
+|--purge           |安全地删除sqlmap数据目录中的所有内容|
+|--results-file=R..|多目标模式下CSV结果文件的位置|
+|--shell           |提示一个交互式的sqlmap shell|
+|--tmp-dir=TMPDIR  |用于存储临时文件的本地目录|
+|--unstable        |为不稳定的连接调整选项|
+|--update          |更新sqlmap|
+|--wizard          |为初级用户提供简单的向导界面|
 
 
 
