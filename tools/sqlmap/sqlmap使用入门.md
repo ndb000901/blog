@@ -11,30 +11,32 @@
 
 |参数|说明|
 |----|----|
-|-h,--help||
-|-hh||
-|--version||
-|-v VERBOSE||
+|-h,--help|显示帮助信息|
+|-hh|显示高级帮助信息|
+|--version|显示版本|
+|-v VERBOSE|验证级别：0-6默认1|
 
 **目标**
 
-|参数|说明|
-|----|----|
-|-u URL, --url=URL||
-|-d DIRECT        ||
-|-l LOGFILE       ||
-|-m BULKFILE      ||
-|-r REQUESTFILE   ||
-|-g GOOGLEDORK    ||
-|-c CONFIGFILE    ||
-
-
-
-**qq**
+**注意：至少使用一个参数定义目标**
 
 |参数|说明|
 |----|----|
-|-A AGENT, --user..||
+|-u URL, --url=URL|目标url|
+|-d DIRECT        |直接连接数据库的连接字符串|
+|-l LOGFILE       |从burp或webScarab代理日志文件中解析目标|
+|-m BULKFILE      |从文件中获取目标|
+|-r REQUESTFILE   |从文件中加载http请求|
+|-g GOOGLEDORK    |使用google搜索引擎|
+|-c CONFIGFILE    |从配置文件INI中加载|
+
+
+
+**请求**
+
+|参数|说明|
+|----|----|
+|-A AGENT, --user..|http请求用户代理标头|
 |-H HEADER, --hea..||
 |--method=METHOD   ||
 |--data=DATA       ||
