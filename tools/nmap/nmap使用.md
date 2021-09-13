@@ -8,64 +8,145 @@ nmap-7.92
 
 ## 选项
 
-****
+**目标**
 
 |参数|说明|
 |----|----|
-|-iL <inputfilename>||
-|-iR <num hosts>||
-|--exclude <host1,...>||
-|--excludefile <exclude_file>||
+|-iL <inputfilename>|从主机/网络的列表中输入|
+|-iR <num hosts>|选择随机目标|
+|--exclude <host1,...>|排除主机/网络|
+|--excludefile <exclude_file>|从文件中排除名单|
   
-****
-  
-|参数|说明|
-|----|----|
-|-sL||
-|-sn||
-|-Pn||
-|-PS/PA/PU/PY[portlist]||
-|-PE/PP/PM||
-|-PO[protocol list]||  
-|-n/-R||
-|--dns-servers <serv1,...>||  
-|--system-dns||
-|--traceroute||  
-  
-****
+**主机发现**
   
 |参数|说明|
 |----|----|
-|-sS/sT/sA/sW/sM||
-|-sU||
-|-sN/sF/sX||
-|--scanflags <flags>||
-|-sI <zombie host[:probeport]>||
-|-sY/sZ||
-|-sO||
-|-b||
+|-sL|列表扫描 - 简单列出要扫描的目标|
+|-sn|Ping扫描 - 禁用端口扫描|
+|-Pn|将所有主机视为在线 -- 跳过主机发现|
+|-PS/PA/PU/PY[portlist]|对指定的端口进行TCP SYN/ACK、UDP或SCTP发现|
+|-PE/PP/PM|ICMP回应、时间戳和网络掩码请求发现探针|
+|-PO[protocol list]|IP协议 ping|  
+|-n/-R|从不进行DNS解析/总是解析[默认：有时]|
+|--dns-servers <serv1,...>|指定自定义DNS服务器|  
+|--system-dns|使用操作系统的DNS解析器|
+|--traceroute|追踪到每个主机的一跳路径|  
+  
+**扫描技术**
+  
+|参数|说明|
+|----|----|
+|-sS/sT/sA/sW/sM|TCP SYN/Connect()/ACK/Windows/Maimon扫描|
+|-sU|UDP扫描|
+|-sN/sF/sX|TCP Null, FIN, 和 Xmas 扫描|
+|--scanflags <flags>|自定义TCP扫描标志|
+|-sI <zombie host[:probeport]>|空闲扫描|
+|-sY/sZ|SCTP INIT/COOKIE-ECHO扫描|
+|-sO|IP协议扫描|
+|-b|FTP跳转扫描|
 
 
-****
+**端口扫描设置**
   
 |参数|说明|
 |----|----|
-|||
-|||
-|||
-  
-****
+|-p <port ranges>|只扫描指定的端口|
+|--exclude-ports <port ranges>|排除指定的端口进行扫描|
+|-F|快速模式 - 扫描比默认扫描更少的端口|
+|-r|连续扫描端口 - 不要随机化|
+|--top-ports <number>|扫描 <number> 最常用的端口|
+|--port-ratio <ratio>|扫描比<ratio>更常见的端口|
+
+**服务/版本检测**
   
 |参数|说明|
 |----|----|
-|||
-|||
-|||
+|-sV|探测开放的端口以确定服务/版本信息|
+|--version-intensity <level>|设定从0（轻）到9（尝试所有探测）|
+|--version-light|限制在最有可能的探针上（强度2）|
+|--version-all|尝试每一个探针（强度9）|
+|--version-trace|显示详细的版本扫描活动（用于调试）|
+
+
+**SCRIPT扫描**
+  
+|参数|说明|
+|----|----|
+|-sC|等同于 --script=default|
+|--script=<Lua scripts>|<Lua scripts>是一个逗号分隔的列表，其中包括目录、脚本文件或脚本类别的逗号分隔列表|
+|--script-args=<n1=v1,...>|向脚本提供参数|
+|--script-args-file=filename|在一个文件中提供NSE脚本的args|
+|--script-trace|显示所有发送和接收的数据|
+|--script-updatedb|更新脚本数据库|
+|--script-help=<Lua scripts>|显示关于脚本的帮助|
+
+**操作系统检测**
+
+|参数|说明|
+|----|----|
+|-O|启用操作系统检测|
+|--osscan-limit|限制对有希望的目标进行操作系统检测|
+|--osscan-guess|更积极地猜测操作系统|
+
+  
+**时间和性能**
+
+|参数|说明|
+|----|----|  
+|-T<0-5>|设置计时模板（越高越快）|
+|--min-hostgroup/max-hostgroup <size>|平行主机扫描组的大小|
+|--min-parallelism/max-parallelism <numprobes>|探针并行化|
+|--min-rtt-timeout/max-rtt-timeout/initial-rtt-timeout|指定探针往返时间|
+|--max-retries|端口扫描探针的重传次数上限|
+|--host-timeout|在指定时间后放弃目标|
+|--scan-delay/--max-scan-delay <time>|调整探针之间的延迟|
+|--min-rate <number>|发送数据包的速度不低于每秒<number>|
+|--max-rate <number>|发送数据包的速度不超过每秒<number>|
+  
+**防火墙/ID规避和欺骗**
+  
+|参数|说明|
+|----|----|  
+|-f|对数据包进行分片处理（可选择使用给定的MTU）|
+|-D|用诱饵掩盖一个扫描|
+|-S|欺骗源地址|
+|-e|使用指定的接口|
+|-g|使用指定的端口号|
+|--proxies <url1,...>|通过HTTP/SOCKS4代理进行中继连接|
+|--data <hex string>|在发送的数据包上添加一个自定义的payload|
+|--data-string <string>|在发送的数据包中添加一个自定义的ASCII字符串|
+|--data-length <num>|将随机数据添加到发送的数据包中|
+|--ip-options <options>|用指定的ip选项发送数据包|
+|--ttl <val>|设置IP生存时间字段|
+|--spoof-mac <mac address/prefix/vendor name>|欺骗你的MAC地址|
+|--badsum|发送带有假的TCP/UDP/SCTP校验和的数据包|
+  
+**输出**
+
+|参数|说明|
+|----|----| 
+|-oN/-oX/-oS/-oG <file>||
+|-oA <basename>||
+|-v||
+|-d||
+|--reason||
+|--open||
+|--packet-trace||
+|--iflist||
+|--append-output||
+|--resume <filename>||
+|--noninteractive||
+|--stylesheet <path/URL>||
+|--webxml||
+|--no-stylesheet||
 
 ****
   
-|参数|说明|
-|----|----|
-|||
-|||
-|||
+|-6||
+|-A||
+|--datadir||
+|--send-eth/--send-ip||
+|--privileged||
+|--unprivileged||
+|-V||
+|-h||
