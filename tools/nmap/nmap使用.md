@@ -107,11 +107,11 @@ nmap-7.92
   
 |参数|说明|
 |----|----|  
-|-f|对数据包进行分片处理（可选择使用给定的MTU）|
-|-D|用诱饵掩盖一个扫描|
-|-S|欺骗源地址|
-|-e|使用指定的接口|
-|-g|使用指定的端口号|
+|-f;--mtu<val>|对数据包进行分片处理（可选择使用给定的MTU）|
+|-D <decoy1,...>|用诱饵掩盖一个扫描|
+|-S <IP>|欺骗源地址|
+|-e <iface>|使用指定的接口|
+|-g/--source-port <portnum>|使用指定的端口号|
 |--proxies <url1,...>|通过HTTP/SOCKS4代理进行中继连接|
 |--data <hex string>|在发送的数据包上添加一个自定义的payload|
 |--data-string <string>|在发送的数据包中添加一个自定义的ASCII字符串|
@@ -125,28 +125,28 @@ nmap-7.92
 
 |参数|说明|
 |----|----| 
-|-oN/-oX/-oS/-oG <file>||
-|-oA <basename>||
-|-v||
-|-d||
-|--reason||
-|--open||
-|--packet-trace||
-|--iflist||
-|--append-output||
-|--resume <filename>||
-|--noninteractive||
-|--stylesheet <path/URL>||
-|--webxml||
-|--no-stylesheet||
+|-oN/-oX/-oS/-oG <file>|以normal、XML、s|<rIpt kIddi3,和Grepable格式，分别输出到给定的文件名。|
+|-oA <basename>|一次性以三种主要格式输出|
+|-v|增加粗略程度(使用-vv或更多以获得更大效果)|
+|-d|增加调试级别（使用-dd或更多，效果会更好|
+|--reason|显示一个端口处于特定状态的原因|
+|--open|只显示开放（或可能开放）的端口|
+|--packet-trace|显示所有发送和接收的数据包|
+|--iflist|打印主机接口和路由（用于调试）|
+|--append-output|追加到指定的输出文件中，而不是删掉|
+|--resume <filename>|恢复已中止的扫描|
+|--noninteractive|禁用通过键盘进行的运行时交互|
+|--stylesheet <path/URL>|XSL样式表，将XML输出转换成HTML|
+|--webxml|参考Nmap.Org的样式表以获得更多可移植的XML|
+|--no-stylesheet|防止将XSL样式表与XML输出联系起来|
 
-****
+**MISC:**
   
-|-6||
-|-A||
-|--datadir||
-|--send-eth/--send-ip||
-|--privileged||
-|--unprivileged||
-|-V||
-|-h||
+|-6|启用IPv6扫描|
+|-A|启用操作系统检测、版本检测、脚本扫描和traceroute|
+|--datadir|指定自定义Nmap数据文件位置|
+|--send-eth/--send-ip|使用原始以太网帧或IP数据包发送|
+|--privileged|假设用户是全权限的|
+|--unprivileged|假设用户缺乏原始套接字的权限|
+|-V|打印版本号|
+|-h|打印这个帮助摘要页|
