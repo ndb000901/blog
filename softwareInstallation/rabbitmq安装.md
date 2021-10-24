@@ -28,8 +28,9 @@ erlang与rabbitmq 对应版本(https://www.rabbitmq.com/which-erlang.html)
 **添加用户并设置权限**
 
 ```
-rabbitmqctl add_user codesheep 123456
-rabbitmqctl set_user_tags codesheep administrator
+rabbitmqctl add_user <name> 123456
+rabbitmqctl set_user_tags <name> administrator
+sudo rabbitmqctl  set_permissions -p / <name> '.*' '.*' '.*'
 ```
 
 **开启web监控面板**
@@ -39,4 +40,6 @@ rabbitmqctl set_user_tags codesheep administrator
 ```
 rabbitmq-plugins enable rabbitmq_management
 ```
+
+
 
