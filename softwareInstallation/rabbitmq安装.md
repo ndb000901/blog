@@ -20,3 +20,23 @@ ubuntu18.04
 
 
 erlang与rabbitmq 对应版本(https://www.rabbitmq.com/which-erlang.html)
+
+
+## 配置
+
+
+**添加用户并设置权限**
+
+```
+rabbitmqctl add_user codesheep 123456
+rabbitmqctl set_user_tags codesheep administrator
+```
+
+**开启web监控面板**
+
+**地址： http://172.20.10.11:15672/** 
+
+```
+rabbitmq-plugins enable rabbitmq_management
+```
+
