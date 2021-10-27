@@ -225,3 +225,92 @@ public class TestShiroMD5 {
 }
 
 ```
+
+
+## demo4--->shiro MD5加密
+
+**CustomerMd5Realm.java**
+
+```
+package xyz.wuhen.shiro.demo4;
+
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.AuthenticationInfo;
+import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.realm.AuthorizingRealm;
+import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.util.ByteSource;
+
+public class CustomerMd5Realm extends AuthorizingRealm {
+
+    @Override
+    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+        return null;
+    }
+
+    @Override
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+        String principal = (String) token.getPrincipal();
+        if ("haha".equals(principal)) {
+            //md5
+//            SimpleAuthenticationInfo simpleAuthenticationInfo =
+//                    new SimpleAuthenticationInfo(principal,"e10adc3949ba59abbe56e057f20f883e",this.getName());
+            // md5 + salt
+            SimpleAuthenticationInfo simpleAuthenticationInfo =
+                    new SimpleAuthenticationInfo(principal,"4fdf0ba83c7a7e128f35a1f4b78b35ba", ByteSource.Util.bytes("sjshhsx"),this.getName());
+            return simpleAuthenticationInfo;
+        }
+        return null;
+    }
+}
+
+```
+
+**TestCustomerMd5RealmAuthenicator.java**
+
+```
+package xyz.wuhen.shiro.demo4;
+
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.mgt.DefaultSecurityManager;
+import org.apache.shiro.subject.Subject;
+
+
+public class TestCustomerMd5RealmAuthenicator {
+    public static void main(String[] args) {
+        DefaultSecurityManager securityManager = new DefaultSecurityManager();
+        CustomerMd5Realm customerMd5Realm = new CustomerMd5Realm();
+        HashedCredentialsMatcher matcher = new HashedCredentialsMatcher();
+
+        //设置算法
+        matcher.setHashAlgorithmName("md5");
+        //设置散列次数
+        matcher.setHashIterations(1024);
+        //设置hash凭证匹配器
+        customerMd5Realm.setCredentialsMatcher(matcher);
+        securityManager.setRealm(customerMd5Realm);
+
+        SecurityUtils.setSecurityManager(securityManager);
+
+
+        Subject subject = SecurityUtils.getSubject();
+
+        //认证
+        UsernamePasswordToken token = new UsernamePasswordToken("haha","123456");
+        try {
+            subject.login(token);
+        } catch (UnknownAccountException e) {
+            e.printStackTrace();
+        } catch (IncorrectCredentialsException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+```
