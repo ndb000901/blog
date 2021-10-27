@@ -314,3 +314,27 @@ public class TestCustomerMd5RealmAuthenicator {
 }
 
 ```
+
+
+## demo5-->授权方式
+
+**基于角色的访问控制**
+
+```
+if (subject.hasRole("admin")) {
+}
+```
+
+**基于资源的访问控制**
+
+```
+if(subject.isPermission("user:update:01")) { //资源实例
+
+}
+
+if(subject.isPermission("user:update:*")) {  //资源类型
+
+}
+
+```
+
