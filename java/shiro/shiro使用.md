@@ -338,3 +338,135 @@ if(subject.isPermission("user:update:*")) {  //资源类型
 
 ```
 
+## demo6-->授权
+
+**TestCustomerMd5RealmAuthenicator.java**
+
+```
+package xyz.wuhen.shiro.demo4;
+
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.mgt.DefaultSecurityManager;
+import org.apache.shiro.subject.Subject;
+
+import java.util.Arrays;
+
+
+public class TestCustomerMd5RealmAuthenicator {
+    public static void main(String[] args) {
+        DefaultSecurityManager securityManager = new DefaultSecurityManager();
+        CustomerMd5Realm customerMd5Realm = new CustomerMd5Realm();
+        HashedCredentialsMatcher matcher = new HashedCredentialsMatcher();
+
+        //设置算法
+        matcher.setHashAlgorithmName("md5");
+        //设置散列次数
+        matcher.setHashIterations(1024);
+        //设置hash凭证匹配器
+        customerMd5Realm.setCredentialsMatcher(matcher);
+        securityManager.setRealm(customerMd5Realm);
+
+        SecurityUtils.setSecurityManager(securityManager);
+
+
+        Subject subject = SecurityUtils.getSubject();
+
+        //认证
+        UsernamePasswordToken token = new UsernamePasswordToken("haha","123456");
+        try {
+            subject.login(token);
+        } catch (UnknownAccountException e) {
+            e.printStackTrace();
+        } catch (IncorrectCredentialsException e) {
+            e.printStackTrace();
+        }
+
+        //授权
+        if (subject.isAuthenticated()) {
+            //基于角色权限控制
+            System.out.println("super: " + subject.hasRole("super"));
+            System.out.println("admin: " + subject.hasRole("admin"));
+
+            //基于多角色权限控制
+            System.out.println(subject.hasAllRoles(Arrays.asList("admin","super")));
+
+            //是否具有其中的一个角色
+            boolean[] booleans = subject.hasRoles(Arrays.asList("admin","super","user"));
+            for (boolean v : booleans) {
+                System.out.println(v);
+            }
+            //基于权限字符串的访问控制
+            System.out.println(subject.isPermitted("user:*:01"));
+
+            boolean[] permitted = subject.isPermitted("user:*:01","order:*:10");
+            for (boolean v : permitted) {
+                System.out.println(v);
+            }
+
+            //同时具有哪些权限
+            boolean permittedAll = subject.isPermittedAll("user:*:01","product:*:*");
+            System.out.println(permittedAll);
+        }
+    }
+}
+
+```
+
+
+**CustomerMd5Realm.java**
+
+```
+package xyz.wuhen.shiro.demo4;
+
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.AuthenticationInfo;
+import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.realm.AuthorizingRealm;
+import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.util.ByteSource;
+
+public class CustomerMd5Realm extends AuthorizingRealm {
+
+    @Override
+    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+        System.out.println("==============================");
+        String primaryPrincipal = (String) principals.getPrimaryPrincipal();
+        System.out.println("身份信息：" + primaryPrincipal);
+
+
+        SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
+        //设置权限
+        simpleAuthorizationInfo.addRole("admin");
+        simpleAuthorizationInfo.addRole("user");
+
+        //设置基于字符的权限
+        simpleAuthorizationInfo.addStringPermission("user:*:01");
+        simpleAuthorizationInfo.addStringPermission("product:create:02");
+        return simpleAuthorizationInfo;
+    }
+
+    @Override
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+        String principal = (String) token.getPrincipal();
+        if ("haha".equals(principal)) {
+            //md5
+//            SimpleAuthenticationInfo simpleAuthenticationInfo =
+//                    new SimpleAuthenticationInfo(principal,"e10adc3949ba59abbe56e057f20f883e",this.getName());
+            // md5 + salt
+            SimpleAuthenticationInfo simpleAuthenticationInfo =
+                    new SimpleAuthenticationInfo(principal,"4fdf0ba83c7a7e128f35a1f4b78b35ba", ByteSource.Util.bytes("sjshhsx"),this.getName());
+            return simpleAuthenticationInfo;
+        }
+        return null;
+    }
+}
+
+```
+
