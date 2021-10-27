@@ -80,3 +80,14 @@ public class TestAuthenticator {
 }
 
 ```
+
+**认证流程**
+
+```
+认证：
+    1、用户名比较 SimpleAccountRealm-->doGetAuthenticationInfo
+    2、密码校验   AuthenticatingRealm-->assertCredentialsMatch
+    
+AuthenticatingRealm  认证 doGetAuthenticationInfo
+AuthorizingRealm     授权 doGetAuthorizationInfo
+```
