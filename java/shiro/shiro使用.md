@@ -508,3 +508,42 @@ JSP/GSP 标签： 在JSP/GSP 页面通过相应的标签完成
 注意啊：Thymeleaf 中使用shiro需要额外集成！！
 ```
 
+
+## demo9-->shiro启用缓存
+
+**pom.xml**
+
+```
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-ehcache</artifactId>
+            <version>1.8.0</version>
+        </dependency>
+```
+
+**ShiroConfig.java**
+
+```
+@Bean
+    public Realm getRealm() {
+        CustomerRealm customerRealm = new CustomerRealm();
+        HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
+        //算法设置
+        hashedCredentialsMatcher.setHashAlgorithmName("MD5");
+        //散列次数
+        hashedCredentialsMatcher.setHashIterations(1024);
+        customerRealm.setCredentialsMatcher(hashedCredentialsMatcher);
+
+        //开启缓存
+        customerRealm.setCacheManager(new EhCacheManager());
+        //开启全局缓存
+        customerRealm.setCachingEnabled(true);
+        //开启认证缓存
+        customerRealm.setAuthenticationCachingEnabled(true);
+        customerRealm.setAuthenticationCacheName("authenticationCache");
+        //开启授权缓存
+        customerRealm.setAuthorizationCachingEnabled(true);
+        customerRealm.setAuthorizationCacheName("authorizationCache");
+        return customerRealm;
+    }
+```
