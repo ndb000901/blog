@@ -509,7 +509,7 @@ JSP/GSP 标签： 在JSP/GSP 页面通过相应的标签完成
 ```
 
 
-## demo9-->shiro启用缓存
+## demo9-->shiro启用EhCache缓存
 
 **pom.xml**
 
