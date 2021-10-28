@@ -474,3 +474,37 @@ public class CustomerMd5Realm extends AuthorizingRealm {
 ## demo7-->springboot 整合shiro 认证demo
 
 
+## demo8-->shiro中授权编程实现方式
+
+**编程式**
+
+```
+Subject subject = SecurityUtils.getSubject();
+if (subject.hasRole("admin")) {
+    //无权限
+} else {
+    //有权限
+}
+```
+
+**注解式**
+
+```
+@RequiresRoles("admin")
+public void hello() {
+    //有权限
+}
+```
+
+**标签式**
+
+```
+JSP/GSP 标签： 在JSP/GSP 页面通过相应的标签完成
+
+<shiro:hasRole name="admin">
+          //有权限
+</shiro:hasRole>
+
+注意啊：Thymeleaf 中使用shiro需要额外集成！！
+```
+
