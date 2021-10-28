@@ -470,3 +470,7 @@ public class CustomerMd5Realm extends AuthorizingRealm {
 
 ```
 
+
+## demo7-->springboot 整合shiro 认证demo
+
+
