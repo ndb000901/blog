@@ -692,6 +692,47 @@ execution(* xyz.wuhen.dao.*.*(..))
 
 
 
+**pom.xml**
+
+```xml
+<dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>5.3.10</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aspects</artifactId>
+            <version>5.3.10</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.9.8.RC1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>aopalliance</groupId>
+            <artifactId>aopalliance</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/net.sourceforge.cglib/com.springsource.net.sf.cglib -->
+        <dependency>
+            <groupId>net.sourceforge.cglib</groupId>
+            <artifactId>com.springsource.net.sf.cglib</artifactId>
+            <version>2.2.0</version>
+        </dependency>
+
+    </dependencies>
+```
+
+
+
+
+
 **Application.java**
 
 ```java
@@ -769,9 +810,68 @@ public class MyConfig {
 
 
 
+**相同切入点抽取**
+
+```java
+// 相同切入点抽取
+@Pointcut(value = "execution(* xyz.wuhen.spring2.demo4.User.add(..))")
+public void haha() {
+    
+}
+// 前置通知
+// @Before 注解表示作为前置通知
+@Before(value = "haha()")
+public void before() {
+    System.out.println("before....");
+}
+```
+
+
+
 
 
 ## xml方式
+
+**pom.xml**
+
+```xml
+<dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>5.3.10</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aspects</artifactId>
+            <version>5.3.10</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.9.8.RC1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>aopalliance</groupId>
+            <artifactId>aopalliance</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/net.sourceforge.cglib/com.springsource.net.sf.cglib -->
+        <dependency>
+            <groupId>net.sourceforge.cglib</groupId>
+            <artifactId>com.springsource.net.sf.cglib</artifactId>
+            <version>2.2.0</version>
+        </dependency>
+
+    </dependencies>
+```
+
+
+
+
 
 **Application.java**
 
@@ -879,17 +979,515 @@ public class UserProxy {
 
 # JdbcTemplate
 
+## 依赖
+
+```xml
+		<!--数据库。。。。。-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.2.8</version>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.27</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>5.3.12</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>5.3.12</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>5.3.12</version>
+        </dependency>
+        <dependency>
+          <groupId>org.projectlombok</groupId>
+          <artifactId>lombok</artifactId>
+          <version>1.18.22</version>
+        </dependency>
+```
+
+## 表结构
+
+```sql
+create table test.user
+(
+    id    bigint auto_increment comment '主键ID'
+        primary key,
+    name  varchar(30) null comment '姓名',
+    age   int         null comment '年龄',
+    email varchar(50) null comment '邮箱'
+);
+```
+
+
+
+## 注解模式
+
+### 配置
+
+**MyConfig.java**
+
+```java
+@Configuration
+@ComponentScan(basePackages = "xyz.wuhen.spring2.demo5.**")
+public class MyConfig {
+    @Bean
+    public DataSource dataSource() {
+        DruidDataSource dataSource = new DruidDataSource();
+        dataSource.setUrl("jdbc:mysql://127.0.0.1:3306/test");
+        dataSource.setUsername("root");
+        dataSource.setPassword("root");
+        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        return dataSource;
+    }
+    @Bean
+    public JdbcTemplate jdbcTemplate(DataSource dataSource) {
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        return jdbcTemplate;
+    }
+
+}
+
+```
+
+**User.java**
+
+```java
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+
+public class User {
+    private int id;
+    private String name;
+    private int age;
+    private String email;
+}
+
+```
+
+###  查询多个
+
+**Application.java**
+
+```java
+public class Application {
+    public static void main(String[] args) {
+        ApplicationContext context = new AnnotationConfigApplicationContext(MyConfig.class);
+        JdbcTemplate jdbcTemplate = (JdbcTemplate) context.getBean("jdbcTemplate",JdbcTemplate.class);
+        String sql = "select * from user";
+        List<User> list = jdbcTemplate.query(sql,new BeanPropertyRowMapper<User>(User.class));
+        System.out.println();
+    }
+}
+```
+
+### 修改
+
+```java
+        String sql = "update user set name = 'jone1' where id = ?";
+        Object[] objs = {Integer.valueOf(1)};
+        int result = jdbcTemplate.update(sql,objs);
+        System.out.println(result);
+```
+
+
+
+### 删除
+
+```java
+        String sql = "delete from user where id = ?";
+        Object[] objs = {Integer.valueOf(1)};
+        int result = jdbcTemplate.update(sql,objs);
+        System.out.println(result);
+```
+
+
+
+### 插入
+
+```java
+        String sql = "insert into user(name,age,email) values(?,?,?)";
+        Object[] objs = {"jiji",Integer.valueOf(15),"jiji@qq.com"};
+        int result = jdbcTemplate.update(sql,objs);
+        System.out.println(result);
+```
+
+
+
+### 查询行数
+
+
+
+```java
+        String sql = "select count(*) from user";
+        int result = jdbcTemplate.queryForObject(sql,Integer.class);
+        System.out.println(result);
+```
+
+### 插入多行
+
+```java
+        String sql = "insert into user(name,age,email) values (?,?,?)";
+        List<Object[]> batchArgs = new LinkedList<Object[]>();
+        Object[] objs1 = {"haha1",Integer.valueOf(12),"haha1@qq.com"};
+        Object[] objs2 = {"haha2",Integer.valueOf(13),"haha2@qq.com"};
+        Object[] objs3 = {"haha3",Integer.valueOf(14),"haha3@qq.com"};
+        batchArgs.add(objs1);
+        batchArgs.add(objs2);
+        batchArgs.add(objs3);
+        int[] result = jdbcTemplate.batchUpdate(sql,batchArgs);
+        System.out.println(Arrays.toString(result));
+```
 
 
 
 
 
+##  xml配置
+
+
+
+### 配置
+
+```java
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+                            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <context:property-placeholder location="classpath:user.properties"/>
+
+    <context:component-scan base-package="xyz.wuhen.spring2.demo5"></context:component-scan>
+
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
+        <property name="username" value="root"></property>
+        <property name="password" value="root"></property>
+        <property name="url" value="jdbc:mysql://127.0.0.1:3306/test"></property>
+    </bean>
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
+
+</beans>
+```
 
 
 
 # 事务操作
 
 
+
+## 依赖
+
+**pom.xml**
+
+```xml
+		<!--数据库。。。。。-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.2.8</version>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.27</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>5.3.12</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>5.3.12</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>5.3.12</version>
+        </dependency>
+        <dependency>
+          <groupId>org.projectlombok</groupId>
+          <artifactId>lombok</artifactId>
+          <version>1.18.22</version>
+        </dependency>
+```
+
+## propagation-->事务传播行为
+
+
+
+| 传播属性      | 说明                                                         |
+| ------------- | ------------------------------------------------------------ |
+| REQUIRED      | 如果有事务在运行，当前方法就在这个事务内运行，否则，就启动一个新的事务，并在自己的事务内运行。 |
+| REQUIRES_NEW  | 当前的方法必须启动新事务，并在自己的事务内运行，如果有事务正在运行，应该将它挂起。 |
+| SUPPORTS      | 如果有事务正在运行，当前的方法就在这个事务内运行，否则他可以不运行在事务中。 |
+| MANDATORY     | 当前的方法必须运行在事务中，如果没有正在运行的事务，就抛出异常。 |
+| NOT_SUPPORTED | 当前的方法不应该运行在事务内部，如果有运行的事务，将它挂起。 |
+| NEVER         | 当前的方法不应该运行在事务中，如果有运行的事务，就抛出异常。 |
+| NESTED        | 如果有事务在运行，当前方法就应该在这个事务的嵌套事务内运行，否则，就启动一个新的事务，并在它自己的事务内运行。 |
+
+## 并发事务问题
+
+
+
+### 脏读
+
+读取了其他并发事务未提交的事务。
+
+### 不可重复读
+
+读取了其他并发事务已提交的数据。针对update、delete。
+
+### 幻读
+
+读取了其他并发事务提交的数据，针对insert。
+
+
+
+## 隔离级别
+
+
+
+### READ UNCOMMITTED(读未提交)
+
+
+
+### READ COMMITTED(读已提交)
+
+
+
+### REPEATABLE READ(可重复读)
+
+
+
+### SERIALIZABLE(串行化)
+
+
+
+| 。。。                     | 脏读 | 不可重复读 | 幻读 |
+| -------------------------- | ---- | ---------- | ---- |
+| READ UNCOMMITTED(读未提交) | Y    | Y          | Y    |
+| READ COMMITTED(读已提交)   |      | Y          | Y    |
+| REPEATABLE READ(可重复读)  |      |            | Y    |
+| SERIALIZABLE(串行化)       |      |            |      |
+
+
+
+
+
+## 注解模式
+
+
+
+###  @Transactional属性
+
+
+
+| 属性          | 说明                                   |
+| ------------- | -------------------------------------- |
+| timeout       | 超过指定时间不提交，进行回滚，单位秒。 |
+| readOnly      | true-->只可查询，false-->可查可写      |
+| rollbackFor   | 出现哪些异常进行回滚                   |
+| noRollbackFor | 出现哪些异常不进行回滚                 |
+| isolation     | 隔离级别                               |
+
+
+
+**User.java**
+
+```java
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+
+public class User {
+    private int id;
+    private String name;
+    private int age;
+    private String email;
+}
+
+```
+
+**UserDao.java**
+
+```java
+public interface UserDao {
+    User selectUserById(Integer id);
+    int updateUserById(User user);
+}
+
+```
+
+**UserDaoImpl.java**
+
+```java
+@Repository
+
+public class UserDaoImpl implements UserDao {
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+    public User selectUserById(Integer id) {
+        String sql = "select * from user where id = ?";
+        User user = jdbcTemplate.queryForObject(sql,new BeanPropertyRowMapper<User>(User.class),id);
+        return user;
+    }
+
+
+    public int updateUserById(User user) {
+        String sql = "update user set age = ? where id = ?";
+        Object[] args = {user.getAge(),user.getId()};
+        int result = jdbcTemplate.update(sql,args);
+        return result;
+    }
+}
+
+```
+
+**MyConfig.java**
+
+```java
+@Configuration
+@ComponentScan(basePackages = "xyz.wuhen.spring2.demo6.**")
+@EnableTransactionManagement
+public class MyConfig {
+    @Bean
+    public DataSource dataSource() {
+        DruidDataSource dataSource = new DruidDataSource();
+        dataSource.setUrl("jdbc:mysql://127.0.0.1:3306/test");
+        dataSource.setUsername("root");
+        dataSource.setPassword("root");
+        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        return dataSource;
+    }
+    @Bean
+    public JdbcTemplate jdbcTemplate(DataSource dataSource) {
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        return jdbcTemplate;
+    }
+    @Bean
+    public DataSourceTransactionManager dataSourceTransactionManager(DataSource dataSource) {
+        DataSourceTransactionManager dataSourceTransactionManager = new DataSourceTransactionManager();
+        dataSourceTransactionManager.setDataSource(dataSource);
+        return dataSourceTransactionManager;
+    }
+}
+
+```
+
+
+
+
+
+**Application.java**
+
+```java
+public class Application {
+
+
+    public static void main(String[] args) {
+        ApplicationContext context = new AnnotationConfigApplicationContext(MyConfig.class);
+        UserService userService = context.getBean("userService",UserService.class);
+        User user = new User();
+        user.setAge(510);
+        user.setId(4);
+        userService.updateUserById(user);
+        System.out.println(userService.selectUserById(4));
+    }
+}
+
+```
+
+
+
+## xml模式
+
+
+
+**bean.xml**
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+                            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+                            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <context:property-placeholder location="classpath:user.properties"/>
+
+    <context:component-scan base-package="xyz.wuhen.spring2.demo6"></context:component-scan>
+
+    <!--开启事务注解-->
+    <tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
+        <property name="username" value="root"></property>
+        <property name="password" value="root"></property>
+        <property name="url" value="jdbc:mysql://127.0.0.1:3306/test"></property>
+    </bean>
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+    <bean id="userDao" class="xyz.wuhen.spring2.demo6.dao.impl.UserDaoImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate"></property>
+    </bean>
+    <bean id="userService" class="xyz.wuhen.spring2.demo6.service.UserService">
+        <property name="userDao" ref="userDao"></property>
+    </bean>
+
+    <tx:advice id="txadvice">
+        <tx:attributes>
+            <tx:method name="updateUserById" propagation="REQUIRED"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <aop:config>
+        <aop:pointcut id="pt" expression="execution(* xyz.wuhen.spring2.demo6.dao.impl.UserDaoImpl.updateUserById(..))"/>
+        <aop:advisor advice-ref="txadvice" pointcut-ref="pt"></aop:advisor>
+    </aop:config>
+
+    <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+
+
+</beans>
+```
 
 
 
