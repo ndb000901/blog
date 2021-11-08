@@ -188,7 +188,7 @@
 </beans>
 ```
 
-## 注解配置
+
 
 
 
@@ -196,7 +196,7 @@
 
 ## 解决中文乱码
 
-
+**SpringMVC中处理编码的过滤器一定要配置到其他过滤器之前，否则无效。**
 
 **src/main/resources/springmvc.xml**
 
@@ -362,9 +362,30 @@ public String test(@PathVariable("id") String id,@PathVariable String name) {
 
 ## 通过ServletAPI获取
 
+```java
+    @RequestMapping(value = "/hello")
+    @ResponseBody
+    public String hello(HttpServletRequest request) {
+        String name = request.getParameter("name");
+        String id = request.getParameter("id");
+        return "id-->" + id + "  name-->" + name;
+    }
+```
+
+
+
 
 
 ##  通过控制器方法的形参获取请求参数
+
+```java
+    @RequestMapping(value = "/hello")
+    @ResponseBody
+    public String hello(String id,String name) {
+        System.out.println("id-->" + id + "  name-->" + name);
+        return "id-->" + id + "  name-->" + name;
+    }
+```
 
 
 
@@ -372,15 +393,79 @@ public String test(@PathVariable("id") String id,@PathVariable String name) {
 
 
 
+| 属性         | 说明                                                         |
+| ------------ | ------------------------------------------------------------ |
+| value        | 请求参数名                                                   |
+| required     | 设置是否必须传输请求参数，若为true,必须携带value所指定参数，否则报错400 |
+| defaultValue | 不论required何值，当value指定参数没有传输，使用defaultValue  |
+
+
+
+```java
+    @RequestMapping(value = "/hello")
+    @ResponseBody
+    public String hello(@RequestParam(value = "id") String id,@RequestParam(value = "name") String name) {
+        System.out.println("id-->" + id + "  name-->" + name);
+        return "id-->" + id + "  name-->" + name;
+    }
+```
+
+
+
 ## @RequestHeader
+
+属性与@RequestParam一致
+
+```java
+    @RequestMapping(value = "/hello")
+    @ResponseBody
+    public String hello(@RequestHeader("Host") String host) {
+        System.out.println("id-->" + host);
+        return "id-->" + host;
+    }
+```
 
 
 
 ## @CookieValue
 
+属性与@RequestParam一致
+
+```java
+    @RequestMapping(value = "/hello")
+    @ResponseBody
+    public String hello(@CookieValue("admin") String admin) {
+        System.out.println("admin-->" + admin);
+        return "admin-->" + admin;
+    }
+```
+
 
 
 ## 通过POJO获取请求参数
+
+**User.java**
+
+```java
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class User {
+    private String name;
+    private String id;
+}
+```
+
+
+
+```java
+    @RequestMapping(value = "/hello")
+    @ResponseBody
+    public String hello(User user) {
+        System.out.println("id-->" + user.getId() + "  name-->" + user.getName());
+        return "id-->" + user.getId() + "  name-->" + user.getName();
+    }
+```
 
 
 
@@ -392,33 +477,144 @@ public String test(@PathVariable("id") String id,@PathVariable String name) {
 
 ## 使用servletAPI向request域对象共享数据
 
+```java
+    @RequestMapping(value = "/hello")
+    public String hello(HttpServletRequest request) {
+        request.setAttribute("name","world");
+        System.out.println("ssss");
+        return "hello";
+    }
+```
+
 
 
 ## 使用ModelAndView向request域对象共享数据
+
+```java
+    @RequestMapping(value = "/hello")
+    public ModelAndView hello(HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView();
+         /**
+         * ModelAndView有Model和View的功能
+         * Model主要用于向请求域共享数据
+         * View主要用于设置视图，实现页面跳转
+         */
+        mav.addObject("name","jiji");
+        mav.setViewName("hello");
+        System.out.println("ssss");
+        return mav;
+    }
+```
 
 
 
 ## 使用Model向request域对象共享数据
 
+```java
+        @RequestMapping(value = "/hello")
+        public String hello(Model model) {
+            model.addAttribute("name","haha");
+            System.out.println("ssss");
+            return "hello";
+        }
+```
+
 
 
 ## 使用map向request域对象共享数据
+
+```java
+        @RequestMapping(value = "/hello")
+        public String hello(Map map) {
+            map.put("name","haha");
+            System.out.println("ssss");
+            return "hello";
+        }
+```
 
 
 
 ## 使用ModelMap向request域对象共享数据
 
+```java
+        @RequestMapping(value = "/hello")
+        public String hello(ModelMap modelMap) {
+            modelMap.addAttribute("name","jiji");
+            System.out.println("ssss");
+            return "hello";
+        }
+```
+
 
 
 ## 向session域共享数据
+
+```java
+    @RequestMapping(value = "/hello")
+    public String hello(HttpSession session) {
+        session.setAttribute("name","jiji");
+        System.out.println("ssss");
+        return "hello";
+    }
+```
 
 
 
 ## 向application域共享数据
 
+```java
+    @RequestMapping(value = "/hello")
+    public String hello(HttpSession session) {
+        ServletContext application = session.getServletContext();
+        application.setAttribute("name","haha");
+        System.out.println("ssss");
+        return "hello";
+    }
+```
+
 
 
 # 5、SpringMVC视图
+
+
+
+## ThymeleafView
+
+
+
+## 转发视图
+
+
+
+InternalResourceView
+
+```java
+    @RequestMapping(value = "/hello")
+    public String hello() {
+        return "forward:/haha";
+    }
+```
+
+
+
+## 重定向视图--RedirectView
+
+RedirectView
+
+```java
+    @RequestMapping(value = "/hello")
+    public String hello() {
+        return "redirect:/haha";
+    }
+```
+
+
+
+## 视图控制器--view-controller
+
+```xml
+    <mvc:view-controller path="/test" view-name="hello"></mvc:view-controller>
+```
 
 
 
@@ -428,11 +624,108 @@ public String test(@PathVariable("id") String id,@PathVariable String name) {
 
 
 
+## @RequestBody
 
+获取请求体
+
+```java
+    @RequestMapping(value = "/hello")
+    public String hello(@RequestBody String body) {
+        System.out.println(body);
+        return "hello";
+    }
+```
+
+
+
+## RequestEntity
+
+```java
+@RequestMapping(value = "/hello")
+public String hello(RequestEntity<String> requestEntity) {
+    System.out.println(requestEntity.getHeaders());
+    System.out.println(requestEntity.getBody());
+    return "hello";
+}
+```
+
+## @ResponseBody
+
+将方法返回值响应到响应报文。
+
+## SpringMVC 处理json
+
+ 
+
+**pom.xml**
+
+```xml
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.13.0</version>
+
+        </dependency>
+```
+
+```xml
+<mvc:annotation-driven/>
+```
+
+## @RestController
+
+
+
+等价于@Controller + @ResponseBody
+
+## ResponseEntity
 
 
 
 # 7、文件上传和下载
+
+## 依赖
+
+**pom.xml**
+
+```xml
+ <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.4</version>
+        </dependency>
+```
+
+## 配置
+
+
+
+**springmvc.xml**
+
+```xml
+<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"></bean>
+
+```
+
+**file.html**
+
+```html
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form th:action="@{/upload}" method="post" enctype="multipart/form-data">
+    <input type="file" name="photo">
+    <input type="submit">
+</form>
+
+</body>
+</html>
+```
 
 
 
@@ -440,7 +733,47 @@ public String test(@PathVariable("id") String id,@PathVariable String name) {
 
 
 
+```java
+    @RequestMapping("/download")
+    public ResponseEntity<byte[]> download(HttpSession session) throws IOException {
+        ServletContext servletContext = session.getServletContext();
+        String realPath = servletContext.getRealPath("/img/1.png");
+        InputStream is = new FileInputStream(realPath);
+        byte[] bytes = new byte[is.available()];
+        is.read(bytes);
+        MultiValueMap<String,String> headers = new HttpHeaders();
+        headers.add("Content-Disposition","attachment;filename=1.png");
+        HttpStatus statusCode = HttpStatus.OK;
+        ResponseEntity<byte[]> responseEntity = new ResponseEntity<byte[]>(bytes,headers,statusCode);
+        is.close();
+        return responseEntity;
+    }
+
+```
+
+
+
 ## 文件上传
+
+```java
+    @RequestMapping("/upload")
+    public void upload(MultipartFile photo,HttpSession session) throws IOException {
+        String name = photo.getOriginalFilename();
+        String type = name.substring(name.lastIndexOf("."));
+        name = UUID.randomUUID().toString() + type;
+
+        ServletContext servletContext = session.getServletContext();
+        String photoPath = servletContext.getRealPath("upload");
+        File file = new File(photoPath);
+        if (!file.exists()) {
+            file.mkdir();
+        }
+        String finalPath = photoPath + File.separator + name;
+        photo.transferTo(new File(finalPath));
+
+    }
+
+```
 
 
 
@@ -448,11 +781,264 @@ public String test(@PathVariable("id") String id,@PathVariable String name) {
 
 
 
+## 拦截器配置
+
+**springmvc.xml**
+
+```xml
+<bean id="myInterceptor" class="xyz.wuhen.springmvc.demo1.interceptor.MyInterceptor"></bean>
+    <bean id="myInterceptor2" class="xyz.wuhen.springmvc.demo1.interceptor.MyInterceptor2"></bean>
+    <bean id="myInterceptor3" class="xyz.wuhen.springmvc.demo1.interceptor.MyInterceptor3"></bean>
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/hello"/>
+<!--            <mvc:exclude-mapping path="/hello"/>-->
+            <ref bean="myInterceptor"></ref>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/hello"/>
+            <ref bean="myInterceptor2"></ref>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/hello"/>
+            <ref bean="myInterceptor3"></ref>
+        </mvc:interceptor>
+    </mvc:interceptors>
+```
+
+**MyInterceptor.java**
+
+```java
+public class MyInterceptor implements HandlerInterceptor {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        System.out.println("preHandle-->1");
+        return true;
+    }
+
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+        System.out.println("postHandle-->1");
+    }
+
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+        System.out.println("afterCompletion-->1");
+    }
+}
+```
+
+
+
+## 拦截器的三个抽象方法
+
+SpringMVC中的拦截器有三个抽象方法：
+
+**preHandle：**控制器方法执行之前执行preHandle()，其boolean类型的返回值表示是否拦截或放行，返回true为放行，即调用控制器方法；返回false表示拦截，即不调用控制器方法。
+
+**postHandle：**控制器方法执行之后执行postHandle()。
+
+**afterComplation：**处理完视图和模型数据，渲染视图完毕之后执行afterComplation()。
+
+## 多个拦截器的执行顺序
+
+a>若每个拦截器的preHandle()都返回true
+
+此时多个拦截器的执行顺序和拦截器在SpringMVC的配置文件的配置顺序有关：
+
+preHandle()会按照配置的顺序执行，而postHandle()和afterComplation()会按照配置的反序执行
+
+b>若某个拦截器的preHandle()返回了false
+
+preHandle()返回false和它之前的拦截器的preHandle()都会执行，postHandle()都不执行，返回false的拦截器之前的拦截器的afterComplation()会执行
+
+
+
 # 9、异常处理器
 
 ## 基于xml配置异常处理
 
+SpringMVC提供了一个处理控制器方法执行过程中所出现的异常的接口：HandlerExceptionResolver
+
+HandlerExceptionResolver接口的实现类有：DefaultHandlerExceptionResolver和SimpleMappingExceptionResolver
+
+SpringMVC提供了自定义的异常处理器SimpleMappingExceptionResolver，使用方式:
+
+```xml
+<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+    <property name="exceptionMappings">
+        <props>
+        	<!--
+        		properties的键表示处理器方法执行过程中出现的异常
+        		properties的值表示若出现指定异常时，设置一个新的视图名称，跳转到指定页面
+        	-->
+            <prop key="java.lang.ArithmeticException">error</prop>
+        </props>
+    </property>
+    <!--
+    	exceptionAttribute属性设置一个属性名，将出现的异常信息在请求域中进行共享
+    -->
+    <property name="exceptionAttribute" value="ex"></property>
+</bean>
+```
+
 
 
 ## 基于注解配置异常处理
+
+**ExceptionController.java**
+
+```java
+@ControllerAdvice
+public class ExceptionController {
+    @ExceptionHandler(ArithmeticException.class)
+    public void handleArithmeticException() {
+        System.out.println("handleArithmeticException.....");
+    }
+}
+```
+
+
+
+# 10、全注解开发
+
+
+
+**WebInit.java**
+
+```java
+public class WebInit extends AbstractAnnotationConfigDispatcherServletInitializer {
+
+    /**
+     * 指定spring的配置类
+     * @return
+     */
+    @Override
+    protected Class<?>[] getRootConfigClasses() {
+        return new Class[]{SpringConfig.class};
+    }
+
+    /**
+     * 指定SpringMVC的配置类
+     * @return
+     */
+    @Override
+    protected Class<?>[] getServletConfigClasses() {
+        return new Class[]{MyWebConfig.class};
+    }
+
+    /**
+     * 指定DispatcherServlet的映射规则，即url-pattern
+     * @return
+     */
+    @Override
+    protected String[] getServletMappings() {
+        return new String[]{"/"};
+    }
+
+    /**
+     * 添加过滤器
+     * @return
+     */
+    @Override
+    protected Filter[] getServletFilters() {
+        CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter();
+        encodingFilter.setEncoding("UTF-8");
+        encodingFilter.setForceRequestEncoding(true);
+        HiddenHttpMethodFilter hiddenHttpMethodFilter = new HiddenHttpMethodFilter();
+        return new Filter[]{encodingFilter, hiddenHttpMethodFilter};
+    }
+}
+```
+
+**SpringConfig.java**
+
+```java
+@Configuration
+public class SpringConfig {
+}
+
+```
+
+**MyWebConfig.java**
+
+
+
+```java
+
+@Configuration
+
+@ComponentScan(basePackages = "xyz.wuhen.springmvc.demo2.**")
+@EnableWebMvc
+public class MyWebConfig implements WebMvcConfigurer {
+
+
+    //使用默认的servlet处理静态资源
+
+    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+        configurer.enable();
+    }
+
+    //配置文件上传解析器
+    @Bean
+    public CommonsMultipartResolver multipartResolver(){
+        return new CommonsMultipartResolver();
+    }
+
+    //配置拦截器
+    public void addInterceptors(InterceptorRegistry registry) {
+        MyInterceptor myInterceptor = new MyInterceptor();
+        registry.addInterceptor(myInterceptor).addPathPatterns("/hello");
+    }
+    //配置视图控制
+
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/").setViewName("index");
+    }
+
+//    //配置异常映射
+//    public void configureHandlerExceptionResolvers(List<HandlerExceptionResolver> resolvers) {
+//        SimpleMappingExceptionResolver exceptionResolver = new SimpleMappingExceptionResolver();
+//        Properties prop = new Properties();
+//        prop.setProperty("java.lang.ArithmeticException", "error");
+//        //设置异常映射
+//        exceptionResolver.setExceptionMappings(prop);
+//        //设置共享异常信息的键
+//        exceptionResolver.setExceptionAttribute("ex");
+//        resolvers.add(exceptionResolver);
+//    }
+
+    //配置生成模板解析器
+    @Bean
+    public ITemplateResolver templateResolver() {
+        WebApplicationContext webApplicationContext = ContextLoader.getCurrentWebApplicationContext();
+        // ServletContextTemplateResolver需要一个ServletContext作为构造参数，可通过WebApplicationContext 的方法获得
+        ServletContextTemplateResolver templateResolver = new ServletContextTemplateResolver(
+                webApplicationContext.getServletContext());
+        templateResolver.setPrefix("/WEB-INF/templates/");
+        templateResolver.setSuffix(".html");
+        templateResolver.setCharacterEncoding("UTF-8");
+        templateResolver.setTemplateMode(TemplateMode.HTML);
+        return templateResolver;
+    }
+
+    //生成模板引擎并为模板引擎注入模板解析器
+    @Bean
+    public SpringTemplateEngine templateEngine(ITemplateResolver templateResolver) {
+        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+        templateEngine.setTemplateResolver(templateResolver);
+        return templateEngine;
+    }
+
+    //生成视图解析器并未解析器注入模板引擎
+    @Bean
+    public ViewResolver viewResolver(SpringTemplateEngine templateEngine) {
+        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+        viewResolver.setCharacterEncoding("UTF-8");
+        viewResolver.setTemplateEngine(templateEngine);
+        return viewResolver;
+    }
+
+
+
+}
+
+```
 
