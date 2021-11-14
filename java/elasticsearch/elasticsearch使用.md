@@ -1776,18 +1776,77 @@ Content-Length: 247
 
 在进行关键字搜索时，搜索出的内容中的关键字会显示不同的颜色，称之为高亮。
 
+Elasticsearch 可以对查询内容中的关键字部分，进行标签和样式(高亮)的设置。
+在使用 match 查询的同时，加上一个 highlight 属性：
 
+- pre_tags：前置标签
+- post_tags：后置标签
+- fields：需要高亮的字段
+- title：这里声明 title 字段需要高亮，后面可以为这个字段设置特有配置，也可以空
 
 **请求**
 
 ```http
+GET /student/_search HTTP/1.1
+Host: 172.20.10.11:9200
+Content-Type: application/json
+Content-Length: 237
 
+{
+    "query": {
+        "match": {
+            "name": "zhangsan"
+        }
+    },
+    "highlight": {
+        "pre_tags": "<font color='red'>",
+        "post_tags": "</font>",
+        "fields": {
+            "name": {}
+        }
+    }
+}
 ```
 
 **响应**
 
 ```json
-
+{
+    "took": 31,
+    "timed_out": false,
+    "_shards": {
+        "total": 1,
+        "successful": 1,
+        "skipped": 0,
+        "failed": 0
+    },
+    "hits": {
+        "total": {
+            "value": 1,
+            "relation": "eq"
+        },
+        "max_score": 1.3862942,
+        "hits": [
+            {
+                "_index": "student",
+                "_type": "_doc",
+                "_id": "1001",
+                "_score": 1.3862942,
+                "_source": {
+                    "name": "zhangsan",
+                    "nickname": "zhangsan",
+                    "sex": "男",
+                    "age": 30
+                },
+                "highlight": {
+                    "name": [
+                        "<font color='red'>zhangsan</font>"
+                    ]
+                }
+            }
+        ]
+    }
+}
 ```
 
 
@@ -1798,16 +1857,87 @@ Content-Length: 247
 
 ### 分页查询
 
+
+
+from：当前页的起始索引，默认从 0 开始。 from = (pageNum - 1) * size
+size：每页显示多少条
+
 **请求**
 
 ```http
+GET /student/_search HTTP/1.1
+Host: 172.20.10.11:9200
+Content-Type: application/json
+Content-Length: 186
 
+{
+    "query": {
+        "match_all": {}
+    },
+    "sort": [
+        {
+            "age": {
+                "order": "desc"
+            }
+        }
+    ],
+    "from": 0,
+    "size": 2
+}
 ```
 
 **响应**
 
 ```json
-
+{
+    "took": 2,
+    "timed_out": false,
+    "_shards": {
+        "total": 1,
+        "successful": 1,
+        "skipped": 0,
+        "failed": 0
+    },
+    "hits": {
+        "total": {
+            "value": 5,
+            "relation": "eq"
+        },
+        "max_score": null,
+        "hits": [
+            {
+                "_index": "student",
+                "_type": "_doc",
+                "_id": "1004",
+                "_score": null,
+                "_source": {
+                    "name": "zhangsan1",
+                    "nickname": "zhangsan1",
+                    "sex": "女",
+                    "age": 50
+                },
+                "sort": [
+                    50
+                ]
+            },
+            {
+                "_index": "student",
+                "_type": "_doc",
+                "_id": "1003",
+                "_score": null,
+                "_source": {
+                    "name": "wangwu",
+                    "nickname": "wangwu",
+                    "sex": "女",
+                    "age": 40
+                },
+                "sort": [
+                    40
+                ]
+            }
+        ]
+    }
+}
 ```
 
 
@@ -1818,36 +1948,495 @@ Content-Length: 247
 
 ### 聚合查询
 
+聚合允许使用者对 es 文档进行统计分析，类似与关系型数据库中的 group by，当然还有很多其他的聚合，例如取最大值、平均值等等。
 
+**对某个字段取最大值 max**
 
 **请求**
 
 ```http
+GET /student/_search HTTP/1.1
+Host: 172.20.10.11:9200
+Content-Type: application/json
+Content-Length: 135
 
+{
+    "aggs": {
+        "max_age": {
+            "max": {
+                "field": "age"
+            }
+        }
+    },
+    "size": 0
+}
 ```
 
 **响应**
 
 ```json
+{
+    "took": 15,
+    "timed_out": false,
+    "_shards": {
+        "total": 1,
+        "successful": 1,
+        "skipped": 0,
+        "failed": 0
+    },
+    "hits": {
+        "total": {
+            "value": 5,
+            "relation": "eq"
+        },
+        "max_score": null,
+        "hits": []
+    },
+    "aggregations": {
+        "max_age": {
+            "value": 50.0
+        }
+    }
+}
+```
 
+**对某个字段取最小值 min**
+
+
+
+**请求**
+
+```http
+GET /student/_search HTTP/1.1
+Host: 172.20.10.11:9200
+Content-Type: application/json
+Content-Length: 135
+
+{
+    "aggs": {
+        "min_age": {
+            "min": {
+                "field": "age"
+            }
+        }
+    },
+    "size": 0
+}
 ```
 
 
+
+**响应**
+
+```json
+{
+    "took": 2,
+    "timed_out": false,
+    "_shards": {
+        "total": 1,
+        "successful": 1,
+        "skipped": 0,
+        "failed": 0
+    },
+    "hits": {
+        "total": {
+            "value": 5,
+            "relation": "eq"
+        },
+        "max_score": null,
+        "hits": []
+    },
+    "aggregations": {
+        "min_age": {
+            "value": 20.0
+        }
+    }
+}
+```
+
+**对某个字段取总和**
+
+
+
+**请求**
+
+```http
+GET /student/_search HTTP/1.1
+Host: 172.20.10.11:9200
+Content-Type: application/json
+Content-Length: 135
+
+{
+    "aggs": {
+        "sum_age": {
+            "sum": {
+                "field": "age"
+            }
+        }
+    },
+    "size": 0
+}
+```
+
+
+
+**响应**
+
+```json
+{
+    "took": 2,
+    "timed_out": false,
+    "_shards": {
+        "total": 1,
+        "successful": 1,
+        "skipped": 0,
+        "failed": 0
+    },
+    "hits": {
+        "total": {
+            "value": 5,
+            "relation": "eq"
+        },
+        "max_score": null,
+        "hits": []
+    },
+    "aggregations": {
+        "sum_age": {
+            "value": 170.0
+        }
+    }
+}
+```
+
+**对某个字段的平均值**
+
+
+
+**请求**
+
+```http
+GET /student/_search HTTP/1.1
+Host: 172.20.10.11:9200
+Content-Type: application/json
+Content-Length: 135
+
+{
+    "aggs": {
+        "avg_age": {
+            "avg": {
+                "field": "age"
+            }
+        }
+    },
+    "size": 0
+}
+```
+
+
+
+**响应**
+
+```json
+{
+    "took": 2,
+    "timed_out": false,
+    "_shards": {
+        "total": 1,
+        "successful": 1,
+        "skipped": 0,
+        "failed": 0
+    },
+    "hits": {
+        "total": {
+            "value": 5,
+            "relation": "eq"
+        },
+        "max_score": null,
+        "hits": []
+    },
+    "aggregations": {
+        "avg_age": {
+            "value": 34.0
+        }
+    }
+}
+```
+
+
+
+**对某个字段的值进行去重之后再取总数**
+
+
+
+**请求**
+
+```http
+GET /student/_search HTTP/1.1
+Host: 172.20.10.11:9200
+Content-Type: application/json
+Content-Length: 148
+
+{
+    "aggs": {
+        "distinct_age": {
+            "cardinality": {
+                "field": "age"
+            }
+        }
+    },
+    "size": 0
+}
+```
+
+**响应**
+
+```json
+{
+    "took": 1,
+    "timed_out": false,
+    "_shards": {
+        "total": 1,
+        "successful": 1,
+        "skipped": 0,
+        "failed": 0
+    },
+    "hits": {
+        "total": {
+            "value": 5,
+            "relation": "eq"
+        },
+        "max_score": null,
+        "hits": []
+    },
+    "aggregations": {
+        "distinct_age": {
+            "value": 4
+        }
+    }
+}
+```
+
+
+
+
+
+
+
+**State 聚合**
+
+
+
+**请求**
+
+```http
+GET /student/_search HTTP/1.1
+Host: 172.20.10.11:9200
+Content-Type: application/json
+Content-Length: 139
+
+{
+    "aggs": {
+        "stats_age": {
+            "stats": {
+                "field": "age"
+            }
+        }
+    },
+    "size": 0
+}
+```
+
+
+
+**响应**
+
+```json
+{
+    "took": 10,
+    "timed_out": false,
+    "_shards": {
+        "total": 1,
+        "successful": 1,
+        "skipped": 0,
+        "failed": 0
+    },
+    "hits": {
+        "total": {
+            "value": 5,
+            "relation": "eq"
+        },
+        "max_score": null,
+        "hits": []
+    },
+    "aggregations": {
+        "distinct_age": {
+            "value": 4
+        }
+    }
+}
+```
 
 
 
 ### 桶聚合查询
 
+
+
+**桶聚和相当于 sql 中的 group by 语句**
+
 **请求**
 
 ```http
+GET /student/_search HTTP/1.1
+Host: 172.20.10.11:9200
+Content-Type: application/json
+Content-Length: 141
 
+{
+    "aggs": {
+        "age_groupby": {
+            "terms": {
+                "field": "age"
+            }
+        }
+    },
+    "size": 0
+}
 ```
 
 **响应**
 
 ```json
+{
+    "took": 6,
+    "timed_out": false,
+    "_shards": {
+        "total": 1,
+        "successful": 1,
+        "skipped": 0,
+        "failed": 0
+    },
+    "hits": {
+        "total": {
+            "value": 5,
+            "relation": "eq"
+        },
+        "max_score": null,
+        "hits": []
+    },
+    "aggregations": {
+        "age_groupby": {
+            "doc_count_error_upper_bound": 0,
+            "sum_other_doc_count": 0,
+            "buckets": [
+                {
+                    "key": 30,
+                    "doc_count": 2
+                },
+                {
+                    "key": 20,
+                    "doc_count": 1
+                },
+                {
+                    "key": 40,
+                    "doc_count": 1
+                },
+                {
+                    "key": 50,
+                    "doc_count": 1
+                }
+            ]
+        }
+    }
+}
+```
 
+
+
+**在 terms 分组下再进行聚合**
+
+**请求**
+
+```http
+GET /student/_search HTTP/1.1
+Host: 172.20.10.11:9200
+Content-Type: application/json
+Content-Length: 265
+
+{
+    "aggs": {
+        "age_groupby": {
+            "terms": {
+                "field": "age"
+            },
+            "aggs":{
+                "sum_age":{
+                    "sum":{"field":"age"}
+                }
+            }
+        }
+    },
+    "size": 0
+}
+```
+
+**响应**
+
+```json
+{
+    "took": 3,
+    "timed_out": false,
+    "_shards": {
+        "total": 1,
+        "successful": 1,
+        "skipped": 0,
+        "failed": 0
+    },
+    "hits": {
+        "total": {
+            "value": 5,
+            "relation": "eq"
+        },
+        "max_score": null,
+        "hits": []
+    },
+    "aggregations": {
+        "age_groupby": {
+            "doc_count_error_upper_bound": 0,
+            "sum_other_doc_count": 0,
+            "buckets": [
+                {
+                    "key": 30,
+                    "doc_count": 2,
+                    "sum_age": {
+                        "value": 60.0
+                    }
+                },
+                {
+                    "key": 20,
+                    "doc_count": 1,
+                    "sum_age": {
+                        "value": 20.0
+                    }
+                },
+                {
+                    "key": 40,
+                    "doc_count": 1,
+                    "sum_age": {
+                        "value": 40.0
+                    }
+                },
+                {
+                    "key": 50,
+                    "doc_count": 1,
+                    "sum_age": {
+                        "value": 50.0
+                    }
+                }
+            ]
+        }
+    }
+}
 ```
 
 
@@ -1862,9 +2451,44 @@ Content-Length: 247
 
 ## 依赖
 
-**pom**
+**pom.xml**
 
 ```xml
+<dependencies>
+        <dependency>
+            <groupId>org.elasticsearch</groupId>
+            <artifactId>elasticsearch</artifactId>
+            <version>7.8.0</version>
+        </dependency>
+        <!-- elasticsearch 的客户端 -->
+        <dependency>
+            <groupId>org.elasticsearch.client</groupId>
+            <artifactId>elasticsearch-rest-high-level-client</artifactId>
+            <version>7.8.0</version>
+        </dependency>
+        <!-- elasticsearch 依赖 2.x 的 log4j -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.8.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.8.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.9.9</version>
+        </dependency>
+        <!-- junit 单元测试 -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+        </dependency>
+    </dependencies>
 ```
 
 
@@ -1879,9 +2503,902 @@ Content-Length: 247
 
 
 
+**IndexCreate.java**
+
+```java
+public class IndexCreate {
+
+    public static void main(String[] args) throws IOException {
+        // 创建客户端对象
+        RestHighLevelClient client = new RestHighLevelClient(
+                RestClient.builder(new HttpHost("172.20.10.11",9200,"http"))
+        );
+
+        // 创建索引-请求对象
+        CreateIndexRequest request = new CreateIndexRequest("user");
+
+
+        // 发送请求
+        CreateIndexResponse response = client.indices().create(request, RequestOptions.DEFAULT);
+        boolean result = response.isAcknowledged();
+
+        System.out.println(result);
+        // 关闭客户端连接
+        client.close();
+    }
+}
+
+```
+
 
 
 ### 查看索引
+
+
+
+**IndexGet.java**
+
+```java
+public class IndexGet {
+
+
+
+    public static void main(String[] args) throws IOException {
+        RestHighLevelClient client = new RestHighLevelClient(
+                RestClient.builder(new HttpHost("172.20.10.11",9200,"http"))
+        );
+
+        GetIndexRequest request = new GetIndexRequest("user");
+        GetIndexResponse response = client.indices().get(request, RequestOptions.DEFAULT);
+        System.out.println("aliases:" + response.getAliases());
+        System.out.println("mappings:" + response.getMappings());
+        System.out.println("settings" + response.getSettings());
+        
+        client.close();
+    }
+}
+
+```
+
+
+
+### 删除索引
+
+
+
+**IndexDelete.java**
+
+```java
+public class IndexDelete {
+    public static void main(String[] args) throws IOException {
+        RestHighLevelClient client = new RestHighLevelClient(
+                RestClient.builder(new HttpHost("172.20.10.11",9200,"http"))
+        );
+
+        DeleteIndexRequest request = new DeleteIndexRequest("user");
+
+        AcknowledgedResponse response = client.indices().delete(request, RequestOptions.DEFAULT);
+        System.out.println(response.isAcknowledged());
+
+        client.close();
+    }
+}
+
+```
+
+
+
+## 文档操作
+
+
+
+**User.java**
+
+```java
+package xyz.wuhen.es.demo2;
+
+public class User {
+    private String name;
+    private Integer age;
+    private String sex;
+
+    public User() {
+
+    }
+
+    public User(String name,Integer age,String sex) {
+        this.name = name;
+        this.age = age;
+        this.sex = sex;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+}
+
+```
+
+
+
+### 新增文档
+
+
+
+**CreateUser.java**
+
+```java
+public class CreateUser {
+    public static void main(String[] args) throws IOException {
+        RestHighLevelClient client = new RestHighLevelClient(
+                RestClient.builder(new HttpHost("172.20.10.11",9200,"http"))
+        );
+        // 新建文档-请求对象
+        IndexRequest request = new IndexRequest();
+        // 设置索引及id
+        request.index("user").id("1001");
+
+        //数据转json
+        User user = new User("zhangsan",30,"男");
+        ObjectMapper objectMapper = new ObjectMapper();
+        String data = objectMapper.writeValueAsString(user);
+
+        // 添加数据
+        request.source(data, XContentType.JSON);
+        IndexResponse response = client.index(request, RequestOptions.DEFAULT);
+
+        System.out.println("_index:" + response.getIndex());
+        System.out.println("_id:" + response.getId());
+        System.out.println("_result:" + response.getResult());
+
+        client.close();
+    }
+}
+
+```
+
+
+
+### 修改文档
+
+
+
+**UpdateUser.java**
+
+```java
+public class UpdateUser {
+
+    public static void main(String[] args) throws IOException {
+        RestHighLevelClient client = new RestHighLevelClient(
+                RestClient.builder(new HttpHost("172.20.10.11",9200,"http"))
+        );
+
+        UpdateRequest request = new UpdateRequest();
+
+        request.index("user").id("1001");
+        request.doc(XContentType.JSON,"sex","女");
+
+        UpdateResponse response = client.update(request, RequestOptions.DEFAULT);
+        System.out.println("_index:" + response.getIndex());
+        System.out.println("_id:" + response.getId());
+        System.out.println("_result:" + response.getResult());
+
+        client.close();
+    }
+}
+
+```
+
+
+
+### 查询文档
+
+
+
+**GetUser.java**
+
+```java
+public class GetUser {
+
+    public static void main(String[] args) throws IOException {
+        RestHighLevelClient client = new RestHighLevelClient(
+                RestClient.builder(new HttpHost("172.20.10.11",9200,"http"))
+        );
+
+        GetRequest request = new GetRequest().index("user").id("1001");
+        GetResponse response = client.get(request, RequestOptions.DEFAULT);
+
+        System.out.println("_index:" + response.getIndex());
+        System.out.println("_type:" + response.getType());
+        System.out.println("_id:" + response.getId());
+        System.out.println("source:" + response.getSource());
+        client.close();
+    }
+}
+
+```
+
+
+
+### 删除文档
+
+
+
+**DeleteUser.java**
+
+```java
+public class DeleteUser {
+    public static void main(String[] args) throws IOException {
+        RestHighLevelClient client = new RestHighLevelClient(
+                RestClient.builder(new HttpHost("172.20.10.11",9200,"http"))
+        );
+
+        DeleteRequest request = new DeleteRequest().index("user").id("1001");
+        DeleteResponse response = client.delete(request, RequestOptions.DEFAULT);
+        System.out.println(response.toString());
+        client.close();
+    }
+}
+
+```
+
+
+
+
+
+### 批量操作
+
+
+
+**批量新增**
+
+**BatchCreateUser.java**
+
+```java
+public class BatchCreateUser {
+    public static void main(String[] args) throws IOException {
+        RestHighLevelClient client = new RestHighLevelClient(
+                RestClient.builder(new HttpHost("172.20.10.11",9200,"http"))
+        );
+
+        BulkRequest request = new BulkRequest();
+        request.add(new IndexRequest().index("user").id("1001").source(XContentType.JSON,"name","haha"))
+                .add(new IndexRequest().index("user").id("1002").source(XContentType.JSON,"name","jiji"));
+
+        BulkResponse response = client.bulk(request, RequestOptions.DEFAULT);
+        System.out.println("took:" + response.getTook());
+        System.out.println("items:" + response.getItems());
+        client.close();
+    }
+}
+
+```
+
+
+
+
+
+**批量删除**
+
+**BatchDeleteUser.java**
+
+```java
+public class BatchDeleteUser {
+    public static void main(String[] args) throws IOException {
+        RestHighLevelClient client = new RestHighLevelClient(
+                RestClient.builder(new HttpHost("172.20.10.11",9200,"http"))
+        );
+
+        BulkRequest request = new BulkRequest();
+        request.add(new DeleteRequest().index("user").id("1001"));
+        request.add(new DeleteRequest().index("user").id("1002"));
+        BulkResponse response = client.bulk(request, RequestOptions.DEFAULT);
+        System.out.println("took:" + response.getTook());
+        System.out.println("items:" + response.getItems());
+        client.close();
+
+    }
+}
+
+```
+
+
+
+
+
+
+
+## 高级查询
+
+
+
+**所有数据**
+
+
+
+```json
+{
+    "took": 1,
+    "timed_out": false,
+    "_shards": {
+        "total": 1,
+        "successful": 1,
+        "skipped": 0,
+        "failed": 0
+    },
+    "hits": {
+        "total": {
+            "value": 5,
+            "relation": "eq"
+        },
+        "max_score": 1.0,
+        "hits": [
+            {
+                "_index": "student",
+                "_type": "_doc",
+                "_id": "1001",
+                "_score": 1.0,
+                "_source": {
+                    "name": "zhangsan",
+                    "nickname": "zhangsan",
+                    "sex": "男",
+                    "age": 30
+                }
+            },
+            {
+                "_index": "student",
+                "_type": "_doc",
+                "_id": "1002",
+                "_score": 1.0,
+                "_source": {
+                    "name": "lisi",
+                    "nickname": "lisi",
+                    "sex": "男",
+                    "age": 20
+                }
+            },
+            {
+                "_index": "student",
+                "_type": "_doc",
+                "_id": "1003",
+                "_score": 1.0,
+                "_source": {
+                    "name": "wangwu",
+                    "nickname": "wangwu",
+                    "sex": "女",
+                    "age": 40
+                }
+            },
+            {
+                "_index": "student",
+                "_type": "_doc",
+                "_id": "1004",
+                "_score": 1.0,
+                "_source": {
+                    "name": "zhangsan1",
+                    "nickname": "zhangsan1",
+                    "sex": "女",
+                    "age": 50
+                }
+            },
+            {
+                "_index": "student",
+                "_type": "_doc",
+                "_id": "1005",
+                "_score": 1.0,
+                "_source": {
+                    "name": "zhangsan2",
+                    "nickname": "zhangsan2",
+                    "sex": "女",
+                    "age": 30
+                }
+            }
+        ]
+    }
+}
+```
+
+
+
+
+
+### 请求体查询
+
+
+
+**查询所有索引数据**
+
+
+
+```java
+public class Test1 {
+    public static void main(String[] args) throws IOException {
+        RestHighLevelClient client = new RestHighLevelClient(
+                RestClient.builder(new HttpHost("172.20.10.11",9200,"http"))
+        );
+
+        SearchRequest request = new SearchRequest();
+        request.indices("student");
+        // 构建查询请求体
+        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
+
+        // 查询所有数据
+        sourceBuilder.query(QueryBuilders.matchAllQuery());
+        request.source(sourceBuilder);
+
+        SearchResponse response = client.search(request,RequestOptions.DEFAULT);
+
+        // 查询匹配
+        SearchHits hits = response.getHits();
+        System.out.println("took:" + response.getTook());
+        System.out.println("timeout:" + response.isTimedOut());
+        System.out.println("total:" + hits.getTotalHits());
+        System.out.println("MaxScore:" + hits.getMaxScore());
+        System.out.println("hits=======>>");
+        for (SearchHit hit : hits) {
+            System.out.println(hit.getSourceAsString());
+        }
+        client.close();
+    }
+}
+
+```
+
+
+
+
+
+**term查询，查询条件为关键字**
+
+**Test2.java**
+
+```java
+public class Test2 {
+    public static void main(String[] args) throws IOException {
+        RestHighLevelClient client = new RestHighLevelClient(
+                RestClient.builder(new HttpHost("172.20.10.11",9200,"http"))
+        );
+
+        SearchRequest request = new SearchRequest();
+        request.indices("student");
+        // 构建查询请求体
+        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
+
+        // 查询所有数据
+        sourceBuilder.query(QueryBuilders.termQuery("age","30"));
+        request.source(sourceBuilder);
+
+        SearchResponse response = client.search(request, RequestOptions.DEFAULT);
+
+        // 查询匹配
+        SearchHits hits = response.getHits();
+        System.out.println("took:" + response.getTook());
+        System.out.println("timeout:" + response.isTimedOut());
+        System.out.println("total:" + hits.getTotalHits());
+        System.out.println("MaxScore:" + hits.getMaxScore());
+        System.out.println("hits=======>>");
+        for (SearchHit hit : hits) {
+            System.out.println(hit.getSourceAsString());
+        }
+        client.close();
+    }
+
+}
+
+```
+
+
+
+
+
+**分页查询**
+
+**Test3.java**
+
+```java
+public class Test3 {
+    public static void main(String[] args) throws IOException {
+        RestHighLevelClient client = new RestHighLevelClient(
+                RestClient.builder(new HttpHost("172.20.10.11",9200,"http"))
+        );
+
+        SearchRequest request = new SearchRequest();
+        request.indices("student");
+        // 构建查询请求体
+        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
+
+        // 查询所有数据
+        sourceBuilder.query(QueryBuilders.matchAllQuery());
+        sourceBuilder.from(0);
+        sourceBuilder.size(2);
+        request.source(sourceBuilder);
+
+        SearchResponse response = client.search(request, RequestOptions.DEFAULT);
+
+        // 查询匹配
+        SearchHits hits = response.getHits();
+        System.out.println("took:" + response.getTook());
+        System.out.println("timeout:" + response.isTimedOut());
+        System.out.println("total:" + hits.getTotalHits());
+        System.out.println("MaxScore:" + hits.getMaxScore());
+        System.out.println("hits=======>>");
+        for (SearchHit hit : hits) {
+            System.out.println(hit.getSourceAsString());
+        }
+        client.close();
+    }
+    
+}
+
+```
+
+
+
+
+
+**数据排序**
+
+**Test4.java**
+
+```java
+public class Test4 {
+    public static void main(String[] args) throws IOException {
+        RestHighLevelClient client = new RestHighLevelClient(
+                RestClient.builder(new HttpHost("172.20.10.11",9200,"http"))
+        );
+
+        SearchRequest request = new SearchRequest();
+        request.indices("student");
+        // 构建查询请求体
+        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
+
+        // 查询所有数据
+        sourceBuilder.query(QueryBuilders.matchAllQuery());
+        sourceBuilder.sort("age", SortOrder.ASC);
+
+        request.source(sourceBuilder);
+
+        SearchResponse response = client.search(request, RequestOptions.DEFAULT);
+
+        // 查询匹配
+        SearchHits hits = response.getHits();
+        System.out.println("took:" + response.getTook());
+        System.out.println("timeout:" + response.isTimedOut());
+        System.out.println("total:" + hits.getTotalHits());
+        System.out.println("MaxScore:" + hits.getMaxScore());
+        System.out.println("hits=======>>");
+        for (SearchHit hit : hits) {
+            System.out.println(hit.getSourceAsString());
+        }
+        client.close();
+
+    }
+}
+
+```
+
+
+
+**过滤字段**
+
+**Test5.java**
+
+```java
+public class Test5 {
+    public static void main(String[] args) throws IOException {
+        RestHighLevelClient client = new RestHighLevelClient(
+                RestClient.builder(new HttpHost("172.20.10.11",9200,"http"))
+        );
+
+        SearchRequest request = new SearchRequest();
+        request.indices("student");
+        // 构建查询请求体
+        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
+
+        // 查询所有数据
+        sourceBuilder.query(QueryBuilders.matchAllQuery());
+        String[] excludes = {};
+        String[] includes = {"name","age"};
+        sourceBuilder.fetchSource(includes,excludes);
+
+        request.source(sourceBuilder);
+
+        SearchResponse response = client.search(request, RequestOptions.DEFAULT);
+
+        // 查询匹配
+        SearchHits hits = response.getHits();
+        System.out.println("took:" + response.getTook());
+        System.out.println("timeout:" + response.isTimedOut());
+        System.out.println("total:" + hits.getTotalHits());
+        System.out.println("MaxScore:" + hits.getMaxScore());
+        System.out.println("hits=======>>");
+        for (SearchHit hit : hits) {
+            System.out.println(hit.getSourceAsString());
+        }
+        client.close();
+
+    }
+}
+
+
+```
+
+
+
+**Bool查询**
+
+**Test6.java**
+
+```java
+public class Test6 {
+    public static void main(String[] args) throws IOException {
+        RestHighLevelClient client = new RestHighLevelClient(
+                RestClient.builder(new HttpHost("172.20.10.11",9200,"http"))
+        );
+
+        SearchRequest request = new SearchRequest();
+        request.indices("student");
+        // 构建查询请求体
+        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
+
+        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+        boolQueryBuilder.must(QueryBuilders.matchQuery("age","30"));
+        boolQueryBuilder.mustNot(QueryBuilders.matchQuery("name","zhangsan"));
+        boolQueryBuilder.should(QueryBuilders.matchQuery("sex","男"));
+
+        // 查询所有数据
+        sourceBuilder.query(boolQueryBuilder);
+        request.source(sourceBuilder);
+
+        SearchResponse response = client.search(request, RequestOptions.DEFAULT);
+
+        // 查询匹配
+        SearchHits hits = response.getHits();
+        System.out.println("took:" + response.getTook());
+        System.out.println("timeout:" + response.isTimedOut());
+        System.out.println("total:" + hits.getTotalHits());
+        System.out.println("MaxScore:" + hits.getMaxScore());
+        System.out.println("hits=======>>");
+        for (SearchHit hit : hits) {
+            System.out.println(hit.getSourceAsString());
+        }
+        client.close();
+
+    }
+}
+```
+
+
+
+**范围查询**
+
+**Test7.java**
+
+```java
+public class Test7 {
+    public static void main(String[] args) throws IOException {
+        RestHighLevelClient client = new RestHighLevelClient(
+                RestClient.builder(new HttpHost("172.20.10.11",9200,"http"))
+        );
+
+        SearchRequest request = new SearchRequest();
+        request.indices("student");
+        // 构建查询请求体
+        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
+
+        RangeQueryBuilder rangeQueryBuilder = QueryBuilders.rangeQuery("age");
+
+        rangeQueryBuilder.gte("30");
+        rangeQueryBuilder.lte("40");
+        // 查询所有数据
+        sourceBuilder.query(rangeQueryBuilder);
+        request.source(sourceBuilder);
+
+        SearchResponse response = client.search(request, RequestOptions.DEFAULT);
+
+        // 查询匹配
+        SearchHits hits = response.getHits();
+        System.out.println("took:" + response.getTook());
+        System.out.println("timeout:" + response.isTimedOut());
+        System.out.println("total:" + hits.getTotalHits());
+        System.out.println("MaxScore:" + hits.getMaxScore());
+        System.out.println("hits=======>>");
+        for (SearchHit hit : hits) {
+            System.out.println(hit.getSourceAsString());
+        }
+        client.close();
+
+    }
+}
+
+```
+
+
+
+
+
+**模糊查询**
+
+**Test8.java**
+
+```java
+public class Test8 {
+    public static void main(String[] args) throws IOException {
+        RestHighLevelClient client = new RestHighLevelClient(
+                RestClient.builder(new HttpHost("172.20.10.11",9200,"http"))
+        );
+
+        SearchRequest request = new SearchRequest();
+        request.indices("student");
+        // 构建查询请求体
+        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
+
+        // 查询所有数据
+        sourceBuilder.query(QueryBuilders.fuzzyQuery("name","zhangsan").fuzziness(Fuzziness.ONE));
+        request.source(sourceBuilder);
+
+        SearchResponse response = client.search(request, RequestOptions.DEFAULT);
+
+        // 查询匹配
+        SearchHits hits = response.getHits();
+        System.out.println("took:" + response.getTook());
+        System.out.println("timeout:" + response.isTimedOut());
+        System.out.println("total:" + hits.getTotalHits());
+        System.out.println("MaxScore:" + hits.getMaxScore());
+        System.out.println("hits=======>>");
+        for (SearchHit hit : hits) {
+            System.out.println(hit.getSourceAsString());
+        }
+        client.close();
+    }
+}
+
+```
+
+
+
+
+
+### 高亮查询
+
+
+
+**Test9.java**
+
+```java
+public class Test9 {
+    public static void main(String[] args) throws IOException {
+        RestHighLevelClient client = new RestHighLevelClient(
+                RestClient.builder(new HttpHost("172.20.10.11",9200,"http"))
+        );
+
+        SearchRequest request = new SearchRequest();
+        request.indices("student");
+        // 构建查询请求体
+        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
+
+        TermQueryBuilder termQueryBuilder = QueryBuilders.termQuery("name","zhangsan");
+
+        // 查询所有数据
+        sourceBuilder.query(termQueryBuilder);
+        request.source(sourceBuilder);
+
+        // 构建高亮
+        HighlightBuilder highlightBuilder = new HighlightBuilder();
+        highlightBuilder.preTags("<font color='red'>");
+        highlightBuilder.postTags("</font>");
+        highlightBuilder.field("name");
+
+        sourceBuilder.highlighter(highlightBuilder);
+
+        SearchResponse response = client.search(request, RequestOptions.DEFAULT);
+
+        // 查询匹配
+        SearchHits hits = response.getHits();
+        System.out.println("took:" + response.getTook());
+        System.out.println("timeout:" + response.isTimedOut());
+        System.out.println("total:" + hits.getTotalHits());
+        System.out.println("MaxScore:" + hits.getMaxScore());
+        System.out.println("hits=======>>");
+        for (SearchHit hit : hits) {
+            System.out.println(hit.getSourceAsString());
+
+            Map<String, HighlightField> highlightFieldMap = hit.getHighlightFields();
+            System.out.println(highlightFieldMap);
+        }
+        client.close();
+
+    }
+}
+
+```
+
+
+
+### 聚合查询
+
+
+
+**最大年龄**
+
+**Test10.java**
+
+```java
+public class Test10 {
+    public static void main(String[] args) throws IOException {
+        RestHighLevelClient client = new RestHighLevelClient(
+                RestClient.builder(new HttpHost("172.20.10.11",9200,"http"))
+        );
+
+        SearchRequest request = new SearchRequest().indices("student");
+
+        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
+        sourceBuilder.aggregation(AggregationBuilders.max("maxAge").field("age"));
+        request.source(sourceBuilder);
+
+        SearchResponse response = client.search(request,RequestOptions.DEFAULT);
+
+        SearchHits hits = response.getHits();
+        System.out.println(response);
+        client.close();
+    }
+}
+
+```
+
+
+
+
+
+**分组统计**
+
+**Test11.java**
+
+
+
+```java
+public class Test11 {
+    public static void main(String[] args) throws IOException {
+        RestHighLevelClient client = new RestHighLevelClient(
+                RestClient.builder(new HttpHost("172.20.10.11",9200,"http"))
+        );
+
+        SearchRequest request = new SearchRequest().indices("student");
+
+        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
+        sourceBuilder.aggregation(AggregationBuilders.terms("age_groupby").field("age"));
+        request.source(sourceBuilder);
+
+        SearchResponse response = client.search(request, RequestOptions.DEFAULT);
+
+        SearchHits hits = response.getHits();
+        System.out.println(response);
+        client.close();
+    }
+}
+
+
+```
 
 
 
