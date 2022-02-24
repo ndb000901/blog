@@ -398,3 +398,49 @@ cloud-consumer-hystrix-dashboard9001
 
 
 
+### 项目
+
+```ini
+# Eureka集群
+
+cloud-eureka-server7001
+cloud-eureka-server7002
+cloud-eureka-server7003
+
+# 支付模块
+cloud-provider-gateway-payment8051
+cloud-provider-gateway-payment8052
+cloud-provider-gateway-payment8053
+
+# 网关
+cloud-gateway9527
+```
+
+
+
+
+
+# 五、分布式配置中心
+
+
+
+## 1、SpringConfig
+
+
+
+### 项目
+
+```ini
+# Eureka集群
+
+cloud-eureka-server7001
+cloud-eureka-server7002
+cloud-eureka-server7003
+
+# 配置中心
+cloud-config-center3344
+
+# 客户端
+cloud-config-client3355
+```
+
