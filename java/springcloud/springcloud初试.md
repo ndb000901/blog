@@ -444,3 +444,63 @@ cloud-config-center3344
 cloud-config-client3355
 ```
 
+
+
+
+
+# 六、消息总线
+
+
+
+## 1、SpringCloud Bus
+
+
+
+### 项目
+
+
+
+```ini
+# Eureka集群
+
+cloud-eureka-server7001
+cloud-eureka-server7002
+cloud-eureka-server7003
+
+# 配置中心
+cloud-config-center3344
+
+# 客户端
+cloud-config-client3355
+cloud-config-client3366
+```
+
+
+
+# 七、消息驱动
+
+
+
+## 1、SpringCloud Stream
+
+
+
+### 项目
+
+
+
+```ini
+# Eureka集群
+
+cloud-eureka-server7001
+cloud-eureka-server7002
+cloud-eureka-server7003
+
+# 生产者
+cloud-stream-rabbitmq-provider8801
+
+# 消费者
+cloud-stream-rabbitmq-consumer8802
+cloud-stream-rabbitmq-consumer8803
+```
+
