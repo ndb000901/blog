@@ -504,3 +504,34 @@ cloud-stream-rabbitmq-consumer8802
 cloud-stream-rabbitmq-consumer8803
 ```
 
+
+
+
+
+# 八、链路跟踪
+
+
+
+## 1、SpringCloud Sleuth
+
+
+
+### 项目
+
+
+
+```ini
+# Eureka集群
+
+cloud-eureka-server7001
+cloud-eureka-server7002
+cloud-eureka-server7003
+
+# 支付服务
+cloud-provider-payment8061
+
+# 消费者
+cloud-consumer-order8062
+
+```
+
