@@ -765,3 +765,102 @@ http {
 
 ```
 
+
+
+# 十、Sentinel
+
+
+
+## 1、基础使用
+
+
+
+### 项目
+
+
+
+```ini
+cloud-alibaba-sentinel-service8401
+```
+
+
+
+## 2、sentinel + ribbon
+
+
+
+### 项目
+
+
+
+```ini
+# nacos 集群
+172.20.10.11:8848
+172.20.10.12:8848
+172.20.10.13:8848
+
+# sentinel
+172.20.10.8080
+
+# 支付模块
+cloud-alibaba-provider-payment9003
+cloud-alibaba-provider-payment9004
+
+# 客户端
+cloud-alibaba-nacos-consumer-order9001
+```
+
+
+
+## 3、sentinel + feign
+
+
+
+### 项目
+
+
+
+```ini
+# nacos 集群
+172.20.10.11:8848
+172.20.10.12:8848
+172.20.10.13:8848
+
+# sentinel
+172.20.10.8080
+
+# 支付模块
+cloud-alibaba-provider-payment9003
+cloud-alibaba-provider-payment9004
+
+# 客户端
+cloud-alibaba-nacos-consumer-order9002
+```
+
+
+
+
+
+## 4、持久化
+
+
+
+### 项目
+
+
+
+```ini
+# nacos 集群
+172.20.10.11:8848
+172.20.10.12:8848
+172.20.10.13:8848
+
+# sentinel
+172.20.10.8080
+
+
+cloud-alibaba-sentinel-service8402
+```
+
+
+
