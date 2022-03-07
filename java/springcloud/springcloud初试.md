@@ -535,3 +535,233 @@ cloud-consumer-order8062
 
 ```
 
+
+
+# 九、Nacos
+
+
+
+## 1、注册中心
+
+
+
+### 项目
+
+
+
+```ini
+# nacos下载
+https://github.com/alibaba/nacos
+
+# nacos管理界面
+http://172.20.10.11:8848/nacos
+
+# 支付模块
+cloud-alibaba-provider-payment8071
+cloud-alibaba-provider-payment8072
+
+# 消费者
+cloud-alibaba-nacos-consumer-order8073
+```
+
+
+
+## 2、配置中心
+
+
+
+### 项目
+
+
+
+```ini
+# 配置中心
+172.20.10.11:8848
+
+# 服务
+cloud-alibaba-config-nacos-client8074
+```
+
+
+
+## 3、持久化
+
+
+
+### 配置
+
+
+
+```ini
+vim application.properties
+
+#添加以下内容##
+spring.datasource.platform=mysql
+ 
+db.num=1
+db.url.0=jdbc:mysql://172.20.10.11:3306/nacos_config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true
+db.user=root
+db.password=root
+###
+
+# 执行/conf/nacos-mysql.sql
+```
+
+
+
+
+
+## 4、集群
+
+
+
+### nginx配置
+
+
+
+**nginx.conf**
+
+```ini
+#user  nobody;
+worker_processes  1;
+
+#error_log  logs/error.log;
+#error_log  logs/error.log  notice;
+#error_log  logs/error.log  info;
+
+#pid        logs/nginx.pid;
+
+
+events {
+    worker_connections  1024;
+}
+
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    #log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+    #                  '$status $body_bytes_sent "$http_referer" '
+    #                  '"$http_user_agent" "$http_x_forwarded_for"';
+
+    #access_log  logs/access.log  main;
+
+    sendfile        on;
+    #tcp_nopush     on;
+
+    #keepalive_timeout  0;
+    keepalive_timeout  65;
+
+    #gzip  on;
+    
+    upstream cluster{
+        server 172.20.10.11:8848;
+        server 172.20.10.12:8848;
+        server 172.20.10.13:8848;
+    }
+
+    server {
+        listen       10000;
+        server_name  localhost;
+
+        #charset koi8-r;
+
+        #access_log  logs/host.access.log  main;
+
+        location / {
+            #root   html;
+            #index  index.html index.htm;
+	    proxy_pass http://cluster;
+        }
+
+        #error_page  404              /404.html;
+
+        # redirect server error pages to the static page /50x.html
+        #
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   html;
+        }
+
+        # proxy the PHP scripts to Apache listening on 127.0.0.1:80
+        #
+        #location ~ \.php$ {
+        #    proxy_pass   http://127.0.0.1;
+        #}
+
+        # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+        #
+        #location ~ \.php$ {
+        #    root           html;
+        #    fastcgi_pass   127.0.0.1:9000;
+        #    fastcgi_index  index.php;
+        #    fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;
+        #    include        fastcgi_params;
+        #}
+
+        # deny access to .htaccess files, if Apache's document root
+        # concurs with nginx's one
+        #
+        #location ~ /\.ht {
+        #    deny  all;
+        #}
+    }
+
+
+    # another virtual host using mix of IP-, name-, and port-based configuration
+    #
+    #server {
+    #    listen       8000;
+    #    listen       somename:8080;
+    #    server_name  somename  alias  another.alias;
+
+    #    location / {
+    #        root   html;
+    #        index  index.html index.htm;
+    #    }
+    #}
+
+
+    # HTTPS server
+    #
+    #server {
+    #    listen       443 ssl;
+    #    server_name  localhost;
+
+    #    ssl_certificate      cert.pem;
+    #    ssl_certificate_key  cert.key;
+
+    #    ssl_session_cache    shared:SSL:1m;
+    #    ssl_session_timeout  5m;
+
+    #    ssl_ciphers  HIGH:!aNULL:!MD5;
+    #    ssl_prefer_server_ciphers  on;
+
+    #    location / {
+    #        root   html;
+    #        index  index.html index.htm;
+    #    }
+    #}
+
+}
+
+```
+
+
+
+### nacos集群配置
+
+
+
+**/conf/cluster.conf**
+
+```ini
+
+#it is ip
+172.20.10.11:8848
+172.20.10.12:8848
+172.20.10.13:8848
+
+```
+
