@@ -864,3 +864,31 @@ cloud-alibaba-sentinel-service8402
 
 
 
+
+
+# 十一、Seata
+
+
+
+### 项目
+
+```ini
+# nacos 集群
+172.20.10.11:8848
+172.20.10.12:8848
+172.20.10.13:8848
+
+# seata
+172.20.10.11:8091
+
+# 订单
+cloud-alibaba-seata-order2001
+
+# 库存
+cloud-alibaba-seata-storage2002
+
+# 帐号
+cloud-alibaba-seata-account2003
+
+```
+
