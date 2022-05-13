@@ -35,3 +35,11 @@ useradd -M -s /sbin/nologin mysql
 
 libncurses5
 ```
+
+
+
+## 修改初始密码
+
+```
+set password='haha'
+```
